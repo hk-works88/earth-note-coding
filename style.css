@@ -1,0 +1,2447 @@
+/* =========================
+   Base / Tokens
+========================= */
+html,
+body {
+  margin: 0;
+  padding: 0;
+}
+
+:root {
+  --header-h: 80px; /* ヘッダー高さ */
+  --crumb-h: 30px; /* パンくず帯高さ */
+
+  /* container rule（全ページ統一） */
+  --container-w: 1150px;
+  --container-px: 40px;
+
+  /* spacing tokens */
+  --space-2xs: clamp(4px, 0.8vw, 8px);
+  --space-xs: clamp(8px, 1.5vw, 12px);
+  --space-sm: clamp(12px, 2vw, 16px);
+  --space-md: clamp(16px, 3vw, 24px);
+  --space-lg: clamp(24px, 4vw, 40px);
+  --space-xl: clamp(40px, 6vw, 72px);
+  --space-2xl: clamp(56px, 8vw, 110px);
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+/* =========================
+   Font utilities
+========================= */
+.font-marcellus {
+  font-family: "Marcellus", serif;
+}
+.font-noto {
+  font-family: "Noto Sans JP", sans-serif;
+}
+.font-montserrat {
+  font-family: "Montserrat", sans-serif;
+}
+
+/* =========================
+   Layout utilities
+========================= */
+.container {
+  max-width: var(--container-w);
+  margin: 0 auto;
+  padding-inline: var(--container-px);
+}
+
+/* 表示切り替え */
+.pc-only {
+  display: block;
+}
+.sp-only {
+  display: none;
+}
+@media (max-width: 767px) {
+  .pc-only {
+    display: none !important;
+  }
+  .sp-only {
+    display: block !important;
+  }
+}
+
+/* =========================
+   Header (Common)
+========================= */
+.header {
+  height: var(--header-h);
+  min-height: var(--header-h);
+  position: absolute; /* indexなど“上に重ねる”前提 */
+  top: 0;
+  left: 0;
+  width: 100%;
+  background: transparent;
+  z-index: 10;
+}
+
+.header__inner {
+  width: 100%;
+  height: var(--header-h);
+  max-width: none;
+  margin: 0;
+  padding: 0 25px;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+/* ロゴ */
+.header__logo a {
+  text-decoration: none;
+  color: inherit;
+  transition: opacity 0.2s ease;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.header__logo a:hover {
+  opacity: 0.7;
+}
+.header__logo-lead {
+  display: block;
+  font-size: 10px;
+  font-weight: 550;
+  line-height: 1.2;
+  margin-bottom: 5px;
+}
+.header__logo-img {
+  width: 180px;
+  height: auto;
+  display: block;
+}
+
+/* PCナビ（デフォルト表示） */
+.header__nav {
+  display: block;
+}
+.header__nav ul {
+  display: flex;
+  align-items: center;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  position: relative;
+  top: -3px;
+}
+.header__nav li + li::before {
+  content: "／";
+  margin: 0 20px;
+  color: #000;
+}
+.header__nav a {
+  position: relative;
+  text-decoration: none;
+  color: #333;
+  font-weight: 500;
+  font-size: 13px;
+  padding-bottom: 8px;
+}
+.header__nav a::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  height: 2px;
+  background: #38b48b;
+  transform: scaleX(0);
+  transform-origin: left center;
+  transition: transform 0.25s ease;
+}
+.header__nav a:hover::after {
+  transform: scaleX(1);
+}
+
+/* =========================
+   Hamburger button (Common)
+   HTML: span.header__hamburger-line 1個
+========================= */
+.header__hamburger {
+  display: none; /* PCでは非表示 */
+  width: 44px;
+  height: 44px;
+  background: transparent;
+  border: 1px solid #111;
+  border-radius: 2px;
+  position: relative;
+  cursor: pointer;
+  z-index: 1001; /* sp-menuより上 */
+}
+
+.header__hamburger-line {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 24px;
+  height: 2px;
+  background: #111;
+  transform: translate(-50%, -50%);
+  transition: transform 0.25s ease;
+}
+.header__hamburger-line::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 8px;
+  width: 24px;
+  height: 2px;
+  background: #111;
+  transition:
+    transform 0.25s ease,
+    top 0.25s ease;
+}
+
+/* open: × */
+.header__hamburger.is-active .header__hamburger-line {
+  transform: translate(-50%, -50%) rotate(45deg);
+}
+.header__hamburger.is-active .header__hamburger-line::before {
+  top: 0;
+  transform: rotate(-90deg);
+}
+
+/* SP時のヘッダー挙動（共通） */
+@media (max-width: 767px) {
+  .header {
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    background: #fff;
+  }
+
+  .header__inner {
+    position: relative;
+    padding: 12px 16px;
+  }
+
+  .header__nav {
+    display: none !important;
+  }
+
+  .header__hamburger {
+    display: inline-flex;
+    position: absolute;
+    right: 12px;
+    top: 50%;
+    transform: translateY(-50%);
+    align-items: center;
+    justify-content: center;
+  }
+}
+
+/* =========================
+   SP Menu (Common)
+========================= */
+.sp-menu {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: #fff;
+  z-index: 900;
+  overflow-y: auto;
+  padding-top: var(--header-h);
+}
+
+body.is-menu-open .sp-menu {
+  display: block;
+}
+body.is-menu-open {
+  overflow: hidden;
+}
+
+/* PCではSPメニューは消す */
+@media (min-width: 768px) {
+  .sp-menu {
+    display: none !important;
+  }
+}
+
+/* =========================
+   Breadcrumb (Common) - PC only
+========================= */
+.breadcrumb {
+  margin-top: var(--header-h);
+  height: var(--crumb-h);
+  display: flex;
+  align-items: center;
+  background: #fff;
+  border-bottom: 1px solid #e6e6e6;
+}
+
+.breadcrumb .container {
+  margin-left: 0; /* 左基準にしたいなら */
+  display: flex;
+  align-items: center;
+  height: 100%;
+}
+
+.breadcrumb__list {
+  transform: translateX(56px);
+  display: flex;
+  align-items: center;
+  height: 100%;
+  gap: 10px;
+
+  margin: 0;
+  padding: 0;
+  list-style: none;
+
+  font-size: 9px;
+  line-height: 1;
+  color: #666;
+}
+
+.breadcrumb__item,
+.breadcrumb__item a {
+  display: inline-flex;
+  align-items: center;
+  height: 100%;
+}
+
+.breadcrumb__item + .breadcrumb__item::before {
+  content: ">";
+  margin: 0 8px;
+  color: #000;
+  opacity: 0.7;
+  display: inline-flex;
+  align-items: center;
+  height: 100%;
+}
+
+.breadcrumb a {
+  color: #000;
+  text-decoration: none;
+}
+.breadcrumb a:visited {
+  color: #000;
+}
+.breadcrumb a:hover {
+  text-decoration: underline;
+}
+
+@media (max-width: 767px) {
+  .breadcrumb {
+    display: none !important;
+  }
+}
+
+/* =========================
+   To top (Common)
+========================= */
+.to-top {
+  position: fixed;
+  right: 24px;
+  bottom: 24px;
+  width: 92px;
+  height: 92px;
+
+  border: none;
+  border-radius: 50%;
+  cursor: pointer;
+  z-index: 9999;
+
+  background: url("images/to-top.png") no-repeat center / contain;
+  font-size: 0;
+
+  opacity: 0;
+  pointer-events: none;
+  transform: translateY(10px);
+  transition:
+    opacity 0.25s ease,
+    transform 0.25s ease;
+}
+.to-top.is-show {
+  opacity: 1;
+  pointer-events: auto;
+  transform: translateY(0);
+}
+/* =====================================
+   SP: Header switching（共通SP）
+===================================== */
+@media (max-width: 767px) {
+  .header {
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    background: #fff;
+  }
+
+  .header__inner {
+    position: relative;
+    padding: 12px 16px;
+    height: var(--header-h);
+  }
+
+  .header__nav {
+    display: none !important;
+  }
+
+  .header__hamburger {
+    display: inline-flex;
+    position: absolute;
+    right: 12px;
+    top: 50%;
+    transform: translateY(-50%);
+    align-items: center;
+    justify-content: center;
+  }
+}
+
+/* =====================================
+   Page: interview (PC)
+===================================== */
+.page-interview .header,
+.page-trends-article .header {
+  background: #f3f5f6;
+}
+
+/* interview heading */
+.page-interview .interview__head {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 16px;
+  margin-top: 60px;
+  margin-bottom: 100px;
+}
+.page-interview .interview__title {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  position: relative;
+  left: -15px;
+}
+.page-interview .interview__heading-ja {
+  font-size: 30px;
+  margin: 0;
+}
+.page-interview .interview__lead {
+  max-width: 1000px;
+  font-size: 15px;
+  line-height: 1.7;
+}
+
+/* interview grid */
+.page-interview .interview__list {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: var(--space-lg);
+}
+.page-interview .interview__article-image {
+  width: 100%;
+  height: 180px;
+  object-fit: cover;
+  display: block;
+}
+
+/* =====================================
+   Page: interview (SP only)
+   - header look like “2枚目”
+   - grid -> 2 columns
+===================================== */
+@media (max-width: 767px) {
+  .page-interview .header {
+    background: #f3f5f6;
+  }
+
+  /* 枠なしハンバーガー */
+  .page-interview .header__hamburger {
+    border: none !important;
+    background: transparent;
+  }
+
+  /* ★ここが本命：2列 */
+  .page-interview .interview__list {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 480px) {
+  .page-interview .interview__list {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* ===== indexだけ：透過でMVに重ねる ===== */
+.page-index .header {
+  top: 0;
+  left: 0;
+  width: 100%;
+  background: transparent;
+  transition:
+    background-color 0.25s ease,
+    box-shadow 0.25s ease;
+}
+
+/* hover か、キーボードフォーカスが入ったら背景出す */
+.page-index .header:hover,
+.page-index .header:focus-within {
+  background: rgba(243, 245, 246, 0.92); /* interviewの#f3f5f6に寄せた半透明 */
+  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.08);
+}
+
+/* ===== interviewはそのまま背景あり ===== */
+.page-interview .header,
+.page-trends-article .header {
+  background: #f3f5f6;
+}
+
+/**********nav*********/
+.header__nav ul {
+  display: flex;
+  align-items: center;
+  list-style: none;
+
+  position: relative;
+  top: -3px;
+  /* gapは一旦なし */
+}
+
+/* 2つ目以降のliの先頭に「／」をつける */
+.header__nav li + li::before {
+  content: "／";
+  margin: 0 20px;
+  color: #000; /* 好きな色に */
+}
+
+.header__nav a {
+  position: relative;
+  text-decoration: none;
+  color: #333;
+  font-weight: 500;
+  font-size: 13px;
+  padding-top: 0;
+  padding-bottom: 8px; /* 下線用の余白 */
+}
+/* 下線のベース（最初は幅0） */
+.header__nav a::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 100%; /* 全体に引く。短くしたければ60%とかに */
+  height: 2px;
+  background: #38b48b; /* 好きな緑に調整 */
+  transform: scaleX(0);
+  transform-origin: left center;
+  transition: transform 0.25s ease;
+}
+
+/* hoverで線が出る */
+.header__nav a:hover::after {
+  transform: scaleX(1);
+}
+
+.container {
+  max-width: var(--container-w);
+  margin: 0 auto;
+  padding-inline: var(--container-px);
+}
+
+/********メインビジュアル*******/
+.mv {
+  position: relative;
+  height: 70vh; /* 680px以上、大画面では可変 */
+  min-height: 680px;
+  padding-top: 0;
+  padding-bottom: 0;
+  background-image: url("images/mv.png");
+  background-size: cover;
+  background-position: center 10%;
+  /* or  center 30%  ←もっと下に見せたいなら */
+  background-repeat: no-repeat;
+  margin-bottom: 110px;
+}
+
+/* コンテナを基準にしたいので relative にする */
+.mv .container {
+  height: 100%;
+  position: relative;
+}
+
+/* テキスト全体の箱を縦中央へ */
+.mv__content {
+  position: absolute;
+  top: 55%;
+  left: 2%;
+  transform: translateY(-50%);
+}
+
+/* 見出し */
+/* 未アウトライン
+.mv__catch {
+  font-size: 95px;
+  line-height: 0.9;
+  transform: skewX(-8deg);
+  text-align: left; 左揃えのままにしたいなら
+  margin-bottom: 40px;
+} */
+
+/* 1行ずつブロックにして下線を引く */
+/* .mv__line {
+  display: inline-block;  文字の周りだけの箱にする 
+  border-bottom: 3px solid #000;
+  padding-bottom: 0px;  文字と線をくっつける 効かないので０ 
+} */
+
+/* 2行目以降の上マージンだけマイナスで詰める */
+/* .mv__line + .mv__line {
+  margin-top: -10px; 調整
+} */
+
+/* メインリード文（画像） */
+.mv__lead {
+  margin-bottom: 30px;
+
+  width: clamp(500px, 40vw, 700px);
+  /* 最小500px・基準画面幅の40%・最大420px */
+  height: auto;
+  display: block; /* ← 下の隙間防止 */
+}
+
+/* サブコピー */
+.mv__sub {
+  font-size: 16px;
+  margin-top: 0px; /* カンプ見ながら調整 */
+}
+/* サブコピー前□ */
+.mv__sub::before {
+  content: "";
+  display: inline-block;
+  width: 33px; /* カンプ見ながら調整 */
+  height: 13px;
+  background: #fff;
+  margin-right: 12px;
+}
+
+/*********SDGs trends head部分全体********/
+/* セクションsection-heading__icon共通設定 */
+.section-heading__icon {
+  display: inline-block;
+  width: 85px; /* SVGの横幅に合わせる */
+  height: 70px; /* SVGの高さに合わせる */
+  background: url("images/slash.svg") no-repeat;
+  background-size: contain;
+  margin-right: 0.8em; /* 右の余白 */
+}
+/* h2 */
+.trends__head {
+  display: flex;
+  align-items: center;
+  gap: 12px; /* 調整 */
+  margin-bottom: 25px;
+}
+.trends__heading-en {
+  font-size: 75px;
+  font-weight: 400;
+  margin: 0;
+}
+/*真ん中黒斜線*/
+.trends__slash {
+  display: inline-block;
+  width: 40px; /* 長さ */
+  height: 2px; /* 太さ */
+  background: #000;
+  transform-origin: center; /* 回転の中心 */
+  transform: rotate(-45deg); /* 角度は好みで調整 */
+  margin-left: 45px; /* 前後の余白 */
+  margin-right: 5px; /* 前後の余白 */
+
+  position: relative; /*元の場所を保持*/
+  top: 4px; /*元の場所からtop4px*/
+}
+
+.trends__heading-ja {
+  font-weight: 700;
+
+  position: relative; /*元の場所を保持*/
+  top: 6px; /* 見本は3〜6px程度下がっている */
+}
+.trends__lead {
+  font-size: 17px;
+  margin-bottom: 50px;
+}
+
+.articles {
+  display: flex;
+  gap: 40px;
+}
+
+/* メイン・サブの比率（可変） */
+.articles__main {
+  flex: 1.3; /* 大きいカラム（左 or 右） */
+}
+.articles__sub {
+  flex: 1; /* 小さいカラム */
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+}
+
+/* 画像は可変に必須 */
+.page-index .trends__article-image,
+.page-index .interview__article-image {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+/* INTERVIEWだけ左右反転 */
+.articles--reverse {
+  flex-direction: row-reverse;
+}
+
+/* ── SDGsトレンド・インタビュー・Familiar SDGs一覧：リンクの見た目 ── */
+.page-index .trends__list a,
+.page-index .interview__list a,
+.page-index .familiar__list a {
+  display: block; /* 画像＋テキストまとめてクリックできるように */
+  color: #000; /* 文字色を黒に固定 */
+  text-decoration: none; /* 下線なし */
+  transition: opacity 0.25s ease;
+}
+/* visited でも色を変えない */
+.page-index .trends__list a:visited,
+.page-index .interview__list a:visited,
+.page-index .familiar__list a:visited {
+  color: #000;
+}
+/* hover したらロゴと同じように少し薄く */
+.page-index .trends__list a:hover,
+.page-index .interview__list a:hover,
+.page-index .familiar__list a:hover {
+  opacity: 0.7;
+}
+
+/***********top-interview__head部分全体**********/
+/* h2 */
+.page-index .interview__head {
+  display: flex;
+  align-items: center;
+  gap: 12px; /* 調整 */
+  margin-bottom: 25px;
+}
+.page-index .interview__heading-en {
+  font-size: 75px;
+  font-weight: 400;
+  margin: 0;
+}
+/*真ん中黒斜線*/
+.page-index .interview__slash {
+  display: inline-block;
+  width: 40px; /* 長さ */
+  height: 2px; /* 太さ */
+  background: #000;
+  transform-origin: center; /* 回転の中心 */
+  transform: rotate(-45deg); /* 角度調整 */
+  margin-left: 45px; /* 前後の余白 */
+  margin-right: 5px; /* 前後の余白 */
+
+  position: relative; /*元の場所を保持*/
+  top: 4px; /*元の場所からtop4px*/
+}
+.page-index .interview__heading-ja {
+  font-weight: 700;
+
+  position: relative; /*元の場所を保持*/
+  top: 6px; /* 見本は3〜6px程度下がっている */
+}
+/* ラベル（右上の黒いタグ） */
+/* ラベル基準を作る */
+.page-index .interview__article-item {
+  position: relative;
+}
+.page-index .interview__article-label {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  background: rgba(0, 0, 0, 0.75);
+  color: #fff;
+  font-size: 12px;
+  padding: 6px 10px;
+  line-height: 1;
+}
+.page-index .interview__lead {
+  font-size: 17px;
+  margin-bottom: 50px;
+}
+
+/* トレンド・インタビュー画像の下のテキストエリア */
+.page-index .trends__article-body,
+.page-index .interview__article-body {
+  display: flex;
+  gap: 24px; /* 左右のすき間 */
+  margin-top: 16px;
+}
+/* 左：タイトル+日付 */
+.page-index .trends__article-meta,
+.page-index .interview__article-meta {
+  flex: 0 0 50%; /* 左側の幅：変えられる（例：35%〜45%） */
+}
+/* 右：本文 */
+.page-index .trends__article-text,
+.page-index .interview__article-text {
+  flex: 1; /* 残り全部を使う */
+}
+
+/* タイトル */
+.page-index .trends__article-title,
+.page-index .interview__article-title {
+  font-size: 20px;
+  line-height: 1.5;
+  margin-bottom: 8px;
+}
+/* 日付 */
+.page-index .trends__article-date,
+.page-index .interview__article-date,
+.page-index .familiar__article-date {
+  display: block; /* span、aタグはインライン要素のため */
+  font-size: 14px;
+  color: #666;
+}
+/* 本文 */
+.page-index .trends__article-desc,
+.page-index .interview__article-desc {
+  line-height: 1.7;
+  font-size: 15px;
+  color: #333;
+}
+
+.page-index .trends__article-title--sm,
+.page-index .interview__article-title--sm,
+.page-index .familiar__article-title {
+  font-size: 16px;
+}
+.trends__article-item--large,
+.interview__article-item--large {
+  /* large用の差分が出たらここに書く */
+}
+
+/**********17Goals************/
+.goals {
+  position: relative;
+  padding: 90px 0;
+}
+/* 横並び：左タイトル + 右パネル */
+.goals__inner {
+  display: flex;
+  align-items: center;
+  gap: 60px;
+}
+
+/* 左 */
+.goals__info {
+  flex: 0 0 214px; /* 左の固定幅。好みで調整 */
+}
+.goals__title {
+  margin: 0px;
+  width: 214px;
+}
+/* 画像を親幅にフィットさせる */
+.goals__title img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+.goals__sub {
+  margin: 0;
+  font-weight: 700;
+}
+
+/* 右 */
+.goals__panel {
+  position: relative;
+  flex: 1;
+  padding-left: 60px; /* 仕切り影ぶん */
+  padding-right: 60px; /* ←矢印ぶんの余白（ここが大事） */
+  overflow: visible; /* ←切れ防止（hiddenにしない） */
+  min-width: 0; /* ★これがないと横スクロールが死ぬことある */
+}
+
+/* 仕切りの影 */
+.goals__panel::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: -30px;
+  bottom: -30px;
+  width: 60px;
+  background: linear-gradient(90deg, rgba(0, 0, 0, 0.15), transparent);
+  pointer-events: none; /* ←これ追加！影がクリック邪魔しなくなる */
+}
+
+/* ▼ 2列で横に伸びるグリッド（横スクロールの本体） */
+.goals__grid {
+  /*display: grid;
+  grid-auto-flow: column; 横方向に追加していく 
+  grid-template-rows: repeat(2, 1fr); 2段固定
+  gap: 20px 24px; 縦 横 
+  width: max-content; 中身の幅分だけ広がる → はみ出してスクロール*/
+
+  /* display: flex;
+  flex-flow: column wrap; ★縦に詰めて、折り返して横へ伸びる
+  height: 220px; ★2段分の高さ（ここ調整する）
+  gap: 20px 24px;
+  width: max-content; ★中身の幅ぶんだけ広がる→横スクロール発生
+  outline: 2px solid red; テスト用
+  background: rgba(255, 0, 0, 0.06); 薄赤で広がり確認 */
+
+  display: grid;
+  grid-auto-flow: column; /*横方向に追加していく */
+  grid-auto-columns: 100px; /* ←これがないと横に伸びないことがある */
+  grid-template-rows: repeat(2, auto);
+  gap: 20px 24px;
+  width: max-content;
+}
+
+/* スクロール領域 */
+.goals__scroll {
+  /* -webkit-overflow-scrolling: touch; iOS慣性スクロール
+  padding-bottom: 10px; スクロールバー被り防止 */
+
+  scroll-behavior: smooth;
+  scrollbar-width: none; /*Firefox */
+
+  /*padding: 4px; 枠が見えるように保険 */
+  overflow-x: auto;
+  overflow-y: hidden;
+
+  max-width: 100%; /* ★これ必須 */
+  width: 100%;
+  min-width: 0; /* ★念押し */
+
+  /* position: relative;
+  z-index: 1; */
+}
+.goals__scroll::-webkit-scrollbar {
+  display: none; /* Chrome/Safari */
+}
+
+/* アイコンを横一列にするなら 
+.goals__grid {
+  display: flex;
+  gap: 18px;
+  width: max-content; 中身の幅分だけ広がる
+}*/
+
+/* アイコンサイズ */
+.goals__icon {
+  width: 120px; /* デザインに合わせて調整 */
+  height: auto;
+  display: block;
+  flex-shrink: 0; /* 縮まないのが重要 */
+}
+/* 矢印 */
+.goals__arrow {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  border: none;
+  background: #000;
+  color: #fff;
+  font-size: 22px;
+  cursor: pointer;
+  z-index: 2;
+}
+.goals__arrow--prev {
+  left: 8px;
+}
+.goals__arrow--next {
+  right: 8px;
+}
+.goals__arrow:hover {
+  opacity: 1;
+}
+/* スクロールバー（PC用・任意）
+.goals__scroll::-webkit-scrollbar {
+  height: 6px;
+}
+.goals__scroll::-webkit-scrollbar-track {
+  background: #eee;
+}
+.goals__scroll::-webkit-scrollbar-thumb {
+  background: #999;
+  border-radius: 3px;
+} */
+/***********Familiar SDGs__head部分全体**********/
+/* h2 */
+.familiar__head {
+  display: flex;
+  align-items: center;
+  gap: 12px; /* 調整 */
+  margin-bottom: 25px;
+}
+.familiar__heading-en {
+  font-size: 75px;
+  font-weight: 400;
+  margin: 0;
+}
+/*真ん中黒斜線*/
+.familiar__slash {
+  display: inline-block;
+  width: 40px; /* 長さ */
+  height: 2px; /* 太さ */
+  background: #000;
+  transform-origin: center; /* 回転の中心 */
+  transform: rotate(-45deg); /* 角度調整 */
+  margin-left: 45px; /* 前後の余白 */
+  margin-right: 5px; /* 前後の余白 */
+
+  position: relative; /*元の場所を保持*/
+  top: 4px; /*元の場所からtop4px*/
+}
+.familiar__heading-ja {
+  font-weight: 700;
+
+  position: relative; /*元の場所を保持*/
+  top: 6px; /* 見本は3〜6px程度下がっている */
+}
+.familiar__lead {
+  font-size: 17px;
+  margin-bottom: 50px;
+}
+
+.familiar__list {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 24px;
+  max-width: 1250px; /* 好きな幅 */
+  margin: 0 auto;
+}
+.familiar__article-image {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+/********横長ボタン共通：aタグそのものがボタン*******/
+/*********wrapper*******/
+.trends__btn,
+.interview__btn,
+.familiar__btn {
+  margin-top: 60px;
+  margin-bottom: 110px;
+  text-align: right;
+
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+
+  width: 100%;
+  height: 56px;
+  padding: 0 112px 0 24px;
+
+  background: #000;
+  color: #fff;
+  text-decoration: none;
+  border-radius: 6px;
+
+  transition:
+    height 0.25s ease,
+    box-shadow 0.25s ease,
+    background-color 0.25s ease;
+}
+
+/* 右向き矢印 */
+.trends__btn::after,
+.interview__btn::after,
+.familiar__btn::after {
+  content: "›"; /* 見本は画像だけど、まずは文字矢印でOK */
+  position: absolute;
+  top: 9px;
+  right: 0;
+  width: 88px;
+  height: calc(100% - 18px);
+  border-left: 1px solid #fff;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  font-size: 22px;
+  line-height: 1;
+}
+
+.trends__btn:hover,
+.interview__btn:hover,
+.familiar__btn:hover {
+  height: 64px;
+  background: #111;
+  box-shadow: 0 16px 30px rgba(0, 0, 0, 0.25);
+}
+
+/*******背景イメージ******/
+.bg-group {
+  position: relative;
+  overflow: hidden; /* はみ出し防止 */
+}
+/* 中身を背景より手前に */
+.bg-group > section {
+  position: relative;
+  z-index: 1;
+}
+/* 背景本体（擬似要素） */
+.bg-group::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+
+  background-repeat: no-repeat;
+  /* background-position: center;
+  background-size: cover; 斜めが途切れるなら contain→cover が安定  */
+  background-size: auto 100%; /* 高さ100%で、横は元サイズ感 */
+  background-position: 50% 0; /* ← デフォ：上中央スタート */
+}
+/* 背景A（bg-diagonal-a） */
+.bg-group--a::before {
+  background-image: url("images/bg-diagonal-a.png");
+  left: -50%;
+}
+/* 背景B（bg-diagonal-b） */
+.bg-group--b::before {
+  background-image: url("images/bg-diagonal-b.png");
+  left: -100%;
+}
+
+/********* Coming *********/
+.coming {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  margin-bottom: 0;
+}
+
+/* カード本体 */
+.coming__item {
+  position: relative;
+  height: 580px;
+  overflow: hidden;
+  color: #fff;
+  text-decoration: none;
+}
+
+/* 背景画像 */
+.coming__item::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-size: cover;
+  background-position: center;
+  transform: scale(1);
+  transition:
+    transform 0.5s ease,
+    filter 0.5s ease;
+  z-index: 0;
+}
+
+/* テキスト（h3 / p） */
+.coming__text {
+  position: relative;
+  z-index: 1;
+  height: 100%;
+  padding: 32px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  gap: 4px; /* ← 縦の行間を詰める */
+}
+
+.coming__text h3 {
+  font-size: 52px;
+  line-height: 1.05; /* ← 行間詰め */
+  margin-bottom: 0;
+  font-family: "Marcellus", serif;
+  font-weight: 400;
+}
+
+.coming__text p {
+  font-size: 14px;
+  line-height: 1.4; /* ← 行間詰め */
+  font-family: "Noto Sans JP", sans-serif;
+}
+
+/* 通常 hover（1・3枚目） */
+.coming__item:hover::before {
+  filter: brightness(1.15);
+  transform: scale(1.12);
+}
+
+/* ===== Coming Soon 用 ===== */
+.is-coming::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.72); /* ← 見本に近い濃さ */
+  z-index: 2;
+}
+
+/* Coming Soon テキスト */
+.coming__soon {
+  position: absolute;
+  inset: 0;
+  z-index: 3;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  font-family: "Marcellus", serif;
+  font-size: 32px;
+  line-height: 1.1; /* ← 行間詰め */
+}
+
+.coming__soon .line {
+  margin-top: -10px;
+  font-size: 32px;
+}
+
+/* Coming Soon は hover 無効 */
+.is-coming:hover::before {
+  transform: none;
+  filter: none;
+}
+
+/* 背景画像 */
+.coming__item--sdgs::before {
+  background-image: url("images/sea-turtle.jpg");
+}
+
+.coming__item--numbers::before {
+  background-image: url("images/time-is-up.jpg");
+}
+
+.coming__item--circulation::before {
+  background-image: url("images/forest-road.jpg");
+}
+
+/********* about *********/
+/* about 全体：背景（地球） */
+/* 背景のmax-widthを制御するためやめる。
+  .about {
+    min-height: 700px;
+    background-image: url(images/thumbnail-earthnote-default.png);
+    ここ重要：coverをやめる（切れる原因） 
+    background-image: url("images/thumbnail-earthnote-default.png");
+    background-repeat: no-repeat;
+    background-size: contain;  ← 切れない 
+    background-position: center 30px;  ← 上30px基準 
+
+    flexで中央寄せすると padding-top の意図が崩れるのでやめる 
+    display: block;
+
+    ブロックにするためやめる。
+    display: flex; 子要素を「主軸（main axis）」に沿って並べる デフォルトではrow
+    flex-direction: column;
+    justify-content: center;  主軸（main axis） 
+    align-items: center; 交差軸（cross axis）　
+
+    position: relative;
+  } */
+.about {
+  position: relative;
+  min-height: auto;
+}
+
+/* 背景画像専用レイヤー */
+.about::before {
+  content: "";
+  position: absolute;
+  top: 30px; /* ← 画像開始位置 */
+  left: 50%;
+  transform: translateX(-50%);
+
+  width: 100%;
+  max-width: 1000px; /* ← ここで制御できる */
+  height: 100%;
+
+  background-image: url("images/thumbnail-earthnote-default.png");
+  background-repeat: no-repeat;
+  background-size: contain; /* 切れない */
+  background-position: center top;
+
+  z-index: 0;
+  pointer-events: none;
+}
+
+/* 中央にまとまる箱 前面 */
+.about__inner {
+  position: relative;
+  z-index: 1;
+
+  width: min(720px, 90%);
+  margin: 0 auto;
+  padding-top: 160px;
+  text-align: center;
+}
+
+/* タイトル */
+.about__title {
+  font-size: 20px;
+  font-weight: 700;
+  line-height: 1.6;
+  margin: 0;
+}
+
+/* タイトル下の“線” */
+.about__line {
+  display: block;
+  width: 28px; /* 短い線 */
+  height: 2px;
+  margin: 16px auto 0;
+  background: #111;
+}
+
+/* 本文：中央寄せでも読みやすいように “左寄せ” にする */
+.about__text {
+  margin: 32px 0 0;
+  text-align: left; /* ← ここ重要。本文は左寄せの方が読みやすい */
+  font-size: 16px;
+  line-height: 1.7; /* 行間ゆったり（詰めたいなら 1.9〜2.0） */
+  letter-spacing: 0.02em;
+  color: #111;
+}
+
+/* ===== 流れる文字 ===== */
+.marquee {
+  overflow: hidden;
+  padding: 0; /* 好きに調整 */
+  background: #fff;
+  filter: saturate(0); /* 彩度０ */
+}
+
+.marquee__inner {
+  width: 100%;
+}
+
+.marquee__track {
+  display: flex;
+  gap: 80px;
+  width: max-content; /* 中身の幅だけ広げる */
+  animation: marquee 300s linear infinite;
+  margin: 0;
+  padding: 0;
+  white-space: nowrap;
+
+  font-family: "Marcellus", serif;
+  font-size: 160px; /* 見本っぽく大きく */
+  font-weight: 500;
+  letter-spacing: -0.05em;
+  line-height: 1;
+
+  color: rgba(0, 10, 20, 0.09); /* かなり繊細 */
+  opacity: 0.4;
+
+  text-shadow: none;
+  transform: translateZ(0);
+}
+
+/* 文字の繰り返し間隔の調整（任意） */
+.marquee__track span {
+  display: inline-block;
+}
+
+/* 左に流す */
+@keyframes marquee {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+/* 端末で大きすぎる時 */
+@media (max-width: 768px) {
+  .marquee__track {
+    font-size: 56px;
+    gap: 32px;
+  }
+}
+
+/* ===== 横フルムービー ===== */
+.movie {
+  width: 100%;
+  height: 420px; /* 見本に合わせて調整 */
+  overflow: hidden;
+  background: #000; /* 読み込み中の保険 */
+}
+
+.movie__video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* 横フルでトリミング */
+  display: block;
+}
+
+/* ===== footer ===== */
+.footer {
+  padding: 45px 35px;
+  background: #fff;
+}
+/* 横並び：左ロゴ / 右ナビ */
+/* footer全体の横幅を広げたいならここ */
+.footer__inner {
+  max-width: 1400px;
+  margin: 0 auto;
+  display: flex;
+  align-items: flex-start;
+  gap: 120px;
+}
+
+/* 左：ロゴ */
+.footer__brand {
+  font-family: "Noto Sans JP", sans-serif;
+  flex: 0 0 auto;
+  top: -10px;
+}
+.footer__label {
+  font-size: 10px;
+  font-weight: 500;
+  margin: 0 0 8px;
+}
+.footer__brand img {
+  width: 180px;
+  height: auto;
+  display: block;
+}
+/* 👇 画面中央を起点にする箱 */
+.footer__nav-wrap {
+  margin-left: auto; /* ← これで中央基準になる */
+  width: clamp(520px, 58vw, 760px); /* 右側エリアを可変で広げる */
+  padding-left: 40px; /* ← 中央から少し右へ */
+}
+/* 右：ナビ（2カラム） */
+/* 右半分を2分割して、それぞれ中央寄せ */
+.footer__nav {
+  display: grid;
+  grid-template-columns: 1fr 1fr; /* 右半分を2等分 */
+  column-gap: clamp(48px, 6vw, 140px); /* 2列の間隔を可変 */
+}
+/* リスト共通 */
+.footer__nav ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+/* 上の横線（2本：各カラム） */
+/* 各カラムを「自分の列の中で中央寄せ」 */
+.footer__nav-main,
+.footer__nav-sub {
+  justify-self: center; /* ← これが“それぞれ中央” */
+  width: 100%;
+  max-width: 360px; /* ← 線や並びの見た目を揃える */
+  position: relative;
+  padding-top: 40px;
+}
+.footer__nav-main::before,
+.footer__nav-sub::before {
+  content: "";
+  position: absolute;
+  top: -10px;
+  left: 0;
+  /* width: min(360px, 100%); 最大360、でも親よりはみ出さない  */
+  width: 100%; /* ← さっきのmax-width(360px)の中で100% */
+  height: 1px;
+  background: #000;
+}
+/* 右カラムの外部リンクアイコンの余白を少し増やす */
+.footer__nav a.is-external {
+  padding-right: 26px;
+}
+/* main側だけ「›」を付ける */
+.footer__nav-main a::after {
+  content: "›";
+  font-size: 20px;
+  line-height: 1;
+  margin-left: 14px;
+  transform: translateY(1px);
+}
+/* 行間 */
+.footer__nav li + li {
+  margin-top: 14px;
+}
+/* リンク */
+.footer__nav a {
+  text-decoration: none;
+  color: #000;
+  font-size: 14px;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+}
+.footer__nav a:hover {
+  opacity: 0.6;
+}
+
+/* sub側：外部リンク風の□アイコン */
+.footer__nav a.is-external {
+  position: relative;
+  padding-right: 22px; /* アイコン分の余白 */
+}
+
+/* □ */
+.footer__nav a.is-external::after {
+  content: "";
+  position: absolute;
+  right: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 12px;
+  height: 12px;
+  border: 1px solid #000;
+}
+/* □の右上の“飛び出し” */
+.footer__nav a.is-external::before {
+  content: "";
+  position: absolute;
+  right: 2px;
+  top: calc(50% - 6px);
+  width: 6px;
+  height: 6px;
+  border-top: 1px solid #000;
+  border-right: 1px solid #000;
+  transform: translate(2px, -2px);
+}
+
+/* コピーライト */
+.footer__copy {
+  margin: 56px 0 0;
+  text-align: center;
+  font-size: 12px;
+  color: #000;
+  opacity: 0.55;
+}
+
+/* ===== TOPボタン ===== */
+.to-top {
+  position: fixed;
+  right: 24px;
+  bottom: 24px;
+  width: 92px;
+  height: 92px;
+
+  border: none;
+  border-radius: 50%;
+  cursor: pointer;
+  z-index: 9999;
+
+  /* ▼ 画像を使う */
+  background: url("images/to-top.png") no-repeat center / contain;
+
+  /* テキストは見せない（アクセシビリティ用に残す） */
+  font-size: 0;
+
+  /* 初期は非表示 */
+  opacity: 0;
+  pointer-events: none;
+  transform: translateY(10px);
+  transition:
+    opacity 0.25s ease,
+    transform 0.25s ease;
+}
+
+.to-top.is-show {
+  opacity: 1;
+  pointer-events: auto;
+  transform: translateY(0);
+}
+
+/* hover（少し浮かせる例） */
+.to-top:hover {
+  transform: translateY(-4px);
+}
+
+/* =========================
+   breadcrumb（共通）
+========================= */
+
+/* パンくずは header の下に置く（headerがabsolute想定なのでmargin-topで逃がす） */
+.breadcrumb {
+  margin-top: var(--header-h);
+  height: var(--crumb-h);
+  display: flex;
+  align-items: center;
+  background: #fff;
+  border-bottom: 1px solid #e6e6e6;
+}
+
+/* ★追加：containerにもflex＋高さ100%を与えて、帯の中央を確実にする */
+.breadcrumb .container {
+  margin-left: 0;
+  max-width: var(--container-w);
+  padding-inline: var(--container-px);
+
+  display: flex;
+  align-items: center;
+  height: 100%;
+}
+
+/* “帯の高さ” に合わせるので縦paddingは0 */
+.breadcrumb__list {
+  transform: translateX(56px); /* ← container-px と同じ値 */
+
+  display: flex;
+  align-items: center;
+  height: 100%;
+
+  gap: 10px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+
+  font-size: 9px;
+  line-height: 1; /* ★追加：小さい文字の“上寄りに見える”のを潰す */
+  color: #666;
+}
+
+/* ★追加：li / a も高さ100%の中央に揃えて、ベースラインズレを潰す */
+.breadcrumb__item,
+.breadcrumb__item a {
+  display: inline-flex;
+  align-items: center;
+  height: 100%;
+}
+
+/* 区切り「>」を自動で入れる */
+.breadcrumb__item + .breadcrumb__item::before {
+  content: ">";
+  margin: 0 8px;
+  color: #000;
+  opacity: 0.7;
+
+  display: inline-flex; /* ★追加 */
+  align-items: center; /* ★追加 */
+  height: 100%; /* ★追加 */
+}
+
+/* リンクを紫/下線にしない */
+.breadcrumb a {
+  color: #000;
+  text-decoration: none;
+}
+.breadcrumb a:visited {
+  color: #000;
+}
+.breadcrumb a:hover {
+  text-decoration: underline;
+}
+
+/* 本文は パンくず 分だけ下げる（必要なページだけ使えるように） */
+.has-breadcrumb main {
+  padding-top: var(--crumb-h);
+}
+
+@media (max-width: 767px) {
+  .breadcrumb {
+    display: none;
+  }
+}
+
+/* =========================
+   Interview
+========================= */
+/* ----- Interview Body ----- */
+
+.page-interview {
+  --interview-gap: var(--space-lg); /* 例：24〜40くらいの可変 */
+}
+
+/* ページ見出し全体 */
+.page-interview .interview__head {
+  display: flex;
+  flex-direction: column; /* ← 縦並び */
+  align-items: center; /* ← 中央寄せ */
+  text-align: center; /* ← テキスト中央 */
+  gap: 16px; /* 斜線・見出し・リードの間隔 */
+  margin-top: 60px;
+  margin-bottom: 100px;
+}
+/* 斜線＋タイトルを横並びにする行 */
+/* ← 横並びはこの1行だけ */
+.page-interview .interview__title {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+
+  position: relative;
+  left: -15px;
+}
+/* 緑の斜線 */
+.page-interview .section-heading__icon {
+  margin: 0; /* 変なズレ防止 */
+}
+.page-interview .interview__heading-ja {
+  font-size: 30px;
+  margin: auto;
+}
+/* リード文 */
+.page-interview .interview__lead {
+  max-width: 1000px; /* 横に広がりすぎない */
+  font-size: 15px;
+  line-height: 1.7;
+}
+
+/* 記事一覧：PCは4列 */
+.page-interview .interview__list {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: var(--interview-gap);
+}
+
+.page-interview .interview__list a {
+  display: block;
+  color: #000;
+  text-decoration: none;
+  transition: opacity 0.25s ease;
+}
+.page-interview .interview__list a:hover {
+  opacity: 0.7;
+}
+
+.page-interview .interview__article-item a {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  text-decoration: none;
+  color: inherit;
+}
+.page-interview .interview__list--equal {
+  display: grid;
+}
+/* =========================
+   Interview card
+========================= */
+
+/* カード全体 */
+.page-interview .interview__article-item a {
+  display: block;
+  color: #111;
+  text-decoration: none;
+}
+
+/* 画像 */
+.page-interview .interview__article-image {
+  width: 100%;
+  height: 180px;
+  object-fit: cover;
+  display: block;
+}
+
+/* タイトル */
+.page-interview .interview__article-title {
+  margin: 12px 0 8px;
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 1.6;
+}
+
+/* 日付 */
+.page-interview .interview__article-date {
+  display: block;
+  font-size: 12px;
+  color: #999;
+}
+/* =========================
+   page-interview：SPヘッダーを“2枚目風”に寄せる（パンくずは現状維持）
+========================= */
+
+@media (max-width: 767px) {
+  /* interviewページのSPヘッダー背景（2枚目の薄グレー寄せ） */
+  .page-interview .header {
+    background: #f3f5f6;
+    z-index: 1000; /* sp-menuより上 */
+  }
+
+  .page-interview .header__inner {
+    padding: 10px 16px;
+  }
+
+  /* 1枚目の“枠付きボタン”を消して、2枚目みたいにする */
+  .page-interview .header__hamburger {
+    border: none !important; /* ←枠線を殺す（これが効く） */
+    background: transparent;
+
+    top: 50%;
+    right: 12px;
+    transform: translateY(-50%);
+  }
+
+  /* ちょい見た目調整（お好み） */
+  .page-interview .header__hamburger-line,
+  .page-interview .header__hamburger-line::before {
+    width: 22px;
+  }
+}
+/* =========================
+   page-interview：SPヘッダーを“2枚目風”に寄せる（パンくずは現状維持）
+========================= */
+
+@media (max-width: 767px) {
+  /* interviewページのSPヘッダー背景（2枚目の薄グレー寄せ） */
+  .page-interview .header {
+    background: #f3f5f6;
+  }
+
+  .page-interview .header__inner {
+    padding: 10px 16px;
+  }
+
+  /* 1枚目の“枠付きボタン”を消して、2枚目みたいにする */
+  .page-interview .header__hamburger {
+    border: none !important; /* ←枠線を殺す（これが効く） */
+    background: transparent;
+
+    top: 50%;
+    right: 12px;
+    transform: translateY(-50%) translateY(-10px);
+  }
+
+  /* ちょい見た目調整（お好み） */
+  .page-interview .header__hamburger-line,
+  .page-interview .header__hamburger-line::before {
+    width: 22px;
+  }
+}
+/* ----- Pagination ----- */
+.pagination {
+  margin-top: 80px;
+  margin-bottom: 50px;
+}
+.pagination__list {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+/* 共通 */
+.pagination__item a,
+.pagination__item {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 36px;
+  height: 36px;
+  font-size: 14px;
+  color: #000;
+  text-decoration: none;
+  border: 1px solid #ddd;
+  background: #fff;
+}
+/* 1/5 表示 */
+.pagination__info {
+  border: none;
+  font-size: 13px;
+  color: #666;
+  margin-right: 12px;
+}
+/* 現在ページ */
+.pagination__item.is-current a {
+  background: #000;
+  color: #fff;
+  border-color: #000;
+}
+/* > ボタン */
+.pagination__next a {
+  font-size: 16px;
+}
+/* hover */
+.pagination__item a:hover {
+  background: #f2f2f2;
+}
+/* ----- Interview Footer ----- */
+.page-interview .footer,
+.page-trends-article .footer {
+  background-color: #f3f5f6;
+}
+
+/* =========================
+   pc-only / sp-only
+========================= */
+.pc-only {
+  display: block;
+}
+.sp-only {
+  display: none;
+}
+
+@media (max-width: 767px) {
+  .pc-only {
+    display: none !important;
+  }
+  .sp-only {
+    display: block !important;
+  }
+}
+
+/* =========================
+   SPメニュー：PCでは消す
+========================= */
+@media (min-width: 768px) {
+  .sp-menu {
+    display: none !important;
+  }
+}
+
+/* =========================
+   SP：ハンバーガー + 全画面メニュー
+   （HTMLは span1個＋.header__hamburger-line方式）
+========================= */
+.header__hamburger {
+  display: none; /* デフォは非表示（PC） */
+  width: 44px;
+  height: 44px;
+  background: transparent;
+  border: 1px solid #111;
+  border-radius: 2px;
+  position: relative;
+  cursor: pointer;
+
+  z-index: 1001; /* さらに上 */
+}
+
+/* 2本線（span本体＋::before） */
+.header__hamburger-line {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 24px;
+  height: 2px;
+  background: #111;
+  transform: translate(-50%, -50%);
+  transition: transform 0.25s ease;
+}
+
+.header__hamburger-line::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 8px;
+  width: 24px;
+  height: 2px;
+  background: #111;
+  transition:
+    transform 0.25s ease,
+    top 0.25s ease;
+}
+
+/* 開いてる時：× */
+.header__hamburger.is-active .header__hamburger-line {
+  transform: translate(-50%, -50%) rotate(45deg);
+}
+.header__hamburger.is-active .header__hamburger-line::before {
+  top: 0;
+  transform: rotate(-90deg);
+}
+
+/* SPだけ：表示＆ナビ隠す */
+@media (max-width: 767px) {
+  .header__nav {
+    display: none !important;
+  }
+  .header__hamburger {
+    display: inline-block;
+  }
+}
+
+/* 全画面メニュー */
+.sp-menu {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: #fff;
+  z-index: 900; /* sp-menuはヘッダーより下に */
+  overflow-y: auto;
+  padding-top: var(--header-h);
+}
+
+body.is-menu-open .sp-menu {
+  display: block;
+}
+
+body.is-menu-open {
+  overflow: hidden;
+}
+
+/* =========================
+      article
+========================= */
+
+.page-trends-article {
+  background: #fff;
+  color: #111;
+
+  /* page-level spacing (このページだけのルール) */
+  --page-x: var(--space-lg); /* 横余白 */
+  --page-y: var(--space-lg); /* 縦余白 */
+  --page-bottom: var(--space-2xl); /* ページ最後余白 */
+
+  --section-gap: var(--space-xl); /* セクション間 */
+  --block-gap: var(--space-md); /* 段落など小さい間隔 */
+}
+
+.page-trends-article .article__section + .article__section {
+  margin-top: var(--section-gap);
+}
+
+/* =========================
+   LAYOUT
+   ========================= */
+.page-trends-article .layout {
+  max-width: var(--container-w);
+  margin: 0 auto;
+  padding-inline: var(--container-px); /* 追加：interviewと揃う */
+
+  /* 余白 */
+  padding-block: var(--page-y);
+  padding-bottom: var(--space-2xl);
+
+  padding-top: 0;
+  margin-top: 0;
+
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 320px;
+
+  /* gapも変数化 */
+  gap: var(--space-xl);
+  align-items: start;
+}
+
+/* =========================
+   ARTICLE HEADER
+   ========================= */
+.page-trends-article .article__title {
+  font-size: 40px;
+  line-height: 1.3;
+  margin-top: 0; /* タイトルに逃がし余白を付けない */
+  margin-bottom: 16px;
+  font-weight: 700;
+}
+
+.page-trends-article .article__meta {
+  font-size: 14px;
+  color: #777;
+  margin-bottom: 24px;
+}
+
+.page-trends-article .article__hero {
+  width: 100%;
+  margin-bottom: 40px;
+}
+
+/* =========================
+   ARTICLE BODY
+   ========================= */
+/* ===== header .article__title ===== */
+.article__header .article__title {
+  font-size: 37px;
+  line-height: 1.5;
+  font-weight: 700;
+
+  margin-top: var(--space-xl);
+}
+
+/* ===== header .article__sublead（date + copy button）===== */
+/*  flex-wrap: nowrap;  折り返さない（1行）←今回これ 
+    flex-wrap: wrap;   はみ出したら次の行へ 
+    flex-wrap: wrap-reverse; 逆方向に折り返す  */
+.page-trends-article .article__sublead {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  width: 100%;
+  flex-wrap: nowrap;
+  margin: 40px auto; /*指定*/
+}
+.page-trends-article .article__sublead .article__meta {
+  margin: 0;
+  min-width: 0;
+}
+.page-trends-article .article__copy-button {
+  margin-left: auto;
+  flex: 0 0 auto;
+  width: auto;
+  display: inline-flex;
+  padding: 0;
+  border: 0;
+  background: transparent;
+}
+.page-trends-article .article__copy-button img {
+  display: block;
+  width: auto;
+  height: 35px;
+}
+
+/* ===== header .article__lead===== */
+.page-trends-article .article__lead {
+  font-size: 16px;
+  line-height: 2;
+  margin-top: 0; /*余白自動で足されるため*/
+  margin-bottom: 40px; /*指定*/
+}
+
+.page-trends-article .article__heading {
+  padding: var(--space-md) var(--space-lg);
+  margin-bottom: var(--space-lg);
+
+  background: #f3f3f3;
+  border-top: 3px solid #0b8f6a;
+  font-size: 28px;
+  font-weight: 700;
+}
+
+/* ===== header マーカーとサブタイトル===== */
+.page-trends-article .article__subheading {
+  margin: 30px 0;
+  font-size: 22px;
+  font-weight: 700;
+  line-height: 1.6;
+
+  /* 2カラムにして「左＝prefix」「右＝本文」 */
+  display: grid;
+  grid-template-columns: max-content 1fr;
+  column-gap: 12px;
+  align-items: start;
+}
+/* マーカー＋（1）を同じ基準で縦センター */
+.page-trends-article .article__subheading-prefix {
+  display: inline-flex;
+  align-items: center; /* ←数字とマーカーのセンター一致 */
+  gap: 0;
+  line-height: 1; /* ←数字の中心がブレにくい */
+}
+/* マーカー */
+.page-trends-article .article__marker {
+  width: 50px;
+  height: auto;
+  display: block;
+  flex-shrink: 0;
+}
+/* （1） */
+.page-trends-article .article__subheading-num {
+  line-height: 1;
+}
+/* 本文（折り返しはここだけで起きる） */
+.page-trends-article .article__subheading-text {
+  min-width: 0; /* 長文折り返しの保険 */
+}
+
+.page-trends-article .article__text {
+  font-size: 16px;
+  line-height: 2;
+  margin-bottom: 18px;
+}
+
+.page-trends-article .article__image {
+  width: 100%;
+  margin: 24px 0;
+}
+
+/* 強調 */
+.page-trends-article .u-accent {
+  color: #0a9671;
+  font-weight: bold;
+}
+.page-trends-article .u-highlight {
+  background: #ffff97;
+  padding: 2px 4px;
+  font-weight: bold;
+}
+
+.page-trends-article .article__captionlink {
+  display: inline-flex;
+  flex-direction: column;
+  row-gap: 5px;
+  text-decoration: none;
+  color: #3399cc;
+}
+.page-trends-article .article__captionlink:visited {
+  color: #3399cc;
+  text-decoration: none;
+}
+/* =========================
+   CALLOUT
+   ========================= */
+.page-trends-article .callout {
+  margin-top: 32px;
+  padding: 22px;
+  border: 3px solid #cfeee3;
+  border-radius: 14px;
+  background: #f7fffc;
+}
+
+.page-trends-article .callout__head {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 12px;
+}
+.page-trends-article .callout__icon {
+  width: 30px;
+  height: auto;
+}
+
+.page-trends-article .callout__title {
+  font-weight: 700;
+  color: #0b8f6a;
+}
+
+.page-trends-article .callout__body {
+  display: flex;
+  flex-direction: column;
+  font-size: 15px;
+  line-height: 1.9;
+}
+.page-trends-article .callout__urlwrap {
+  display: inline-flex;
+  align-items: center;
+  column-gap: 5px;
+  color: #3399cc;
+  text-decoration: none;
+}
+.page-trends-article .callout__urlwrap:visited {
+  color: #3399cc;
+  text-decoration: none;
+}
+.page-trends-article .callout__linkicon {
+  width: 20px;
+  height: auto;
+}
+/* =========================
+   TABLE
+   ========================= */
+.page-trends-article .comparison-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 24px;
+  font-size: 14px;
+}
+
+.page-trends-article .comparison-table th,
+.page-trends-article .comparison-table td {
+  border: 1px solid #ddd;
+  padding: 14px;
+  line-height: 1.7;
+}
+
+.page-trends-article .comparison-table thead th {
+  background: #f7f7f7;
+  text-align: center;
+}
+
+/* =========================
+   SHARE
+   ========================= */
+.page-trends-article .share {
+  margin-top: 72px;
+  padding-top: 24px;
+  border-top: 2px solid #e8e8e8;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+  align-items: center;
+}
+
+/* =========================
+   SIDEBAR（記事ページ）
+========================= */
+
+.page-trends-article .sidebar {
+  position: sticky;
+  top: 24px;
+}
+
+/*Sidebar 上の画像カード */
+.page-trends-article .sidebar__top {
+  position: relative;
+  margin-top: var(--space-lg);
+  margin-bottom: var(--space-lg);
+  box-shadow: 10px 10px 0 rgba(0, 0, 0, 0.25); /* 右下の影っぽいの */
+}
+
+.page-trends-article .sidebar__img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+/* 画像の上の文字 */
+.page-trends-article .sidebar__top span {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  background: rgba(0, 0, 0, 0.35);
+  color: #fff;
+  font-weight: 700;
+}
+
+/* 区切り線 */
+.page-trends-article .sidebar__divider {
+  border: none;
+  border-top: 2px solid #222;
+  margin: 28px 0 22px;
+}
+
+/* PICK UP タイトル行 */
+.page-trends-article .sidebar__title {
+  display: flex;
+  align-items: baseline;
+  gap: 14px;
+  padding-bottom: 18px;
+  margin-bottom: 18px;
+  position: relative;
+}
+
+/* ✅ typo修正：slidebar → sidebar */
+.page-trends-article .sidebar__lead-en {
+  font-size: 36px;
+  font-weight: 400;
+  margin: 0;
+}
+
+.page-trends-article .sidebar__slash {
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.page-trends-article .sidebar__lead-ja {
+  font-size: 14px;
+  font-weight: 700;
+}
+
+/* 緑の下線 */
+.page-trends-article .sidebar__title::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 2px;
+  background: #0b8f6a;
+}
+
+/* PICKUPリスト */
+.page-trends-article .pickup {
+  list-style: none;
+  padding: 0;
+  display: grid;
+  gap: 18px;
+}
+
+.page-trends-article .pickup__link {
+  display: grid;
+  grid-template-columns: 120px 1fr;
+  gap: 14px;
+  align-items: center;
+  text-decoration: none;
+  color: inherit;
+}
+
+.page-trends-article .pickup__thumb {
+  width: 120px;
+  height: 72px;
+  object-fit: cover;
+  display: block;
+}
+
+.page-trends-article .pickup__text {
+  margin: 0;
+  font-size: 14px;
+  line-height: 1.6;
+  font-weight: 700;
+}
+
+.page-trends-article .pickup__link:hover {
+  opacity: 0.75;
+}
+
+/* =========================
+   Share（PC想定・可変対応）
+   ========================= */
+
+/* share全体 */
+.page-trends-article .share {
+  display: flex;
+  flex-wrap: wrap; /* 横が足りなければ自然に改行 */
+  align-items: center;
+  gap: 16px;
+
+  /* 2カラム干渉・潜り込み防止 */
+  clear: both;
+  position: relative;
+  z-index: 1;
+
+  width: 100%;
+  max-width: 100%;
+  box-sizing: border-box;
+}
+
+/* SNSボタンの並び */
+.page-trends-article .share__list {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 12px;
+
+  list-style: none; /* ・消す */
+  margin: 0;
+  padding: 0;
+}
+
+/* li */
+.page-trends-article .share__item {
+  flex: 0 0 auto;
+  display: inline-flex;
+}
+
+/* リンク */
+.page-trends-article .share__link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+  color: inherit;
+}
+
+.page-trends-article .share__link:hover {
+  opacity: 0.7;
+}
+
+/* SNS画像ボタン */
+.page-trends-article .share__item img {
+  display: block;
+  height: 30px; /* ←ここで高さ調整 */
+  width: auto;
+}
+
+/* コピーボタン（右寄せ） */
+.page-trends-article .share .article__copy-button {
+  margin-left: auto; /* 右に押し出す */
+}
+/* コピーボタン画像：SNSと同じ高さにする */
+.page-trends-article .share .article__copy-button img {
+  height: 35px;
+  display: block;
+  width: auto; /* ←これが超重要 */
+  max-width: 280px; /* デカくなりすぎ防止 */
+}

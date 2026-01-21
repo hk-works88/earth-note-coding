@@ -1,0 +1,852 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8" />
+    <title>SDGs情報メディア｜EARTH NOTE</title>
+
+    <!-- タイトルの下に表示される文章。サイト内容（概要）、80~120字、キーワード入れる。-->
+    <meta
+      name="description"
+      content="SDGs達成に取り組む企業インタビューや基礎知識をお伝えし、私たちにできることを紹介するWebメディアです。"
+    />
+    <!-- サイトの内容の目安に使われていたキーワード指定用。自分で管理、他の検索エンジン対策。Googleでは重要度は低い。 -->
+    <meta name="keywords" content="SDGs,SDGsトレンド,リサイクル,サステナブル" />
+    <!-- スマホ用のレスポンシブ設定。画面幅を端末の幅、最初の拡大率を100% -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- スマホで勝手にリンクになるの防ぐタグ -->
+    <meta name="format-detection" content="telephone=no,email=no,address=no" />
+
+    <!-- リセットCSSリンク -->
+    <link rel="stylesheet" href="reset.css" />
+    <!-- CSSリンク -->
+    <link rel="stylesheet" href="style.css" />
+
+    <!-- ファビコン -->
+    <link rel="icon" href="images/favicon.png" type="image/png" />
+    <!-- <link rel="apple-touch-icon" href="/icons/favicon.png.png">　アプリアイコン -->
+
+    <!-- OGP -->
+    <meta property="og:title" content="SDGs情報メディア｜EARTH NOTE" />
+    <meta
+      property="og:description"
+      content="SDGsの企業インタビューや基礎知識を紹介"
+    />
+    <meta property="og:image" content="images/ogp.jpg" />
+    <meta property="og:url" content="https://example.com" />
+    <meta property="og:site_name" content="EARTH NOTE" />
+    <meta property="og:type" content="website" />
+
+    <!-- Google Fonts preconnect -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+
+    <!-- Fonts -->
+    <link
+      href="https://fonts.googleapis.com/css2?family=Marcellus&family=Montserrat:wght@400;500;700&family=Noto+Sans+JP:wght@400;500;700&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+
+  <body class="page-index">
+    <!-- ALLWrapper -->
+    <div class="wrapper">
+      <!-- header -->
+      <header class="header">
+        <div class="header__inner">
+          <!-- ロゴ -->
+          <div class="header__logo">
+            <a href="index.html">
+              <span class="header__logo-lead font-noto">SDGs情報メディア</span>
+              <img
+                src="images/logo.png"
+                alt="EARTH NOTE"
+                class="header__logo-img"
+              />
+            </a>
+          </div>
+          <!-- nav -->
+          <nav class="header__nav font-noto">
+            <ul>
+              <li><a href="#">SDGsトレンド</a></li>
+              <li><a href="#">インタビュー</a></li>
+              <li><a href="#">今すぐできるSDGs</a></li>
+            </ul>
+          </nav>
+        </div>
+        <button class="header__hamburger" aria-label="メニュー">
+          <span></span>
+        </button>
+      </header>
+
+      <!-- MAINWrapper -->
+      <main class="page-top">
+        <!-- MV -->
+        <section class="mv">
+          <div class="container">
+            <div class="mv__content">
+              <!-- <p class="mv__catch font-marcellus">
+                <span class="mv__line">For the future</span><br />
+                <span class="mv__line">Of the earth</span>
+              </p> -->
+
+             <!-- メインリード（画像） -->
+              <img
+                src="images/mv-lead.png"
+                alt="For the future Of the earth"
+                class="mv__lead"
+              />
+
+              <!-- サブコピー -->
+              <p class="mv__sub font-noto">
+                地球のミライのために、今できること。
+              </p>
+
+            </div><!-- mv__content -->
+          </div>
+          <!--MV container -->
+        </section>
+
+        <div class="bg-group bg-group--a">
+        <!-- SDGs trends -->
+        <section class="trends">
+          <div class="container">
+            <div class="trends__inner">
+              <div class="trends__head">
+                <span class="section-heading__icon"></span>
+                <h2 class="trends__heading-en font-marcellus">SDGs trends</h2>
+                <span class="trends__slash"></span>
+                <p class="trends__heading-ja font-noto">SDGsトレンド</p>
+              </div>
+              <p class="trends__lead font-noto">
+                SDGsの最新情報をお届けします。
+              </p>
+
+              <div class="trends__list articles">
+                <!-- 大きい1件：main -->
+                <div class="articles__main">
+                  <article
+                    class="trends__article-item trends__article-item--large"
+                  >
+                    <a href="#">
+                      <img
+                        class="trends__article-image"
+                        src="images/wind-farm.jpg"
+                        alt="ダミーサステナブルとは"
+                      />
+
+                      <div class="trends__article-body">
+                        <div class="trends__article-meta">
+                          <h3 class="trends__article-title font-noto">
+                            ダミーサステナブルとは？SDGsとの違い・企業の取り組み事例を簡単に解説
+                          </h3>
+                          <span class="trends__article-date font-montserrat"
+                            >2023.08.27</span
+                          >
+                        </div>
+                        <!-- trends__article-meta -->
+                        <div class="trends__article-text">
+                          <p class="trends__article-desc font-noto">
+                            本文が入ります。この文章はダミーです。文字の大きさ、量、字間、行間等を確認するために入れています。この文章はダミーです。文字の大きさ、量、字間、行間等を確認するために入れています。この文章はダ
+                          </p>
+                        </div>
+                        <!-- trends__article-text -->
+                      </div>
+                      <!-- trends__article-body -->
+                    </a>
+                  </article>
+                </div>
+                <!-- articles__main -->
+
+                <!-- 小さい4件：sub -->
+                <div class="articles__sub">
+                  <article class="trends__article-item">
+                    <a href="#">
+                      <img
+                        class="trends__article-image"
+                        src="images/tea-farm.jpg"
+                        alt="ダミースリランカの紅茶農園と取り組む持続可能な農業"
+                      />
+                      <h3
+                        class="trends__article-title trends__article-title--sm font-noto"
+                      >
+                        ダミースリランカの紅茶農園と取り組む持続可能な農業
+                      </h3>
+                      <span class="trends__article-date font-montserrat"
+                        >2023.08.27</span
+                      >
+                    </a>
+                  </article>
+                  <article class="trends__article-item">
+                    <a href="#">
+                      <img
+                        class="trends__article-image"
+                        src="images/tiger-sdgs.jpg"
+                        alt="ダミー絶滅危惧種「トラ」の生態について｜トラを守るSDGsの活動とは"
+                      />
+                      <h3
+                        class="trends__article-title trends__article-title--sm font-noto"
+                      >
+                        ダミー絶滅危惧種「トラ」の生態について｜トラを守るSDGsの活動とは
+                      </h3>
+                      <span class="trends__article-date font-montserrat"
+                        >2023.08.27</span
+                      >
+                    </a>
+                  </article>
+                  <article class="trends__article-item">
+                    <a href="#">
+                      <img
+                        class="trends__article-image"
+                        src="images/circular-economy.jpg"
+                        alt="ダミーサーキュラーエコノミーとは？取り組みによるメリット・デメリットを解説"
+                      />
+                      <h3
+                        class="trends__article-title trends__article-title--sm font-noto"
+                      >
+                        ダミーサーキュラーエコノミーとは？取り組みによるメリット・デメリットを解説
+                      </h3>
+                      <span class="trends__article-date font-montserrat"
+                        >2023.08.27</span
+                      >
+                    </a>
+                  </article>
+                  <article class="trends__article-item">
+                    <a href="#">
+                      <img
+                        class="trends__article-image"
+                        src="images/fairtrade-cotton.jpg"
+                        alt="ダミーフェアトレードはなぜ必要？商品例とともに簡単にわかりやすく解説！"
+                      />
+                      <h3
+                        class="trends__article-title trends__article-title--sm font-noto"
+                      >
+                        ダミーフェアトレードはなぜ必要？商品例とともに簡単にわかりやすく解説！
+                      </h3>
+                      <span class="trends__article-date font-montserrat"
+                        >2023.08.27</span
+                      >
+                    </a>
+                  </article>
+                </div>
+                <!-- articles__sub -->
+              </div>
+              <!--trends__list -->
+
+              <!--SDGsトレンド一覧 ボタン-->
+              <a href="#" class="trends__btn"><span>SDGsトレンド一覧</span></a>
+            </div>
+            <!--trends__inner -->
+          </div>
+          <!-- trends container -->
+        </section>
+
+        <!-- 17 Goals -->
+        <section class="goals">
+          <div class="container">
+            <div class="goals__inner">
+              <!-- 左：タイトル -->
+              <div class="goals__info">
+                <h2 class="goals__title">
+                  <img src="images/17goals.png" alt="17goals" />
+                </h2>
+                <p class="goals__sub font-noto">SDGs 17の目標</p>
+              </div>
+              <!-- goals__info -->
+
+              <!-- 右：アイコン -->
+              <div class="goals__panel">
+                <button
+                  class="goals__arrow goals__arrow--prev"
+                  aria-label="前へ"
+                >
+                  ‹
+                </button>
+
+                <div class="goals__scroll" id="goalsScroll">
+                  <div class="goals__grid">
+                    <a href="#">
+                      <img
+                        src="images/icon_01.png"
+                        alt="貧困をなくそう"
+                        class="goals__icon"
+                      />
+                    </a>
+                    <a href="#">
+                      <img
+                        src="images/icon_02.png"
+                        alt="飢餓をゼロに"
+                        class="goals__icon"
+                      />
+                    </a>
+                    <a href="#">
+                      <img
+                        src="images/icon_03.png"
+                        alt="すべての人に健康と福祉を"
+                        class="goals__icon"
+                      />
+                    </a>
+                    <a href="#">
+                      <img
+                        src="images/icon_04.png"
+                        alt="質の良い教育をみんなに"
+                        class="goals__icon"
+                      />
+                    </a>
+                    <a href="#">
+                      <img
+                        src="images/icon_05.png"
+                        alt="ジェンダー平等を実現しよう"
+                        class="goals__icon"
+                      />
+                    </a>
+                    <a href="#">
+                      <img
+                        src="images/icon_06.png"
+                        alt="安全な水とトイレを世界中に"
+                        class="goals__icon"
+                      />
+                    </a>
+                    <a href="#">
+                      <img
+                        src="images/icon_07.png"
+                        alt="エネルギーをクリーンに　そしてみんなに"
+                        class="goals__icon"
+                      />
+                    </a>
+                    <a href="#">
+                      <img
+                        src="images/icon_08.png"
+                        alt="働きがいも　経済成長も"
+                        class="goals__icon"
+                      />
+                    </a>
+                    <a href="#">
+                      <img
+                        src="images/icon_09.png"
+                        alt="産業と革新技術の基盤をつくろう"
+                        class="goals__icon"
+                      />
+                    </a>
+                    <a href="#">
+                      <img
+                        src="images/icon_10.png"
+                        alt="人や国の不平等をなくそう"
+                        class="goals__icon"
+                      />
+                    </a>
+                    <a href="#">
+                      <img
+                        src="images/icon_11.png"
+                        alt="住み続けられるまちづくりを"
+                        class="goals__icon"
+                      />
+                    </a>
+                    <a href="#">
+                      <img
+                        src="images/icon_12.png"
+                        alt="つくる責任　つかう責任"
+                        class="goals__icon"
+                      />
+                    </a>
+                    <a href="#">
+                      <img
+                        src="images/icon_13.png"
+                        alt="気候変動に具体的な対策を"
+                        class="goals__icon"
+                      />
+                    </a>
+                    <a href="#">
+                      <img
+                        src="images/icon_14.png"
+                        alt="海の豊かさを守ろう"
+                        class="goals__icon"
+                      />
+                    </a>
+                    <a href="#">
+                      <img
+                        src="images/icon_15.png"
+                        alt="陸の豊かさも守ろう"
+                        class="goals__icon"
+                      />
+                    </a>
+                    <a href="#">
+                      <img
+                        src="images/icon_16.png"
+                        alt="平和と公正をすべての人に"
+                        class="goals__icon"
+                      />
+                    </a>
+                    <a href="#">
+                      <img
+                        src="images/icon_17.png"
+                        alt="パートナーシップで目標を達成しよう"
+                        class="goals__icon"
+                      />
+                    </a>
+                  </div>
+                  <!-- goals__grid -->
+                </div>
+                <!-- goals__scroll -->
+                <button
+                  class="goals__arrow goals__arrow--next"
+                  aria-label="次へ"
+                >
+                  ›
+                </button>
+              </div>
+              <!-- goals__panel -->
+            </div>
+            <!-- goals__inner -->
+          </div>
+          <!-- 17Goals container -->
+        </section>
+
+        <!-- インタビュー -->
+        <section class="interview">
+          <div class="container">
+            <div class="interview__inner">
+              <div class="interview__head">
+                <span class="section-heading__icon"></span>
+                <h2 class="interview__heading-en font-marcellus">Interview</h2>
+                <span class="interview__slash"></span>
+                <p class="interview__heading-ja font-noto">インタビュー</p>
+              </div>
+              <p class="interview__lead font-noto">
+                SDGsに対する企業や自治体、学校の取り組みをご紹介します。
+              </p>
+
+              <div class="interview__list articles articles--reverse">
+                <!-- 大きい1件：main -->
+                <div class="articles__main">
+                  <article
+                    class="interview__article-item interview__article-item--large"
+                  >
+                    <a href="#">
+                      <img
+                        class="interview__article-image"
+                        src="images/interview-public-center.jpg"
+                        alt="国連広報センター"
+                      />
+                      <span class="interview__article-label">インタビュー</span>
+                      <div class="interview__article-body">
+                        <div class="interview__article-meta">
+                          <h3 class="interview__article-title font-noto">
+                            国連広報センター所長、□□□□さんに聞くSDGsのいま、これから、私たちにできること
+                          </h3>
+                          <span class="interview__article-company"
+                            >□□□□株式会社</span
+                          >
+                          <span class="interview__article-date font-montserrat"
+                            >2023.08.27</span
+                          >
+                        </div>
+                        <!-- interview__article-meta -->
+                        <div class="interview__article-text">
+                          <p class="interview__article-desc font-noto">
+                            本文が入ります。この文章はダミーです。文字の大きさ、量、字間、行間等を確認するために入れています。この文章はダミーです。文字の大きさ、量、字間、行間等を確認するために入れています。この文章はダ
+                          </p>
+                        </div>
+                        <!-- interview__article-text -->
+                      </div>
+                      <!-- interview__article-body -->
+                    </a>
+                  </article>
+                </div>
+                <!-- articles__main -->
+
+                <!-- 小さい4件：sub -->
+                <div class="articles__sub">
+                  <article class="interview__article-item">
+                    <a href="#">
+                      <img
+                        class="interview__article-image"
+                        src="images/interview-office-woman.jpg"
+                        alt="スープストックトーキョー"
+                      />
+                      <span class="interview__article-label">インタビュー</span>
+                      <h3
+                        class="interview__article-title interview__article-title--sm font-noto"
+                      >
+                        ダミースープは「もったいない」と相性が良い｜スープストックトーキョーならではのSDGsとは
+                      </h3>
+                      <span class="interview__article-company"
+                        >□□□□株式会社</span
+                      >
+                      <span class="interview__article-date font-montserrat"
+                        >2023.08.27</span
+                      >
+                    </a>
+                  </article>
+                  <article class="interview__article-item">
+                    <a href="#">
+                      <img
+                        class="interview__article-image"
+                        src="images/sustainable-bakery.jpg"
+                        alt="SDGsに取り組むパン屋"
+                      />
+                      <span class="interview__article-label">インタビュー</span>
+                      <h3
+                        class="interview__article-title interview__article-title--sm font-noto"
+                      >
+                        ダミー電気工事を請け負う会社、“SDGsに取り組むパン屋”を名古屋市千種区にオープン。～再生可能エネルギーを使用
+                      </h3>
+                      <span class="interview__article-company"
+                        >□□□□株式会社</span
+                      >
+                      <span class="interview__article-date font-montserrat"
+                        >2023.08.27</span
+                      >
+                    </a>
+                  </article>
+                  <article class="interview__article-item">
+                    <a href="#">
+                      <img
+                        class="interview__article-image"
+                        src="images/thumbnail-earthnote-default.jpg"
+                        alt="コメ兵"
+                      />
+                      <span class="interview__article-label">インタビュー</span>
+                      <h3
+                        class="interview__article-title interview__article-title--sm font-noto"
+                      >
+                        ダミー誰かの不要が誰かの必要になる｜コメ兵が“リレーユース”でつくる循環型社会とは
+                      </h3>
+                      <span class="interview__article-company"
+                        >□□□□株式会社</span
+                      >
+                      <span class="interview__article-date font-montserrat"
+                        >2023.08.27</span
+                      >
+                    </a>
+                  </article>
+                  <article class="interview__article-item">
+                    <a href="#">
+                      <img
+                        class="interview__article-image"
+                        src="images/interview-team-women.jpg"
+                        alt="モス社員"
+                      />
+                      <span class="interview__article-label">インタビュー</span>
+                      <h3
+                        class="interview__article-title interview__article-title--sm font-noto"
+                      >
+                        一人ひとりが輝く（シャイン）社員｜みんなの個性に光をあてるモスのD&I
+                      </h3>
+                      <span class="interview__article-company"
+                        >□□□□株式会社</span
+                      >
+                      <span class="interview__article-date font-montserrat"
+                        >2023.08.27</span
+                      >
+                    </a>
+                  </article>
+                </div>
+                <!-- articles__sub -->
+              </div>
+              <!--interview__list -->
+
+              <!--インタビュー一覧 ボタン-->
+              <a href="#" class="interview__btn"><span>インタビュー一覧</span></a>
+            </div>
+            <!--interview__inner -->
+          </div>
+          <!-- interview container -->
+        </section>
+        </div><!-- bg-group bg-group--a -->
+
+        <div class="bg-group bg-group--b">
+        <!-- Familiar SDGs -->
+        <section class="familiar">
+          <div class="container">
+            <div class="familiar__inner">
+              <div class="familiar__head">
+                <span class="section-heading__icon"></span>
+                <h2 class="familiar__heading-en font-marcellus">Familiar SDGs</h2>
+                <span class="familiar__slash"></span>
+                <p class="familiar__heading-ja font-noto">今すぐできるSDGs</p>
+              </div>
+              <p class="familiar__lead font-noto">
+                個人レベルで行える身近なSDGsをご紹介します。
+              </p>
+
+              <div class="familiar__list articles">
+                    <article class="familiar__article-item">
+                        <a href="#">
+                          <img
+                            class="familiar__article-image"
+                            src="images/sustainable-fashion.jpg"
+                            alt="サスティナブルファッション"
+                          />
+                          <h3
+                            class="familiar__article-title font-noto"
+                          >
+                            ダミー服からはじめるSDGs「サスティナブルファッション」
+                          </h3>
+                          <span class="familiar__article-date font-montserrat"
+                            >2023.08.27</span
+                          >
+                        </a>
+                      </article>
+                      <article class="familiar__article-item">
+                        <a href="#">
+                          <img
+                            class="familiar__article-image"
+                            src="images/tumbler.jpg"
+                            alt="マイタンブラー"
+                          />
+                          <h3
+                            class="familiar__article-title font-noto"
+                          >
+                            ダミー マイタンブラー持参で割引のカフェ――エシカルでお得なSDGsを
+                          </h3>
+                          <span class="familiar__article-date font-montserrat"
+                            >2023.08.27</span
+                          >
+                        </a>
+                      </article>
+                      <article class="familiar__article-item">
+                        <a href="#">
+                          <img
+                            class="familiar__article-image"
+                            src="images/sustainable-products.jpg"
+                            alt="SDGs商品"
+                          />
+                          <h3
+                            class="familiar__article-title font-noto"
+                          >
+                            ダミー使うだけでSDGs！アップサイクル最新商品ダミーテキスト
+                          </h3>
+                          <span class="familiar__article-date font-montserrat"
+                            >2023.08.27</span
+                          >
+                        </a>
+                        </article>
+                        <article class="familiar__article-item">
+                        <a href="#">
+                          <img
+                            class="familiar__article-image"
+                            src="images/food-waste-salad.jpg"
+                            alt="SDGs商品"
+                          />
+                          <h3
+                            class="familiar__article-title font-noto"
+                          >
+                            ダミー野菜の冷凍保存で食品ロスを減らそう！
+                          </h3>
+                          <span class="familiar__article-date font-montserrat"
+                            >2023.08.27</span
+                          >
+                        </a>
+                      </article>
+              </div><!-- Familiar list -->
+                      <!--今すぐできるSDGs一覧 ボタン-->
+                      <a href="#" class="familiar__btn"><span>今すぐできるSDGs一覧</span></a>
+            </div><!-- Familiar inner -->
+        </section>
+
+        <!-- Coming Soon -->
+               <section class="coming">
+                  <a class="coming__item coming__item--sdgs" href="#">
+                    <div class="coming__text">
+                      <h3>What are SDGs?</h3>
+                      <p>SDGsとは？</p>
+                    </div>
+                  </a>
+
+                  <!-- 真ん中：ComingSoon常時 -->
+                  <div class="coming__item coming__item--numbers is-coming">
+                    <div class="coming__soon">
+                        <span>Coming Soon</span>
+                        <span class="line">_</span>
+                    </div>
+
+                    <div class="coming__text">
+                      <h3>See in numbers<br>Environment<br>issues</h3>
+                      <p>数字から見る環境問題</p>
+                    </div>
+                  </div>
+
+                  <a class="coming__item coming__item--circulation" href="#">
+                    <div class="coming__text">
+                      <h3>Circulation</h3>
+                      <p>循環型社会の実現</p>
+                    </div>
+                  </a>
+                </section>
+        </div><!-- bg-group bg-group--b -->
+
+       <!-- SDGsメディアEarthNoteとは？ -->
+        <section class="about">
+          <div class="about__inner">
+            <h3 class="about__title">SDGs情報メディアEARTH NOTE（アースノート）</h3>
+            <span class="about__line" aria-hidden="true"></span>
+            <p class="about__text">
+              現在、私たちが暮らす地球は様々な危機に直面しています。このままでは私たちの居場所は豊かな環境を失ってしまいます。だから私たちは、未来の地球はどうあるべきか、今どう動くべきかを考えて、行動を起こす必要があります。<br>
+              地球を救う方法の一つはリサイクルの実践・循環型社会の実現です。そこで当サイトは、地球課題を解決するための目標『SDGs』に関する情報を集め、目標達成のアイデアや取り組みを共有し、循環させたいと考えました。<br>
+              EARTH NOTE（アースノート）はSDGs達成に取り組む企業インタビューや基礎知識をお伝えし、私たちにできることを紹介するWebメディアです。気になる記事があったら、まずはクリックしてください。企業や学校、家庭、個人でできることは異なります。一人ひとりがそれぞれの場所で、できることから始めましょう。<br>
+              いいなと思った取り組みは、ぜひ隣にいる人に伝えてください。身近なアイデアを循環させて、地球の未来をつなげていきましょう。皆さんと一緒に取り組んでいけたら幸いです。
+            </p>
+          </div>
+        </section>
+
+        <!-- 流れる文字：Towards a Sustainable Future -->
+        <section class="marquee" aria-label="Towards a Sustainable Future">
+          <div class="marquee__inner">
+            <p class="marquee__track">
+              <span>Towards a Sustainable Future</span>
+              <span>Towards a Sustainable Future</span>
+              <span>Towards a Sustainable Future</span>
+              <span>Towards a Sustainable Future</span>
+              <span>Towards a Sustainable Future</span>
+            </p>
+          </div>
+        </section>
+
+        <!-- 横フルのムービー -->
+        <section class="movie">
+          <video class="movie__video" autoplay muted loop playsinline>
+            <source src="images/your-movie.mp4" type="video/mp4" />
+          </video>
+        </section>
+
+      </main>
+
+      <footer class="footer">
+        <div class="footer__inner">
+          <!-- 左：ロゴ -->
+          <div class="footer__brand">
+            <p class="footer__label">SDGs情報メディア</p>
+            <img src="images/logo.png" alt="EARTH NOTE" />
+          </div>
+
+          <!-- 中央起点 -->
+          <div class="footer__nav-wrap">
+          <!-- 右：リンク -->
+          <nav class="footer__nav" aria-label="フッターナビ">
+            <ul class="footer__nav-main">
+              <li><a href="#">SDGsトレンド</a></li>
+              <li><a href="#">インタビュー</a></li>
+              <li><a href="#">今すぐできるSDGs</a></li>
+            </ul>
+
+            <ul class="footer__nav-sub">
+              <li><a href="#" class="is-external">運営会社</a></li>
+              <li><a href="#" class="is-external">お問い合わせ</a></li>
+              <li><a href="#" class="is-external">サイトポリシー</a></li>
+            </ul>
+          </nav>
+        </div><!-- footer__inner -->
+        </div><!-- footer__nav-wrap -->
+        <p class="footer__copy">© 2023 EARTH NOTE</p>
+      </footer>
+      <!-- 右下固定TOPボタン -->
+    <button class="to-top" id="toTop" aria-label="ページ上部へ">
+      TOP
+    </button>
+    </div>
+
+    <!-- JS -->
+    <script>
+      /* ===== 17Goals横スクロール ===== */
+      const scrollArea = document.getElementById("goalsScroll");
+      const prevBtn = document.querySelector(".goals__arrow--prev");
+      const nextBtn = document.querySelector(".goals__arrow--next");
+
+      if (scrollArea && prevBtn && nextBtn) {
+        const step = () => Math.round(scrollArea.clientWidth * 0.8);
+        const max = () => scrollArea.scrollWidth - scrollArea.clientWidth;
+
+        prevBtn.addEventListener("click", () => {
+          const x = scrollArea.scrollLeft;
+          const m = max();
+          if (x <= 5) {
+            scrollArea.scrollLeft = m; // 最初なら最後へ
+          } else {
+            scrollArea.scrollLeft = x - step();
+          }
+        });
+
+        nextBtn.addEventListener("click", () => {
+          const x = scrollArea.scrollLeft;
+          const m = max();
+          if (x >= m - 5) {
+            scrollArea.scrollLeft = 0; // 最後なら最初へ
+          } else {
+            scrollArea.scrollLeft = x + step();
+          }
+        });
+      }
+
+        /* ===== TOPボタン制御 ===== */
+
+        // // TOPボタン要素を取得
+        // const toTopBtn = document.getElementById("toTop");
+
+        // // トリガーにするセクション（SDGsトレンド）
+        // const triggerSection = document.querySelector(".trends");
+
+        // // FV（ファーストビュー）の高さを取得
+        // const fvHeight = window.innerHeight;
+
+        // // TOPボタンをクリックしたら一番上へ戻る
+        // toTopBtn.addEventListener("click", () => {
+        //   window.scrollTo({ top: 0, behavior: "smooth" });
+        // });
+
+        // // trends が30%以上見えたら「表示可能」にする
+        // let isEnabled = false;
+
+        // if (triggerSection) {
+        //   const io = new IntersectionObserver(
+        //     (entries) => {
+        //       entries.forEach((entry) => {
+        //         if (entry.intersectionRatio >= 0.3) {
+        //           isEnabled = true;   // ← 以降、表示してよい
+        //           io.disconnect();
+        //         }
+        //       });
+        //     },
+        //     {
+        //       threshold: [0.3],
+        //     }
+        //   );
+
+        //   io.observe(triggerSection);
+        // }
+
+        // // スクロール位置で表示・非表示を切り替え
+        // window.addEventListener("scroll", () => {
+        //   if (!isEnabled) return;
+
+        //   if (window.scrollY < fvHeight) {
+        //     // FVエリアでは非表示
+        //     toTopBtn.classList.remove("is-show");
+        //   } else {
+        //     // FVを超えたら表示
+        //     toTopBtn.classList.add("is-show");
+        //   }
+        // });
+
+        
+        /* ===== TOPボタン制御 ===== */
+        const toTopBtn = document.getElementById("toTop");
+
+        // FVの高さ（= 画面1枚分）
+        const fvHeight = window.innerHeight;
+
+        toTopBtn.addEventListener("click", () => {
+          window.scrollTo({ top: 0, behavior: "smooth" });
+        });
+
+        window.addEventListener("scroll", () => {
+          if (window.scrollY > fvHeight) {
+            // FVを抜けたら表示
+            toTopBtn.classList.add("is-show");
+          } else {
+            // FV内では非表示
+            toTopBtn.classList.remove("is-show");
+          }
+        });
+    </script>
+  </body>
+</html>
