@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="ja">
   <head>
     <meta charset="utf-8" />
@@ -76,11 +76,17 @@
             </ul>
           </nav>
         </div>
-        <button class="header__hamburger" aria-label="メニュー">
-          <span></span>
+        <button
+          class="header__hamburger"
+          type="button"
+          aria-label="メニュー"
+          aria-controls="spMenu"
+          aria-expanded="false"
+        >
+          <span class="header__hamburger-line" aria-hidden="true"></span>
         </button>
       </header>
-      <nav class="breadcrumb font-noto" aria-label="Breadcrumb">
+      <nav class="breadcrumb font-noto pc-only" aria-label="Breadcrumb">
         <div class="container">
           <ol class="breadcrumb__list">
             <li class="breadcrumb__item">
@@ -96,6 +102,35 @@
               SDGsの概要や17の目標、私たちにできることを徹底解説！<!-- 記事タイトル：現在地にはリンクつけない -->
             </li>
           </ol>
+        </div>
+      </nav>
+      <nav class="sp-menu" id="spMenu" aria-hidden="true">
+        <div class="sp-menu__inner">
+          <ul class="sp-menu__primary">
+            <li class="sp-menu__item">
+              <a class="sp-menu__link" href="interview.html">インタビュー</a>
+            </li>
+            <li class="sp-menu__item">
+              <a class="sp-menu__link" href="trends.html">SDGsトレンド</a>
+            </li>
+            <li class="sp-menu__item">
+              <a class="sp-menu__link" href="familiar.html">今すぐできるSDGs</a>
+            </li>
+          </ul>
+
+          <hr class="sp-menu__divider" />
+
+          <ul class="sp-menu__secondary">
+            <li class="sp-menu__subitem">
+              <a class="sp-menu__sublink" href="company.html">運営会社</a>
+            </li>
+            <li class="sp-menu__subitem">
+              <a class="sp-menu__sublink" href="contact.html">お問い合わせ</a>
+            </li>
+            <li class="sp-menu__subitem">
+              <a class="sp-menu__sublink" href="policy.html">サイトポリシー</a>
+            </li>
+          </ul>
         </div>
       </nav>
 
@@ -703,23 +738,6 @@
       <!-- wrapper -->
     </div>
 
-    <!-- JS -->
-    <script>
-      /* ===== TOPボタン制御 ===== */
-      const toTopBtn = document.getElementById("toTop");
-      const showAfter = 200;
-
-      toTopBtn.addEventListener("click", () => {
-        window.scrollTo({ top: 0, behavior: "smooth" });
-      });
-
-      window.addEventListener("scroll", () => {
-        if (window.scrollY > showAfter) {
-          toTopBtn.classList.add("is-show");
-        } else {
-          toTopBtn.classList.remove("is-show");
-        }
-      });
-    </script>
+    <script src="./js/common.js" defer></script>
   </body>
 </html>

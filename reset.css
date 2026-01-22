@@ -1,0 +1,55 @@
+/* =========================
+   Reset (Minimum)
+========================= */
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+}
+
+/* 画像は勝手に余白が出ないように＆はみ出さないように */
+img,
+picture,
+video,
+canvas,
+svg {
+  display: block;
+  max-width: 100%;
+}
+
+/* リストの黒丸/数字を消して、余白も統一 */
+ul,
+ol {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+/* リンク色・下線はデザイン側で管理しやすく */
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+/* フォーム類のフォントがバラつくの防止 */
+button,
+input,
+select,
+textarea {
+  font: inherit;
+}
+
+/* ボタンの見た目は必要ならベースで整える */
+button {
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+}
