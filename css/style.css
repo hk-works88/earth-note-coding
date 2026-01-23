@@ -204,6 +204,12 @@ body.is-menu-open .sp-menu {
 body.is-menu-open {
   overflow: hidden;
 }
+body.is-menu-open .header {
+  z-index: 2000;
+}
+body.is-menu-open .header__hamburger {
+  z-index: 2100;
+}
 
 @media (min-width: 768px) {
   .sp-menu {
@@ -280,7 +286,7 @@ body.is-menu-open {
   min-height: 680px;
   padding-top: 0;
   padding-bottom: 0;
-  background-image: url("images/mv.png");
+  background-image: url("../images/mv.png");
   background-size: cover;
   background-position: center 10%;
 
@@ -327,7 +333,7 @@ body.is-menu-open {
   display: inline-block;
   width: 85px;
   height: 70px;
-  background: url("images/slash.svg") no-repeat;
+  background: url("../images/slash.svg") no-repeat;
   background-size: contain;
   margin-right: 0.8em;
 }
@@ -623,12 +629,12 @@ body.is-menu-open {
 }
 
 .bg-group--a::before {
-  background-image: url("images/bg-diagonal-a.png");
+  background-image: url("../images/bg-diagonal-a.png");
   left: -50%;
 }
 
 .bg-group--b::before {
-  background-image: url("images/bg-diagonal-b.png");
+  background-image: url("../images/bg-diagonal-b.png");
   left: -100%;
 }
 
@@ -722,15 +728,15 @@ body.is-menu-open {
 }
 
 .coming__item--sdgs::before {
-  background-image: url("images/sea-turtle.jpg");
+  background-image: url("../images/sea-turtle.jpg");
 }
 
 .coming__item--numbers::before {
-  background-image: url("images/time-is-up.jpg");
+  background-image: url("../images/time-is-up.jpg");
 }
 
 .coming__item--circulation::before {
-  background-image: url("images/forest-road.jpg");
+  background-image: url("../images/forest-road.jpg");
 }
 
 .about {
@@ -749,7 +755,7 @@ body.is-menu-open {
   max-width: 1000px;
   height: 100%;
 
-  background-image: url("images/thumbnail-earthnote-default.png");
+  background-image: url("../images/thumbnail-earthnote-default.png");
   background-repeat: no-repeat;
   background-size: contain;
   background-position: center top;
@@ -1119,7 +1125,7 @@ body.is-menu-open {
   cursor: pointer;
   z-index: 9999;
 
-  background: url("images/to-top.png") no-repeat center / contain;
+  background: url("../images/to-top.png") no-repeat center / contain;
   font-size: 0;
 
   opacity: 0;
