@@ -1,19 +1,14 @@
 /*
-  EarthNote - Clean CSS (organized / 1 file)
+  EarthNote - Clean CSS (organized / single file)
   ------------------------------------------------------------
-  ✅ 共通は上部 / ページ固有は末尾（page-*）へ集約
-  ✅ 重複はできるだけ統合
-  ✅ SP：ヘッダー高さを低く（--header-h）
-  ✅ SP：ハンバーガーを右上fixed
-  ✅ SP：slash.svg（.section-heading__icon）を小さく
-  ✅ SP：全体の基準フォントサイズを小さく
-  ✅ 「SDGs情報メディア」が効かない対策：
-     .header__tagline と .header__logo-lead の両方を同じ指定に
+  - Common styles first
+  - Page-specific styles are grouped under "Pages (page-*)"
+  - Avoid duplicates and keep mobile rules near each section
 */
 
-/* =========================
+/* ===================================================================
    Base / Tokens
-========================= */
+=================================================================== */
 
 html,
 body {
@@ -37,28 +32,25 @@ body {
   --space-2xl: clamp(56px, 8vw, 110px);
 }
 
-@media (max-width: 767px) {
-  :root {
-    --header-h: 52px; /* ✅SP：ヘッダー低く */
-  }
-}
-
 *,
 *::before,
 *::after {
   box-sizing: border-box;
 }
 
-/* ✅SP：全体の基準フォントサイズを小さく */
 @media (max-width: 767px) {
+  :root {
+    --header-h: 52px;
+  }
+
   body {
     font-size: 14px;
   }
 }
 
-/* =========================
+/* ===================================================================
    Typography
-========================= */
+=================================================================== */
 
 .font-marcellus {
   font-family: "Marcellus", serif;
@@ -70,9 +62,9 @@ body {
   font-family: "Montserrat", sans-serif;
 }
 
-/* =========================
+/* ===================================================================
    Layout / Utilities
-========================= */
+=================================================================== */
 
 .container {
   max-width: var(--container-w);
@@ -86,6 +78,7 @@ body {
 .sp-only {
   display: none;
 }
+
 @media (max-width: 767px) {
   .pc-only {
     display: none !important;
@@ -95,9 +88,13 @@ body {
   }
 }
 
-/* =========================
+/* ===================================================================
    Header / Navigation
-========================= */
+=================================================================== */
+
+/* -------------------------------------------------------------------
+   Header base
+------------------------------------------------------------------- */
 
 .header {
   height: var(--header-h);
@@ -135,8 +132,9 @@ body {
   opacity: 0.7;
 }
 
-/* 「SDGs情報メディア」(lead) */
-.header__logo-lead {
+/* lead/tagline (both classes supported) */
+.header__logo-lead,
+.header__tagline {
   display: block;
   font-family: "Noto Sans JP", sans-serif;
   font-size: 10px;
@@ -151,11 +149,53 @@ body {
   display: block;
 }
 
+/* PC nav */
 .header__nav {
   display: block;
 }
 
-/* hamburger button */
+.header__nav ul {
+  display: flex;
+  align-items: center;
+  list-style: none;
+  position: relative;
+  top: -3px;
+}
+
+.header__nav li + li::before {
+  content: "／";
+  margin: 0 20px;
+  color: #000;
+}
+
+.header__nav a {
+  position: relative;
+  text-decoration: none;
+  color: #333;
+  font-weight: 500;
+  font-size: 13px;
+  padding-top: 0;
+  padding-bottom: 8px;
+}
+
+.header__nav a::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  height: 2px;
+  background: #38b48b;
+  transform: scaleX(0);
+  transform-origin: left center;
+  transition: transform 0.25s ease;
+}
+
+.header__nav a:hover::after {
+  transform: scaleX(1);
+}
+
+/* hamburger button (base) */
 .header__hamburger {
   display: none;
   width: 44px;
@@ -167,6 +207,7 @@ body {
   cursor: pointer;
   z-index: 1200;
 }
+
 .header__hamburger:focus-visible {
   outline: 2px solid currentColor;
   outline-offset: 4px;
@@ -182,6 +223,7 @@ body {
   transform: translate(-50%, -50%);
   transition: transform 0.25s ease;
 }
+
 .header__hamburger-line::before {
   content: "";
   position: absolute;
@@ -199,53 +241,16 @@ body {
 .header__hamburger[aria-expanded="true"] .header__hamburger-line {
   transform: translate(-50%, -50%) rotate(45deg);
 }
+
 .header__hamburger.is-active .header__hamburger-line::before,
 .header__hamburger[aria-expanded="true"] .header__hamburger-line::before {
   top: 0;
   transform: rotate(-90deg);
 }
 
-/* ✅PC nav */
-.header__nav ul {
-  display: flex;
-  align-items: center;
-  list-style: none;
-  position: relative;
-  top: -3px;
-}
-.header__nav li + li::before {
-  content: "／";
-  margin: 0 20px;
-  color: #000;
-}
-.header__nav a {
-  position: relative;
-  text-decoration: none;
-  color: #333;
-  font-weight: 500;
-  font-size: 13px;
-  padding-top: 0;
-  padding-bottom: 8px;
-}
-.header__nav a::after {
-  content: "";
-  position: absolute;
-  left: 0;
-  bottom: 0;
-  width: 100%;
-  height: 2px;
-  background: #38b48b;
-  transform: scaleX(0);
-  transform-origin: left center;
-  transition: transform 0.25s ease;
-}
-.header__nav a:hover::after {
-  transform: scaleX(1);
-}
-
-/* =========================
+/* -------------------------------------------------------------------
    Header (SP)
-========================= */
+------------------------------------------------------------------- */
 
 @media (max-width: 767px) {
   .header {
@@ -256,45 +261,42 @@ body {
     height: var(--header-h);
   }
 
-  /* ✅縦中央を安定させる：innerに上下paddingを入れない */
   .header__inner {
     padding: 0 16px;
     height: var(--header-h);
     align-items: center;
-    position: relative; /* 念のため（なくてもOK） */
+    position: relative;
   }
 
   .header__nav {
     display: none;
   }
 
-  /* ハンバーガー縦中央：absoluteをやめて flex の並びで中央 */
   .header__hamburger {
     display: inline-flex;
     align-items: center;
     justify-content: center;
+
     position: fixed;
+    top: 3px;
+    right: 12px;
+
     transform: none;
-    top: 3px; /* 好みで 6〜10px */
-    right: 12px; /* 好みで 10〜16px */
-    z-index: 2100; /* sp-menuより上に */
+    z-index: 2100;
   }
 
-  /* ロゴ画像は少し小さく */
   .header__logo-img {
     width: 130px;
     height: auto;
   }
 
-  /* ✅「SDGs情報メディア」：クラス差異吸収（tagline/lead両方OK） */
-  .header__tagline,
-  .header__logo-lead {
+  .header__logo-lead,
+  .header__tagline {
     font-size: 10px;
     letter-spacing: 0.04em;
     margin-bottom: 2px;
   }
 
-  /* EARTH NOTE ロゴ文字を使ってる場合 */
   .header__title {
     font-size: 18px;
     font-weight: 600;
@@ -302,9 +304,9 @@ body {
   }
 }
 
-/* =========================
+/* ===================================================================
    SP Menu
-========================= */
+=================================================================== */
 
 .sp-menu {
   display: none;
@@ -319,12 +321,15 @@ body {
 body.is-menu-open .sp-menu {
   display: block;
 }
+
 body.is-menu-open {
   overflow: hidden;
 }
+
 body.is-menu-open .header {
   z-index: 2000;
 }
+
 body.is-menu-open .header__hamburger {
   z-index: 2100;
 }
@@ -333,11 +338,19 @@ body.is-menu-open .header__hamburger {
   .sp-menu__inner {
     padding: 20px 18px 28px;
   }
+
   .sp-menu__primary,
   .sp-menu__secondary {
     list-style: none;
     padding: 0;
     margin: 0;
+  }
+
+  .sp-menu__item,
+  .sp-menu__subitem {
+    display: flex;
+    align-items: center;
+    gap: 10px;
   }
 
   .sp-menu__link,
@@ -347,11 +360,15 @@ body.is-menu-open .header__hamburger {
     gap: 10px;
 
     padding: 14px 2px;
-    font-size: 15px; /* ✅少し小さく */
+    font-size: 15px;
     font-weight: 500;
     line-height: 1.4;
     color: #111;
     text-decoration: none;
+  }
+
+  .sp-menu__sublink {
+    font-weight: 400;
   }
 
   .sp-menu__link:active,
@@ -359,17 +376,21 @@ body.is-menu-open .header__hamburger {
     opacity: 0.7;
   }
 
-  .sp-menu__item {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-  }
-
   .sp-menu__icon {
     display: inline-block;
-    width: 16px; /* ✅少し小さく */
+    width: 16px;
     height: 16px;
     background: url("../images/slash_s.svg") no-repeat;
+    background-size: contain;
+    flex: 0 0 16px;
+    opacity: 0.9;
+  }
+
+  .sp-menu__companyicon {
+    display: inline-block;
+    width: 16px;
+    height: 16px;
+    background: url("../images/company_icon.svg") no-repeat;
     background-size: contain;
     flex: 0 0 16px;
     opacity: 0.9;
@@ -380,25 +401,6 @@ body.is-menu-open .header__hamburger {
     border: 0;
     border-top: 1px solid #bbb;
   }
-
-  .sp-menu__subitem {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-  }
-  .sp-menu__sublink {
-    font-weight: 400;
-  }
-
-  .sp-menu__companyicon {
-    display: inline-block;
-    width: 16px; /* ✅少し小さく */
-    height: 16px;
-    background: url("../images/company_icon.svg") no-repeat;
-    background-size: contain;
-    flex: 0 0 16px;
-    opacity: 0.9;
-  }
 }
 
 @media (min-width: 768px) {
@@ -406,30 +408,31 @@ body.is-menu-open .header__hamburger {
     display: none !important;
   }
 }
-/* =========================
-   Page: Index (SP) header fix
-   - 透過をやめて他ページSPと同じ固定ヘッダーにする
-========================= */
+
+/* ===================================================================
+   Section Heading Icon (slash.svg)
+=================================================================== */
+
+.section-heading__icon {
+  display: inline-block;
+  width: 85px;
+  height: 70px;
+  background: url("../images/slash.svg") no-repeat;
+  background-size: contain;
+  margin-right: 0.8em;
+}
 
 @media (max-width: 767px) {
-  .page-index .header {
-    top: 0;
-    position: fixed;
-    background: #f3f5f6;
-    height: var(--header-h);
-    box-shadow: none; /* 必要なら後で薄影 */
-  }
-
-  /* indexのPC用 hover 演出をSPでは無効化 */
-  .page-index .header:hover,
-  .page-index .header:focus-within {
-    background: #fff;
-    box-shadow: none;
+  .section-heading__icon {
+    width: 46px;
+    height: 38px;
+    margin-right: 0.5em;
   }
 }
-/* =========================
+
+/* ===================================================================
    MV
-========================= */
+=================================================================== */
 
 .mv {
   position: relative;
@@ -467,6 +470,7 @@ body.is-menu-open .header__hamburger {
   font-size: 16px;
   margin-top: 0px;
 }
+
 .mv__sub::before {
   content: "";
   display: inline-block;
@@ -475,17 +479,16 @@ body.is-menu-open .header__hamburger {
   background: #fff;
   margin-right: 12px;
 }
-/* =========================
-   MV (SP)
-========================= */
 
 @media (max-width: 767px) {
   .mv__lead {
     width: clamp(280px, 78vw, 360px);
   }
+
   .mv__sub {
-    font-size: 14px; /* PC:16px → SP:14px */
+    font-size: 14px;
   }
+
   .mv__sub::before {
     width: 22px;
     height: 9px;
@@ -493,184 +496,33 @@ body.is-menu-open .header__hamburger {
   }
 }
 
-/* slash.svg（見出しアイコン） */
-.section-heading__icon {
-  display: inline-block;
-  width: 85px;
-  height: 70px;
-  background: url("../images/slash.svg") no-repeat;
-  background-size: contain;
-  margin-right: 0.8em;
-}
-
-/* ✅SP：slash.svg を小さく */
-@media (max-width: 767px) {
-  .section-heading__icon {
-    width: 46px;
-    height: 38px;
-    margin-right: 0.5em;
-  }
-}
-
-/* =========================
-   Trends
-========================= */
-
-.trends__head {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  margin-bottom: 25px;
-}
-.trends__heading-en {
-  font-size: 75px;
-  font-weight: 400;
-  margin: 0;
-}
-.trends__slash {
-  display: inline-block;
-  width: 40px;
-  height: 2px;
-  background: #000;
-  transform-origin: center;
-  transform: rotate(-45deg);
-  margin-left: 45px;
-  margin-right: 5px;
-  position: relative;
-  top: 4px;
-}
-.trends__heading-ja {
-  font-weight: 700;
-  position: relative;
-  top: 6px;
-}
-.trends__lead {
-  font-size: 17px;
-  margin-bottom: 50px;
-}
-
-/* ✅SP：見出し類も少し小さく */
-@media (max-width: 767px) {
-  .trends__heading-en {
-    font-size: 46px;
-  }
-  .trends__lead {
-    font-size: 15px;
-  }
-  .trends__slash {
-    margin-left: 18px;
-  }
-  .trends__heading-ja {
-    top: 2px;
-  }
-}
-
-/* =========================
-   Articles layout
-========================= */
+/* ===================================================================
+   Articles Layout (shared)
+=================================================================== */
 
 .articles {
   display: flex;
   gap: 40px;
 }
+
 .articles__main {
   flex: 1.3;
 }
+
 .articles__sub {
   flex: 1;
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 24px;
 }
+
 .articles--reverse {
   flex-direction: row-reverse;
 }
 
-.trends__article-item--large,
-.interview__article-item--large {
-}
-
-/* index：SPで「main→sub(2col)」の並びにする */
-@media (max-width: 767px) {
-  /* trends / interview 共通：左右→縦 */
-  .page-index .trends__list.articles,
-  .page-index .interview__list.articles {
-    flex-direction: column;
-    gap: 24px;
-  }
-
-  .page-index .articles__main,
-  .page-index .articles__sub {
-    width: 100%;
-  }
-
-  /* sub：2カラム */
-  .page-index .articles__sub {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 16px;
-  }
-  /* mainの記事：右テキストの2カラム→縦 */
-  .page-index .trends__article-body,
-  .page-index .interview__article-body {
-    display: block;
-    margin-top: 12px;
-  }
-  .page-index .articles__main .trends__article-body,
-  .page-index .articles__main .interview__article-body {
-    display: block; /* flexを潰す */
-  }
-  /* subのサムネだけ高さ固定（見た目揃える） */
-  .page-index .articles__sub .trends__article-image,
-  .page-index .articles__sub .interview__article-image {
-    height: 110px;
-    object-fit: cover;
-  }
-  .page-index .articles__main .trends__article-meta,
-  .page-index .articles__main .interview__article-meta {
-    flex: none; /* 50%指定を無効化 */
-    width: 100%;
-  }
-  .page-index .articles__main .trends__article-text,
-  .page-index .articles__main .interview__article-text {
-    width: 100%;
-    margin-top: 10px; /* 説明文との間隔 */
-  }
-  /* ✅全体少し小さめ（お好みで） */
-  .page-index .trends__article-title,
-  .page-index .interview__article-title {
-    font-size: 17px;
-    line-height: 1.55;
-  }
-
-  .page-index .trends__article-date,
-  .page-index .interview__article-date,
-  .page-index .familiar__article-date {
-    font-size: 12px;
-  }
-
-  .page-index .trends__article-desc,
-  .page-index .interview__article-desc {
-    font-size: 13px;
-    line-height: 1.75;
-  }
-
-  /* 小カード側（2列のやつ） */
-  .page-index .trends__article-title--sm,
-  .page-index .interview__article-title--sm,
-  .page-index .familiar__article-title {
-    font-size: 14px;
-    line-height: 1.55;
-  }
-  /* 日本語見出しを消す */
-  .page-index .trends__heading-ja,
-  .page-index .interview__heading-ja,
-  .page-index .familiar__heading-ja {
-    display: none;
-  }
-}
-/* =========================
+/* ===================================================================
    Goals
-========================= */
+=================================================================== */
 
 .goals {
   position: relative;
@@ -686,15 +538,18 @@ body.is-menu-open .header__hamburger {
 .goals__info {
   flex: 0 0 214px;
 }
+
 .goals__title {
   margin: 0px;
   width: 214px;
 }
+
 .goals__title img {
   width: 100%;
   height: auto;
   display: block;
 }
+
 .goals__sub {
   margin: 0;
   font-weight: 700;
@@ -708,6 +563,7 @@ body.is-menu-open .header__hamburger {
   overflow: visible;
   min-width: 0;
 }
+
 .goals__panel::before {
   content: "";
   position: absolute;
@@ -739,6 +595,7 @@ body.is-menu-open .header__hamburger {
   width: 100%;
   min-width: 0;
 }
+
 .goals__scroll::-webkit-scrollbar {
   display: none;
 }
@@ -764,86 +621,22 @@ body.is-menu-open .header__hamburger {
   cursor: pointer;
   z-index: 2;
 }
+
 .goals__arrow--prev {
   left: 8px;
 }
+
 .goals__arrow--next {
   right: 8px;
 }
+
 .goals__arrow:hover {
   opacity: 1;
 }
 
-/* =========================
-   Familiar
-========================= */
-
-.familiar__head {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  margin-bottom: 25px;
-}
-.familiar__heading-en {
-  font-size: 75px;
-  font-weight: 400;
-  margin: 0;
-}
-.familiar__slash {
-  display: inline-block;
-  width: 40px;
-  height: 2px;
-  background: #000;
-  transform-origin: center;
-  transform: rotate(-45deg);
-  margin-left: 45px;
-  margin-right: 5px;
-  position: relative;
-  top: 4px;
-}
-.familiar__heading-ja {
-  font-weight: 700;
-  position: relative;
-  top: 6px;
-}
-.familiar__lead {
-  font-size: 17px;
-  margin-bottom: 50px;
-}
-
-.familiar__list {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 24px;
-  max-width: 1250px;
-  margin: 0 auto;
-}
-
-.familiar__article-image {
-  width: 100%;
-  height: auto;
-  display: block;
-}
-
-/* ✅SP：Familiar側も少し小さく */
-@media (max-width: 767px) {
-  .familiar__heading-en {
-    font-size: 46px;
-  }
-  .familiar__lead {
-    font-size: 15px;
-  }
-  .familiar__slash {
-    margin-left: 18px;
-  }
-  .familiar__heading-ja {
-    top: 2px;
-  }
-}
-
-/* =========================
+/* ===================================================================
    Common Button
-========================= */
+=================================================================== */
 
 .trends__btn,
 .interview__btn,
@@ -899,18 +692,20 @@ body.is-menu-open .header__hamburger {
   box-shadow: 0 16px 30px rgba(0, 0, 0, 0.25);
 }
 
-/* =========================
+/* ===================================================================
    Background group
-========================= */
+=================================================================== */
 
 .bg-group {
   position: relative;
   overflow: hidden;
 }
+
 .bg-group > section {
   position: relative;
   z-index: 1;
 }
+
 .bg-group::before {
   content: "";
   position: absolute;
@@ -922,18 +717,20 @@ body.is-menu-open .header__hamburger {
   background-size: auto 100%;
   background-position: 50% 0;
 }
+
 .bg-group--a::before {
   background-image: url("../images/bg-diagonal-a.png");
   left: -50%;
 }
+
 .bg-group--b::before {
   background-image: url("../images/bg-diagonal-b.png");
   left: -100%;
 }
 
-/* =========================
+/* ===================================================================
    Coming soon
-========================= */
+=================================================================== */
 
 .coming {
   display: grid;
@@ -1034,14 +831,15 @@ body.is-menu-open .header__hamburger {
   background-image: url("../images/forest-road.jpg");
 }
 
-/* =========================
+/* ===================================================================
    About
-========================= */
+=================================================================== */
 
 .about {
   position: relative;
   min-height: auto;
 }
+
 .about::before {
   content: "";
   position: absolute;
@@ -1100,15 +898,16 @@ body.is-menu-open .header__hamburger {
   .about__title {
     font-size: 18px;
   }
+
   .about__text {
     font-size: 14px;
     line-height: 1.8;
   }
 }
 
-/* =========================
+/* ===================================================================
    Marquee
-========================= */
+=================================================================== */
 
 .marquee {
   overflow: hidden;
@@ -1163,9 +962,9 @@ body.is-menu-open .header__hamburger {
   }
 }
 
-/* =========================
+/* ===================================================================
    Movie
-========================= */
+=================================================================== */
 
 .movie {
   width: 100%;
@@ -1173,6 +972,7 @@ body.is-menu-open .header__hamburger {
   overflow: hidden;
   background: #000;
 }
+
 .movie__video {
   width: 100%;
   height: 100%;
@@ -1180,9 +980,9 @@ body.is-menu-open .header__hamburger {
   display: block;
 }
 
-/* =========================
+/* ===================================================================
    Footer
-========================= */
+=================================================================== */
 
 .footer {
   padding: 45px 35px;
@@ -1202,11 +1002,13 @@ body.is-menu-open .header__hamburger {
   flex: 0 0 auto;
   top: -10px;
 }
+
 .footer__label {
   font-size: 10px;
   font-weight: 500;
   margin: 0 0 8px;
 }
+
 .footer__brand img {
   width: 180px;
   height: auto;
@@ -1239,6 +1041,7 @@ body.is-menu-open .header__hamburger {
   position: relative;
   padding-top: 40px;
 }
+
 .footer__nav-main::before,
 .footer__nav-sub::before {
   content: "";
@@ -1258,6 +1061,7 @@ body.is-menu-open .header__hamburger {
   align-items: center;
   gap: 10px;
 }
+
 .footer__nav a:hover {
   opacity: 0.6;
 }
@@ -1270,6 +1074,7 @@ body.is-menu-open .header__hamburger {
   position: relative;
   padding-right: 22px;
 }
+
 .footer__nav a.is-external::after {
   content: "";
   position: absolute;
@@ -1280,6 +1085,7 @@ body.is-menu-open .header__hamburger {
   height: 12px;
   border: 1px solid #000;
 }
+
 .footer__nav a.is-external::before {
   content: "";
   position: absolute;
@@ -1334,6 +1140,7 @@ body.is-menu-open .header__hamburger {
     font-size: 13px;
     line-height: 1.6;
   }
+
   .footer__nav a {
     padding: 6px 0;
     font-size: 13px;
@@ -1358,9 +1165,9 @@ body.is-menu-open .header__hamburger {
   }
 }
 
-/* =========================
+/* ===================================================================
    Breadcrumb
-========================= */
+=================================================================== */
 
 .breadcrumb {
   margin-top: var(--header-h);
@@ -1415,9 +1222,11 @@ body.is-menu-open .header__hamburger {
   color: #000;
   text-decoration: none;
 }
+
 .breadcrumb a:visited {
   color: #000;
 }
+
 .breadcrumb a:hover {
   text-decoration: underline;
 }
@@ -1428,9 +1237,9 @@ body.is-menu-open .header__hamburger {
   }
 }
 
-/* =========================
+/* ===================================================================
    To Top Button
-========================= */
+=================================================================== */
 
 .to-top {
   position: fixed;
@@ -1464,21 +1273,21 @@ body.is-menu-open .header__hamburger {
   transform: translateY(-4px);
 }
 
-/* SPメニュー表示中はTOPボタンを隠す */
 body.is-menu-open .to-top {
   opacity: 0;
   pointer-events: none;
   transform: translateY(10px);
 }
 
-/* =========================
+/* ===================================================================
    Pagination
-========================= */
+=================================================================== */
 
 .pagination {
   margin-top: 80px;
   margin-bottom: 50px;
 }
+
 .pagination__list {
   display: flex;
   justify-content: center;
@@ -1524,7 +1333,10 @@ body.is-menu-open .to-top {
   background: #f2f2f2;
 }
 
-/* ✅（あなたの元CSSにあったやつ） */
+/* ===================================================================
+   Article common (existing selector kept)
+=================================================================== */
+
 .article__header .article__title {
   font-size: 37px;
   line-height: 1.5;
@@ -1539,13 +1351,13 @@ body.is-menu-open .to-top {
   }
 }
 
-/* =========================
+/* ===================================================================
    Pages (page-*)
-========================= */
+=================================================================== */
 
-/* -------------------------
+/* -------------------------------------------------------------------
    Page: Index
-------------------------- */
+------------------------------------------------------------------- */
 
 .page-index .header {
   top: 0;
@@ -1556,6 +1368,7 @@ body.is-menu-open .to-top {
     background-color 0.25s ease,
     box-shadow 0.25s ease;
 }
+
 .page-index .header:hover,
 .page-index .header:focus-within {
   background: rgba(243, 245, 246, 0.92);
@@ -1577,29 +1390,40 @@ body.is-menu-open .to-top {
   text-decoration: none;
   transition: opacity 0.25s ease;
 }
+
 .page-index .trends__list a:visited,
 .page-index .interview__list a:visited,
 .page-index .familiar__list a:visited {
   color: #000;
 }
+
 .page-index .trends__list a:hover,
 .page-index .interview__list a:hover,
 .page-index .familiar__list a:hover {
   opacity: 0.7;
 }
 
-.page-index .interview__head {
+/* Index section headings (shared) */
+.page-index .trends__head,
+.page-index .interview__head,
+.page-index .familiar__head {
   display: flex;
   align-items: center;
   gap: 12px;
   margin-bottom: 25px;
 }
-.page-index .interview__heading-en {
+
+.page-index .trends__heading-en,
+.page-index .interview__heading-en,
+.page-index .familiar__heading-en {
   font-size: 75px;
   font-weight: 400;
   margin: 0;
 }
-.page-index .interview__slash {
+
+.page-index .trends__slash,
+.page-index .interview__slash,
+.page-index .familiar__slash {
   display: inline-block;
   width: 40px;
   height: 2px;
@@ -1611,14 +1435,73 @@ body.is-menu-open .to-top {
   position: relative;
   top: 4px;
 }
-.page-index .interview__heading-ja {
+
+.page-index .trends__heading-ja,
+.page-index .interview__heading-ja,
+.page-index .familiar__heading-ja {
   font-weight: 700;
   position: relative;
   top: 6px;
 }
+
+.page-index .trends__lead,
+.page-index .interview__lead,
+.page-index .familiar__lead {
+  font-size: 17px;
+  margin-bottom: 50px;
+}
+
+/* Index articles common */
+.page-index .trends__article-body,
+.page-index .interview__article-body {
+  display: flex;
+  gap: 24px;
+  margin-top: 16px;
+}
+
+.page-index .trends__article-meta,
+.page-index .interview__article-meta {
+  flex: 0 0 50%;
+}
+
+.page-index .trends__article-text,
+.page-index .interview__article-text {
+  flex: 1;
+}
+
+.page-index .trends__article-title,
+.page-index .interview__article-title {
+  font-size: 20px;
+  line-height: 1.5;
+  margin-bottom: 8px;
+}
+
+.page-index .trends__article-date,
+.page-index .interview__article-date,
+.page-index .familiar__article-date {
+  display: block;
+  font-size: 14px;
+  color: #666;
+}
+
+.page-index .trends__article-desc,
+.page-index .interview__article-desc {
+  line-height: 1.7;
+  font-size: 15px;
+  color: #333;
+}
+
+.page-index .trends__article-title--sm,
+.page-index .interview__article-title--sm,
+.page-index .familiar__article-title {
+  font-size: 16px;
+}
+
+/* Interview label (Index only) */
 .page-index .interview__article-item {
   position: relative;
 }
+
 .page-index .interview__article-label {
   position: absolute;
   top: 12px;
@@ -1629,78 +1512,138 @@ body.is-menu-open .to-top {
   padding: 6px 10px;
   line-height: 1;
 }
-.page-index .interview__lead {
-  font-size: 17px;
-  margin-bottom: 50px;
-}
-.page-index .trends__article-body,
-.page-index .interview__article-body {
-  display: flex;
+
+/* Familiar list layout (Index) */
+.page-index .familiar__list {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
   gap: 24px;
-  margin-top: 16px;
-}
-.page-index .trends__article-meta,
-.page-index .interview__article-meta {
-  flex: 0 0 50%;
-}
-.page-index .trends__article-text,
-.page-index .interview__article-text {
-  flex: 1;
-}
-.page-index .trends__article-title,
-.page-index .interview__article-title {
-  font-size: 20px;
-  line-height: 1.5;
-  margin-bottom: 8px;
-}
-.page-index .trends__article-date,
-.page-index .interview__article-date,
-.page-index .familiar__article-date {
-  display: block;
-  font-size: 14px;
-  color: #666;
-}
-.page-index .trends__article-desc,
-.page-index .interview__article-desc {
-  line-height: 1.7;
-  font-size: 15px;
-  color: #333;
-}
-.page-index .trends__article-title--sm,
-.page-index .interview__article-title--sm,
-.page-index .familiar__article-title {
-  font-size: 16px;
+  max-width: 1250px;
+  margin: 0 auto;
 }
 
+.page-index .familiar__article-image {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+/* Index layout adjustments (SP) */
 @media (max-width: 767px) {
-  .page-index .interview__heading-en {
+  /* index header fixed like other pages */
+  .page-index .header {
+    top: 0;
+    position: fixed;
+    background: #f3f5f6;
+    height: var(--header-h);
+    box-shadow: none;
+  }
+
+  .page-index .header:hover,
+  .page-index .header:focus-within {
+    background: #fff;
+    box-shadow: none;
+  }
+
+  /* headings */
+  .page-index .trends__heading-en,
+  .page-index .interview__heading-en,
+  .page-index .familiar__heading-en {
     font-size: 46px;
   }
-  .page-index .interview__lead {
+
+  .page-index .trends__lead,
+  .page-index .interview__lead,
+  .page-index .familiar__lead {
     font-size: 15px;
   }
-  .page-index .trends__article-title,
-  .page-index .interview__article-title {
-    font-size: 18px;
-  }
-  .page-index .trends__article-desc,
-  .page-index .interview__article-desc {
-    font-size: 14px;
-  }
 
-  .page-index .trends__slash,
-  .page-index .interview__slash,
-  .page-index .familiar__slash,
   .page-index .trends__heading-ja,
   .page-index .interview__heading-ja,
-  .page-index .familiar__heading-ja {
+  .page-index .familiar__heading-ja,
+  .page-index .trends__slash,
+  .page-index .interview__slash,
+  .page-index .familiar__slash {
     display: none !important;
   }
+
+  /* trends / interview: side-by-side -> column */
+  .page-index .trends__list.articles,
+  .page-index .interview__list.articles {
+    flex-direction: column;
+    gap: 24px;
+  }
+
+  .page-index .articles__main,
+  .page-index .articles__sub {
+    width: 100%;
+  }
+
+  .page-index .articles__sub {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 16px;
+  }
+
+  .page-index .trends__article-body,
+  .page-index .interview__article-body {
+    display: block;
+    margin-top: 12px;
+  }
+
+  .page-index .articles__sub .trends__article-image,
+  .page-index .articles__sub .interview__article-image {
+    height: 110px;
+    object-fit: cover;
+  }
+
+  .page-index .articles__main .trends__article-meta,
+  .page-index .articles__main .interview__article-meta {
+    flex: none;
+    width: 100%;
+  }
+
+  .page-index .articles__main .trends__article-text,
+  .page-index .articles__main .interview__article-text {
+    width: 100%;
+    margin-top: 10px;
+  }
+
+  .page-index .trends__article-title,
+  .page-index .interview__article-title {
+    font-size: 17px;
+    line-height: 1.55;
+  }
+
+  .page-index .trends__article-date,
+  .page-index .interview__article-date,
+  .page-index .familiar__article-date {
+    font-size: 12px;
+  }
+
+  .page-index .trends__article-desc,
+  .page-index .interview__article-desc {
+    font-size: 13px;
+    line-height: 1.75;
+  }
+
+  .page-index .trends__article-title--sm,
+  .page-index .interview__article-title--sm,
+  .page-index .familiar__article-title {
+    font-size: 14px;
+    line-height: 1.55;
+  }
+
+  /* Familiar list on small screens (optional tweak if needed)
+     If your current HTML looks cramped, uncomment:
+  .page-index .familiar__list {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  */
 }
 
-/* -------------------------
+/* -------------------------------------------------------------------
    Page: Interview
-------------------------- */
+------------------------------------------------------------------- */
 
 .page-interview .header,
 .page-trends-article .header {
@@ -1754,13 +1697,16 @@ body.is-menu-open .to-top {
   .page-interview .interview__list {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
+
   .page-interview .interview__head {
     margin-top: 40px;
     margin-bottom: 70px;
   }
+
   .page-interview .interview__heading-ja {
     font-size: 22px;
   }
+
   .page-interview .interview__lead {
     font-size: 14px;
   }
@@ -1778,21 +1724,16 @@ body.is-menu-open .to-top {
   text-decoration: none;
   transition: opacity 0.25s ease;
 }
+
 .page-interview .interview__list a:hover {
   opacity: 0.7;
 }
 
+/* single definition (no duplicates) */
 .page-interview .interview__article-item a {
   display: flex;
   flex-direction: column;
   height: 100%;
-  text-decoration: none;
-  color: inherit;
-}
-
-/* ✅重複をまとめて1回に */
-.page-interview .interview__article-item a {
-  display: block;
   color: #111;
   text-decoration: none;
 }
@@ -1803,12 +1744,14 @@ body.is-menu-open .to-top {
   object-fit: cover;
   display: block;
 }
+
 .page-interview .interview__article-title {
   margin: 12px 0 8px;
   font-size: 16px;
   font-weight: 500;
   line-height: 1.6;
 }
+
 .page-interview .interview__article-date {
   display: block;
   font-size: 12px;
@@ -1820,9 +1763,9 @@ body.is-menu-open .to-top {
   background-color: #f3f5f6;
 }
 
-/* -------------------------
+/* -------------------------------------------------------------------
    Page: Trends Article
-------------------------- */
+------------------------------------------------------------------- */
 
 .page-trends-article {
   background: #fff;
@@ -1904,6 +1847,7 @@ body.is-menu-open .to-top {
   border: 0;
   background: transparent;
 }
+
 .page-trends-article .article__copy-button img {
   display: block;
   width: auto;
@@ -1975,6 +1919,7 @@ body.is-menu-open .to-top {
   color: #0a9671;
   font-weight: bold;
 }
+
 .page-trends-article .u-highlight {
   background: #ffff97;
   padding: 2px 4px;
@@ -1988,6 +1933,7 @@ body.is-menu-open .to-top {
   text-decoration: none;
   color: #3399cc;
 }
+
 .page-trends-article .article__captionlink:visited {
   color: #3399cc;
   text-decoration: none;
@@ -2032,6 +1978,7 @@ body.is-menu-open .to-top {
   color: #3399cc;
   text-decoration: none;
 }
+
 .page-trends-article .callout__urlwrap:visited {
   color: #3399cc;
   text-decoration: none;
@@ -2048,18 +1995,20 @@ body.is-menu-open .to-top {
   margin-top: 24px;
   font-size: 14px;
 }
+
 .page-trends-article .comparison-table th,
 .page-trends-article .comparison-table td {
   border: 1px solid #ddd;
   padding: 14px;
   line-height: 1.7;
 }
+
 .page-trends-article .comparison-table thead th {
   background: #f7f7f7;
   text-align: center;
 }
 
-/* ✅share（重複を1箇所に統合） */
+/* share */
 .page-trends-article .share {
   margin-top: 72px;
   padding-top: 24px;
@@ -2102,6 +2051,7 @@ body.is-menu-open .to-top {
   text-decoration: none;
   color: inherit;
 }
+
 .page-trends-article .share__link:hover {
   opacity: 0.7;
 }
@@ -2115,6 +2065,7 @@ body.is-menu-open .to-top {
 .page-trends-article .share .article__copy-button {
   margin-left: auto;
 }
+
 .page-trends-article .share .article__copy-button img {
   height: 35px;
   display: block;
@@ -2127,17 +2078,20 @@ body.is-menu-open .to-top {
   position: sticky;
   top: 24px;
 }
+
 .page-trends-article .sidebar__top {
   position: relative;
   margin-top: var(--space-lg);
   margin-bottom: var(--space-lg);
   box-shadow: 10px 10px 0 rgba(0, 0, 0, 0.25);
 }
+
 .page-trends-article .sidebar__img {
   width: 100%;
   height: auto;
   display: block;
 }
+
 .page-trends-article .sidebar__top span {
   position: absolute;
   inset: 0;
@@ -2147,11 +2101,13 @@ body.is-menu-open .to-top {
   color: #fff;
   font-weight: 700;
 }
+
 .page-trends-article .sidebar__divider {
   border: none;
   border-top: 2px solid #222;
   margin: 28px 0 22px;
 }
+
 .page-trends-article .sidebar__title {
   display: flex;
   align-items: baseline;
@@ -2160,19 +2116,23 @@ body.is-menu-open .to-top {
   margin-bottom: 18px;
   position: relative;
 }
+
 .page-trends-article .sidebar__lead-en {
   font-size: 36px;
   font-weight: 400;
   margin: 0;
 }
+
 .page-trends-article .sidebar__slash {
   font-size: 14px;
   font-weight: 700;
 }
+
 .page-trends-article .sidebar__lead-ja {
   font-size: 14px;
   font-weight: 700;
 }
+
 .page-trends-article .sidebar__title::after {
   content: "";
   position: absolute;
@@ -2189,6 +2149,7 @@ body.is-menu-open .to-top {
   display: grid;
   gap: 18px;
 }
+
 .page-trends-article .pickup__link {
   display: grid;
   grid-template-columns: 120px 1fr;
@@ -2197,18 +2158,21 @@ body.is-menu-open .to-top {
   text-decoration: none;
   color: inherit;
 }
+
 .page-trends-article .pickup__thumb {
   width: 120px;
   height: 72px;
   object-fit: cover;
   display: block;
 }
+
 .page-trends-article .pickup__text {
   margin: 0;
   font-size: 14px;
   line-height: 1.6;
   font-weight: 700;
 }
+
 .page-trends-article .pickup__link:hover {
   opacity: 0.75;
 }
@@ -2217,19 +2181,24 @@ body.is-menu-open .to-top {
   .page-trends-article .layout {
     grid-template-columns: 1fr;
   }
+
   .page-trends-article .article__title {
     font-size: 24px;
   }
+
   .page-trends-article .article__heading {
     font-size: 22px;
   }
+
   .page-trends-article .article__subheading {
     font-size: 18px;
   }
+
   .page-trends-article .article__text,
   .page-trends-article .article__lead {
     font-size: 14px;
   }
+
   .page-trends-article .sidebar {
     position: static;
   }
