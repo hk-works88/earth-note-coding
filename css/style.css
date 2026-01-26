@@ -4,7 +4,7 @@
   ✅ 共通は上部 / ページ固有は末尾（page-*）へ集約
   ✅ 重複はできるだけ統合
   ✅ SP：ヘッダー高さを低く（--header-h）
-  ✅ SP：ハンバーガーを縦中央（absolute頼みをやめてflexで中央）
+  ✅ SP：ハンバーガーを右上fixed
   ✅ SP：slash.svg（.section-heading__icon）を小さく
   ✅ SP：全体の基準フォントサイズを小さく
   ✅ 「SDGs情報メディア」が効かない対策：
@@ -268,7 +268,7 @@ body {
     display: none;
   }
 
-  /* ✅ハンバーガー縦中央：absoluteをやめて flex の並びで中央 */
+  /* ハンバーガー縦中央：absoluteをやめて flex の並びで中央 */
   .header__hamburger {
     display: inline-flex;
     align-items: center;
@@ -413,9 +413,9 @@ body.is-menu-open .header__hamburger {
 
 @media (max-width: 767px) {
   .page-index .header {
-    position: sticky;
     top: 0;
-    background: #fff; /* ✅透過なし */
+    position: fixed;
+    background: #f3f5f6;
     height: var(--header-h);
     box-shadow: none; /* 必要なら後で薄影 */
   }
@@ -475,8 +475,25 @@ body.is-menu-open .header__hamburger {
   background: #fff;
   margin-right: 12px;
 }
+/* =========================
+   MV (SP)
+========================= */
 
-/* ✅slash.svg（見出しアイコン） */
+@media (max-width: 767px) {
+  .mv__lead {
+    width: clamp(280px, 78vw, 360px);
+  }
+  .mv__sub {
+    font-size: 14px; /* PC:16px → SP:14px */
+  }
+  .mv__sub::before {
+    width: 22px;
+    height: 9px;
+    margin-right: 8px;
+  }
+}
+
+/* slash.svg（見出しアイコン） */
 .section-heading__icon {
   display: inline-block;
   width: 85px;
@@ -573,6 +590,84 @@ body.is-menu-open .header__hamburger {
 .interview__article-item--large {
 }
 
+/* index：SPで「main→sub(2col)」の並びにする */
+@media (max-width: 767px) {
+  /* trends / interview 共通：左右→縦 */
+  .page-index .trends__list.articles,
+  .page-index .interview__list.articles {
+    flex-direction: column;
+    gap: 24px;
+  }
+
+  .page-index .articles__main,
+  .page-index .articles__sub {
+    width: 100%;
+  }
+
+  /* sub：2カラム */
+  .page-index .articles__sub {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 16px;
+  }
+  /* mainの記事：右テキストの2カラム→縦 */
+  .page-index .trends__article-body,
+  .page-index .interview__article-body {
+    display: block;
+    margin-top: 12px;
+  }
+  .page-index .articles__main .trends__article-body,
+  .page-index .articles__main .interview__article-body {
+    display: block; /* flexを潰す */
+  }
+  /* subのサムネだけ高さ固定（見た目揃える） */
+  .page-index .articles__sub .trends__article-image,
+  .page-index .articles__sub .interview__article-image {
+    height: 110px;
+    object-fit: cover;
+  }
+  .page-index .articles__main .trends__article-meta,
+  .page-index .articles__main .interview__article-meta {
+    flex: none; /* 50%指定を無効化 */
+    width: 100%;
+  }
+  .page-index .articles__main .trends__article-text,
+  .page-index .articles__main .interview__article-text {
+    width: 100%;
+    margin-top: 10px; /* 説明文との間隔 */
+  }
+  /* ✅全体少し小さめ（お好みで） */
+  .page-index .trends__article-title,
+  .page-index .interview__article-title {
+    font-size: 17px;
+    line-height: 1.55;
+  }
+
+  .page-index .trends__article-date,
+  .page-index .interview__article-date,
+  .page-index .familiar__article-date {
+    font-size: 12px;
+  }
+
+  .page-index .trends__article-desc,
+  .page-index .interview__article-desc {
+    font-size: 13px;
+    line-height: 1.75;
+  }
+
+  /* 小カード側（2列のやつ） */
+  .page-index .trends__article-title--sm,
+  .page-index .interview__article-title--sm,
+  .page-index .familiar__article-title {
+    font-size: 14px;
+    line-height: 1.55;
+  }
+  /* 日本語見出しを消す */
+  .page-index .trends__heading-ja,
+  .page-index .interview__heading-ja,
+  .page-index .familiar__heading-ja {
+    display: none;
+  }
+}
 /* =========================
    Goals
 ========================= */
@@ -1369,6 +1464,13 @@ body.is-menu-open .header__hamburger {
   transform: translateY(-4px);
 }
 
+/* SPメニュー表示中はTOPボタンを隠す */
+body.is-menu-open .to-top {
+  opacity: 0;
+  pointer-events: none;
+  transform: translateY(10px);
+}
+
 /* =========================
    Pagination
 ========================= */
@@ -1584,6 +1686,15 @@ body.is-menu-open .header__hamburger {
   .page-index .trends__article-desc,
   .page-index .interview__article-desc {
     font-size: 14px;
+  }
+
+  .page-index .trends__slash,
+  .page-index .interview__slash,
+  .page-index .familiar__slash,
+  .page-index .trends__heading-ja,
+  .page-index .interview__heading-ja,
+  .page-index .familiar__heading-ja {
+    display: none !important;
   }
 }
 
