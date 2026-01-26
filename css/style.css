@@ -261,6 +261,7 @@ body {
     padding: 0 16px;
     height: var(--header-h);
     align-items: center;
+    position: relative; /* 念のため（なくてもOK） */
   }
 
   .header__nav {
@@ -272,8 +273,11 @@ body {
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    position: static;
+    position: fixed;
     transform: none;
+    top: 3px; /* 好みで 6〜10px */
+    right: 12px; /* 好みで 10〜16px */
+    z-index: 2100; /* sp-menuより上に */
   }
 
   /* ロゴ画像は少し小さく */
@@ -329,7 +333,6 @@ body.is-menu-open .header__hamburger {
   .sp-menu__inner {
     padding: 20px 18px 28px;
   }
-
   .sp-menu__primary,
   .sp-menu__secondary {
     list-style: none;
@@ -403,7 +406,27 @@ body.is-menu-open .header__hamburger {
     display: none !important;
   }
 }
+/* =========================
+   Page: Index (SP) header fix
+   - 透過をやめて他ページSPと同じ固定ヘッダーにする
+========================= */
 
+@media (max-width: 767px) {
+  .page-index .header {
+    position: sticky;
+    top: 0;
+    background: #fff; /* ✅透過なし */
+    height: var(--header-h);
+    box-shadow: none; /* 必要なら後で薄影 */
+  }
+
+  /* indexのPC用 hover 演出をSPでは無効化 */
+  .page-index .header:hover,
+  .page-index .header:focus-within {
+    background: #fff;
+    box-shadow: none;
+  }
+}
 /* =========================
    MV
 ========================= */
