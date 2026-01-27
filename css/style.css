@@ -1,14 +1,8 @@
-/*
-  EarthNote - Clean CSS (organized / single file)
-  ------------------------------------------------------------
-  - Common styles first
-  - Page-specific styles are grouped under "Pages (page-*)"
-  - Avoid duplicates and keep mobile rules near each section
-*/
+/* EarthNote - Clean CSS (organized / single file) */
 
-/* ===================================================================
-   Base / Tokens
-=================================================================== */
+/* ========================================================================== */
+/* 01. Base / Tokens / Reset                                                  */
+/* ========================================================================== */
 
 html,
 body {
@@ -48,9 +42,9 @@ body {
   }
 }
 
-/* ===================================================================
-   Typography
-=================================================================== */
+/* ========================================================================== */
+/* 02. Typography                                                             */
+/* ========================================================================== */
 
 .font-marcellus {
   font-family: "Marcellus", serif;
@@ -62,9 +56,9 @@ body {
   font-family: "Montserrat", sans-serif;
 }
 
-/* ===================================================================
-   Layout / Utilities
-=================================================================== */
+/* ========================================================================== */
+/* 03. Layout / Utilities                                                     */
+/* ========================================================================== */
 
 .container {
   max-width: var(--container-w);
@@ -88,13 +82,13 @@ body {
   }
 }
 
-/* ===================================================================
-   Header / Navigation
-=================================================================== */
+/* ========================================================================== */
+/* 04. Header / Navigation                                                    */
+/* ========================================================================== */
 
-/* -------------------------------------------------------------------
-   Header base
-------------------------------------------------------------------- */
+/* ------------------------------------------ */
+/* Header base                                */
+/* ------------------------------------------ */
 
 .header {
   height: var(--header-h);
@@ -124,6 +118,7 @@ body {
   text-decoration: none;
   color: inherit;
   transition: opacity 0.2s ease;
+
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -132,7 +127,7 @@ body {
   opacity: 0.7;
 }
 
-/* lead/tagline (both classes supported) */
+/* lead/tagline（両方のclass対応） */
 .header__logo-lead,
 .header__tagline {
   display: block;
@@ -144,12 +139,15 @@ body {
 }
 
 .header__logo-img {
-  height: auto;
   width: 180px;
+  height: auto;
   display: block;
 }
 
-/* PC nav */
+/* ------------------------------------------ */
+/* PC nav                                     */
+/* ------------------------------------------ */
+
 .header__nav {
   display: block;
 }
@@ -158,6 +156,10 @@ body {
   display: flex;
   align-items: center;
   list-style: none;
+
+  margin: 0;
+  padding: 0;
+
   position: relative;
   top: -3px;
 }
@@ -183,9 +185,11 @@ body {
   position: absolute;
   left: 0;
   bottom: 0;
+
   width: 100%;
   height: 2px;
   background: #38b48b;
+
   transform: scaleX(0);
   transform-origin: left center;
   transition: transform 0.25s ease;
@@ -195,7 +199,10 @@ body {
   transform: scaleX(1);
 }
 
-/* hamburger button (base) */
+/* ------------------------------------------ */
+/* Hamburger button (base)                    */
+/* ------------------------------------------ */
+
 .header__hamburger {
   display: none;
   width: 44px;
@@ -217,9 +224,11 @@ body {
   position: absolute;
   left: 50%;
   top: 50%;
+
   width: 24px;
   height: 2px;
   background: #111;
+
   transform: translate(-50%, -50%);
   transition: transform 0.25s ease;
 }
@@ -229,9 +238,11 @@ body {
   position: absolute;
   left: 0;
   top: 8px;
+
   width: 24px;
   height: 2px;
   background: #111;
+
   transition:
     transform 0.25s ease,
     top 0.25s ease;
@@ -248,9 +259,9 @@ body {
   transform: rotate(-90deg);
 }
 
-/* -------------------------------------------------------------------
-   Header (SP)
-------------------------------------------------------------------- */
+/* ------------------------------------------ */
+/* Header (SP)                                */
+/* ------------------------------------------ */
 
 @media (max-width: 767px) {
   .header {
@@ -304,9 +315,9 @@ body {
   }
 }
 
-/* ===================================================================
-   SP Menu
-=================================================================== */
+/* ========================================================================== */
+/* 05. SP Menu                                                                */
+/* ========================================================================== */
 
 .sp-menu {
   display: none;
@@ -339,7 +350,7 @@ body.is-menu-open .header__hamburger {
     padding: 20px 18px 28px;
   }
 
-  /* リスト（ul）のデフォルト余白をゼロにして安定させる */
+  /* ul reset */
   .sp-menu__primary,
   .sp-menu__secondary {
     list-style: none;
@@ -347,17 +358,15 @@ body.is-menu-open .header__hamburger {
     padding: 0;
   }
 
-  /* 上下の間隔（目的が“外側の間”なので margin） */
   .sp-menu__primary {
     margin-top: 10px;
   }
 
   .sp-menu__secondary {
-    margin-top: 35px; /* primary と secondary の間 */
+    margin-top: 35px;
     margin-bottom: 20px;
   }
 
-  /* li：リンクの中身（アイコン＋テキストなど）を横並びに */
   .sp-menu__item,
   .sp-menu__subitem {
     display: flex;
@@ -365,7 +374,6 @@ body.is-menu-open .header__hamburger {
     gap: 10px;
   }
 
-  /* a：リンク本体（クリック領域を広くして押しやすく） */
   .sp-menu__link,
   .sp-menu__sublink {
     display: flex;
@@ -376,7 +384,6 @@ body.is-menu-open .header__hamburger {
     text-decoration: none;
   }
 
-  /* menuリンク */
   .sp-menu__link {
     padding: 18px 2px;
     font-size: 15px;
@@ -384,7 +391,6 @@ body.is-menu-open .header__hamburger {
     line-height: 1.4;
   }
 
-  /* companyリンク */
   .sp-menu__sublink {
     padding: 10px 2px;
     font-size: 12px;
@@ -392,7 +398,6 @@ body.is-menu-open .header__hamburger {
     line-height: 1.4;
   }
 
-  /* ホバー・フォーカス（任意：PCでも見やすく） */
   .sp-menu__link:hover,
   .sp-menu__sublink:hover {
     opacity: 0.85;
@@ -403,6 +408,7 @@ body.is-menu-open .header__hamburger {
     outline: 2px solid currentColor;
     outline-offset: 2px;
   }
+
   .sp-menu__link:active,
   .sp-menu__sublink:active {
     opacity: 0.7;
@@ -441,9 +447,13 @@ body.is-menu-open .header__hamburger {
   }
 }
 
-/* ===================================================================
-   Section Heading Icon (slash.svg)
-=================================================================== */
+/* ========================================================================== */
+/* 06. Components                                                             */
+/* ========================================================================== */
+
+/* ------------------------------------------ */
+/* Section Heading Icon (slash.svg)           */
+/* ------------------------------------------ */
 
 .section-heading__icon {
   display: inline-block;
@@ -462,9 +472,9 @@ body.is-menu-open .header__hamburger {
   }
 }
 
-/* ===================================================================
-   MV
-=================================================================== */
+/* ------------------------------------------ */
+/* MV                                         */
+/* ------------------------------------------ */
 
 .mv {
   position: relative;
@@ -472,10 +482,7 @@ body.is-menu-open .header__hamburger {
   min-height: 680px;
   padding-top: 0;
   padding-bottom: 0;
-  background-image: url("../images/mv.png");
-  background-size: cover;
-  background-position: center 10%;
-  background-repeat: no-repeat;
+  background: url("../images/mv.png") no-repeat center 10% / cover;
   margin-bottom: 110px;
 }
 
@@ -500,7 +507,7 @@ body.is-menu-open .header__hamburger {
 
 .mv__sub {
   font-size: 16px;
-  margin-top: 0px;
+  margin-top: 0;
 }
 
 .mv__sub::before {
@@ -528,9 +535,9 @@ body.is-menu-open .header__hamburger {
   }
 }
 
-/* ===================================================================
-   Articles Layout (shared)
-=================================================================== */
+/* ------------------------------------------ */
+/* Articles Layout (shared)                   */
+/* ------------------------------------------ */
 
 .articles {
   display: flex;
@@ -552,9 +559,9 @@ body.is-menu-open .header__hamburger {
   flex-direction: row-reverse;
 }
 
-/* ===================================================================
-   Goals
-=================================================================== */
+/* ------------------------------------------ */
+/* Goals                                      */
+/* ------------------------------------------ */
 
 .goals {
   position: relative;
@@ -572,7 +579,7 @@ body.is-menu-open .header__hamburger {
 }
 
 .goals__title {
-  margin: 0px;
+  margin: 0;
   width: 214px;
 }
 
@@ -590,8 +597,7 @@ body.is-menu-open .header__hamburger {
 .goals__panel {
   position: relative;
   flex: 1;
-  padding-left: 60px;
-  padding-right: 60px;
+  padding-inline: 60px;
   overflow: visible;
   min-width: 0;
 }
@@ -643,8 +649,10 @@ body.is-menu-open .header__hamburger {
   position: absolute;
   top: 50%;
   transform: translateY(-50%);
+
   width: 44px;
   height: 44px;
+
   border-radius: 50%;
   border: none;
   background: #000;
@@ -665,6 +673,7 @@ body.is-menu-open .header__hamburger {
 .goals__arrow:hover {
   opacity: 1;
 }
+
 @media (max-width: 767px) {
   .goals__inner {
     flex-direction: column;
@@ -678,7 +687,7 @@ body.is-menu-open .header__hamburger {
   }
 
   .goals__title {
-    width: 140px; /* ← 17Goalsを小さく */
+    width: 140px; /* 17Goalsを小さく */
   }
 
   .goals__sub {
@@ -687,21 +696,19 @@ body.is-menu-open .header__hamburger {
   }
 
   .goals__panel {
-    padding-left: 0;
-    padding-right: 0;
+    padding-inline: 0;
   }
 
   .goals__panel::before {
     display: none; /* 左グラデ消す */
   }
 }
-/* ===================================================================
-   Common Button
-=================================================================== */
 
-.trends__btn,
-.interview__btn,
-.familiar__btn {
+/* ------------------------------------------ */
+/* Common Button（3つをまとめ）               */
+/* ------------------------------------------ */
+
+:is(.trends__btn, .interview__btn, .familiar__btn) {
   margin-top: 60px;
   margin-bottom: 110px;
   text-align: right;
@@ -726,13 +733,12 @@ body.is-menu-open .header__hamburger {
     background-color 0.25s ease;
 }
 
-.trends__btn::after,
-.interview__btn::after,
-.familiar__btn::after {
+:is(.trends__btn, .interview__btn, .familiar__btn)::after {
   content: "›";
   position: absolute;
   top: 9px;
   right: 0;
+
   width: 88px;
   height: calc(100% - 18px);
   border-left: 1px solid #fff;
@@ -745,17 +751,15 @@ body.is-menu-open .header__hamburger {
   line-height: 1;
 }
 
-.trends__btn:hover,
-.interview__btn:hover,
-.familiar__btn:hover {
+:is(.trends__btn, .interview__btn, .familiar__btn):hover {
   height: 64px;
   background: #111;
   box-shadow: 0 16px 30px rgba(0, 0, 0, 0.25);
 }
 
-/* ===================================================================
-   Background group
-=================================================================== */
+/* ------------------------------------------ */
+/* Background group                           */
+/* ------------------------------------------ */
 
 .bg-group {
   position: relative;
@@ -788,29 +792,27 @@ body.is-menu-open .header__hamburger {
   background-image: url("../images/bg-diagonal-b.png");
   left: -100%;
 }
+
 @media (max-width: 767px) {
   .bg-group {
-    overflow: hidden; /* 念のため維持 */
+    overflow: hidden;
   }
 
   .bg-group::before {
-    /* PCと同じ伸ばし方だとズレやすいので、SPは“幅基準”に寄せる */
     background-size: 140% auto;
     background-position: 50% 0;
-
-    /* これが超重要：leftでずらす方式をSPではやめる */
     left: 0;
   }
 
   .bg-group--a::before,
   .bg-group--b::before {
-    left: 0; /* PCの -50% / -100% を無効化 */
+    left: 0;
   }
 }
 
-/* ===================================================================
-   Coming soon
-=================================================================== */
+/* ------------------------------------------ */
+/* Coming soon                                */
+/* ------------------------------------------ */
 
 .coming {
   display: grid;
@@ -830,13 +832,15 @@ body.is-menu-open .header__hamburger {
   content: "";
   position: absolute;
   inset: 0;
+  z-index: 0;
+
   background-size: cover;
   background-position: center;
+
   transform: scale(1);
   transition:
     transform 0.5s ease,
     filter 0.5s ease;
-  z-index: 0;
 }
 
 .coming__text {
@@ -844,6 +848,7 @@ body.is-menu-open .header__hamburger {
   z-index: 1;
   height: 100%;
   padding: 32px;
+
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
@@ -881,6 +886,7 @@ body.is-menu-open .header__hamburger {
   position: absolute;
   inset: 0;
   z-index: 3;
+
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -910,13 +916,14 @@ body.is-menu-open .header__hamburger {
 .coming__item--circulation::before {
   background-image: url("../images/forest-road.jpg");
 }
+
 @media (max-width: 767px) {
   .coming {
     grid-template-columns: 1fr;
   }
 
   .coming__item {
-    height: 360px; /* 縦長すぎ防止 */
+    height: 360px;
   }
 
   .coming__text h3 {
@@ -927,9 +934,10 @@ body.is-menu-open .header__hamburger {
     font-size: 24px;
   }
 }
-/* ===================================================================
-   About
-=================================================================== */
+
+/* ------------------------------------------ */
+/* About                                      */
+/* ------------------------------------------ */
 
 .about {
   position: relative;
@@ -947,10 +955,8 @@ body.is-menu-open .header__hamburger {
   max-width: 1000px;
   height: 100%;
 
-  background-image: url("../images/thumbnail-earthnote-default.png");
-  background-repeat: no-repeat;
-  background-size: contain;
-  background-position: center top;
+  background: url("../images/thumbnail-earthnote-default.png") no-repeat center
+    top / contain;
 
   z-index: 0;
   pointer-events: none;
@@ -1001,9 +1007,9 @@ body.is-menu-open .header__hamburger {
   }
 }
 
-/* ===================================================================
-   Marquee
-=================================================================== */
+/* ------------------------------------------ */
+/* Marquee                                    */
+/* ------------------------------------------ */
 
 .marquee {
   overflow: hidden;
@@ -1058,9 +1064,9 @@ body.is-menu-open .header__hamburger {
   }
 }
 
-/* ===================================================================
-   Movie
-=================================================================== */
+/* ------------------------------------------ */
+/* Movie                                      */
+/* ------------------------------------------ */
 
 .movie {
   width: 100%;
@@ -1076,9 +1082,9 @@ body.is-menu-open .header__hamburger {
   display: block;
 }
 
-/* ===================================================================
-   Footer
-=================================================================== */
+/* ========================================================================== */
+/* 07. Footer                                                                 */
+/* ========================================================================== */
 
 .footer {
   padding: 45px 35px;
@@ -1088,6 +1094,7 @@ body.is-menu-open .header__hamburger {
 .footer__inner {
   max-width: 1400px;
   margin: 0 auto;
+
   display: flex;
   align-items: flex-start;
   gap: 120px;
@@ -1153,6 +1160,7 @@ body.is-menu-open .header__hamburger {
   text-decoration: none;
   color: #000;
   font-size: 14px;
+
   display: inline-flex;
   align-items: center;
   gap: 10px;
@@ -1177,6 +1185,7 @@ body.is-menu-open .header__hamburger {
   right: 0;
   top: 50%;
   transform: translateY(-50%);
+
   width: 12px;
   height: 12px;
   border: 1px solid #000;
@@ -1187,8 +1196,10 @@ body.is-menu-open .header__hamburger {
   position: absolute;
   right: 2px;
   top: calc(50% - 6px);
+
   width: 6px;
   height: 6px;
+
   border-top: 1px solid #000;
   border-right: 1px solid #000;
   transform: translate(2px, -2px);
@@ -1261,9 +1272,9 @@ body.is-menu-open .header__hamburger {
   }
 }
 
-/* ===================================================================
-   Breadcrumb
-=================================================================== */
+/* ========================================================================== */
+/* 08. Breadcrumb                                                             */
+/* ========================================================================== */
 
 .breadcrumb {
   margin-top: var(--header-h);
@@ -1309,6 +1320,7 @@ body.is-menu-open .header__hamburger {
   margin: 0 8px;
   color: #000;
   opacity: 0.7;
+
   display: inline-flex;
   align-items: center;
   height: 100%;
@@ -1333,16 +1345,18 @@ body.is-menu-open .header__hamburger {
   }
 }
 
-/* ===================================================================
-   To Top Button
-=================================================================== */
+/* ========================================================================== */
+/* 09. To Top Button                                                          */
+/* ========================================================================== */
 
 .to-top {
   position: fixed;
   right: 24px;
   bottom: 24px;
+
   width: 92px;
   height: 92px;
+
   border: none;
   border-radius: 50%;
   cursor: pointer;
@@ -1354,6 +1368,7 @@ body.is-menu-open .header__hamburger {
   opacity: 0;
   pointer-events: none;
   transform: translateY(10px);
+
   transition:
     opacity 0.25s ease,
     transform 0.25s ease;
@@ -1375,9 +1390,9 @@ body.is-menu-open .to-top {
   transform: translateY(10px);
 }
 
-/* ===================================================================
-   Pagination
-=================================================================== */
+/* ========================================================================== */
+/* 10. Pagination                                                             */
+/* ========================================================================== */
 
 .pagination {
   margin-top: 80px;
@@ -1389,21 +1404,25 @@ body.is-menu-open .to-top {
   justify-content: center;
   align-items: center;
   gap: 8px;
+
   list-style: none;
   padding: 0;
   margin: 0;
 }
 
-.pagination__item a,
-.pagination__item {
+.pagination__item,
+.pagination__item a {
   display: flex;
   align-items: center;
   justify-content: center;
+
   min-width: 36px;
   height: 36px;
+
   font-size: 14px;
   color: #000;
   text-decoration: none;
+
   border: 1px solid #ddd;
   background: #fff;
 }
@@ -1429,9 +1448,9 @@ body.is-menu-open .to-top {
   background: #f2f2f2;
 }
 
-/* ===================================================================
-   Article common (existing selector kept)
-=================================================================== */
+/* ========================================================================== */
+/* 11. Article common（既存selector維持）                                      */
+/* ========================================================================== */
 
 .article__header .article__title {
   font-size: 37px;
@@ -1447,13 +1466,13 @@ body.is-menu-open .to-top {
   }
 }
 
-/* ===================================================================
-   Pages (page-*)
-=================================================================== */
+/* ========================================================================== */
+/* 12. Pages (page-*)                                                         */
+/* ========================================================================== */
 
-/* -------------------------------------------------------------------
-   Page: Index
-------------------------------------------------------------------- */
+/* ------------------------------------------ */
+/* Page: Index                                */
+/* ------------------------------------------ */
 
 .page-index .header {
   top: 0;
@@ -1471,55 +1490,58 @@ body.is-menu-open .to-top {
   box-shadow: 0 10px 24px rgba(0, 0, 0, 0.08);
 }
 
-.page-index .trends__article-image,
-.page-index .interview__article-image {
+/* images */
+.page-index
+  :is(
+    .trends__article-image,
+    .interview__article-image,
+    .familiar__article-image
+  ) {
   width: 100%;
   height: auto;
   display: block;
 }
 
-.page-index .trends__list a,
-.page-index .interview__list a,
-.page-index .familiar__list a {
+/* links */
+.page-index :is(.trends__list a, .interview__list a, .familiar__list a) {
   display: block;
   color: #000;
   text-decoration: none;
   transition: opacity 0.25s ease;
 }
-
-.page-index .trends__list a:visited,
-.page-index .interview__list a:visited,
-.page-index .familiar__list a:visited {
+.page-index
+  :is(
+    .trends__list a:visited,
+    .interview__list a:visited,
+    .familiar__list a:visited
+  ) {
   color: #000;
 }
-
-.page-index .trends__list a:hover,
-.page-index .interview__list a:hover,
-.page-index .familiar__list a:hover {
+.page-index
+  :is(
+    .trends__list a:hover,
+    .interview__list a:hover,
+    .familiar__list a:hover
+  ) {
   opacity: 0.7;
 }
 
-/* Index section headings (shared) */
-.page-index .trends__head,
-.page-index .interview__head,
-.page-index .familiar__head {
+/* Index section headings */
+.page-index :is(.trends__head, .interview__head, .familiar__head) {
   display: flex;
   align-items: center;
   gap: 12px;
   margin-bottom: 25px;
 }
 
-.page-index .trends__heading-en,
-.page-index .interview__heading-en,
-.page-index .familiar__heading-en {
+.page-index
+  :is(.trends__heading-en, .interview__heading-en, .familiar__heading-en) {
   font-size: 75px;
   font-weight: 400;
   margin: 0;
 }
 
-.page-index .trends__slash,
-.page-index .interview__slash,
-.page-index .familiar__slash {
+.page-index :is(.trends__slash, .interview__slash, .familiar__slash) {
   display: inline-block;
   width: 40px;
   height: 2px;
@@ -1532,68 +1554,66 @@ body.is-menu-open .to-top {
   top: 4px;
 }
 
-.page-index .trends__heading-ja,
-.page-index .interview__heading-ja,
-.page-index .familiar__heading-ja {
+.page-index
+  :is(.trends__heading-ja, .interview__heading-ja, .familiar__heading-ja) {
   font-weight: 700;
   position: relative;
   top: 6px;
 }
 
-.page-index .trends__lead,
-.page-index .interview__lead,
-.page-index .familiar__lead {
+.page-index :is(.trends__lead, .interview__lead, .familiar__lead) {
   font-size: 17px;
   margin-bottom: 50px;
 }
 
 /* Index articles common */
-.page-index .trends__article-body,
-.page-index .interview__article-body {
+.page-index :is(.trends__article-body, .interview__article-body) {
   display: flex;
   gap: 24px;
   margin-top: 16px;
 }
 
-.page-index .trends__article-meta,
-.page-index .interview__article-meta {
+.page-index :is(.trends__article-meta, .interview__article-meta) {
   flex: 0 0 50%;
 }
 
-.page-index .trends__article-text,
-.page-index .interview__article-text {
+.page-index :is(.trends__article-text, .interview__article-text) {
   flex: 1;
 }
 
-.page-index .trends__article-title,
-.page-index .interview__article-title {
+.page-index :is(.trends__article-title, .interview__article-title) {
   font-size: 20px;
   line-height: 1.5;
   margin-bottom: 8px;
 }
 
-.page-index .trends__article-date,
-.page-index .interview__article-date,
-.page-index .familiar__article-date {
+.page-index
+  :is(
+    .trends__article-date,
+    .interview__article-date,
+    .familiar__article-date
+  ) {
   display: block;
   font-size: 14px;
   color: #666;
 }
 
-.page-index .trends__article-desc,
-.page-index .interview__article-desc {
+.page-index :is(.trends__article-desc, .interview__article-desc) {
   line-height: 1.7;
   font-size: 15px;
   color: #333;
 }
 
-.page-index .trends__article-title--sm,
-.page-index .interview__article-title--sm,
-.page-index .familiar__article-title {
+.page-index
+  :is(
+    .trends__article-title--sm,
+    .interview__article-title--sm,
+    .familiar__article-title
+  ) {
   font-size: 16px;
 }
 
-/* Interview label (Index only) */
+/* Interview label（Index only） */
 .page-index .interview__article-item {
   position: relative;
 }
@@ -1602,6 +1622,7 @@ body.is-menu-open .to-top {
   position: absolute;
   top: 12px;
   right: 12px;
+
   background: rgba(0, 0, 0, 0.75);
   color: #fff;
   font-size: 12px;
@@ -1609,7 +1630,7 @@ body.is-menu-open .to-top {
   line-height: 1;
 }
 
-/* Familiar list layout (Index) */
+/* Familiar list layout（Index） */
 .page-index .familiar__list {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
@@ -1618,21 +1639,15 @@ body.is-menu-open .to-top {
   margin: 0 auto;
 }
 
-.page-index .familiar__article-image {
-  width: 100%;
-  height: auto;
-  display: block;
-}
 @media (max-width: 767px) {
   .page-index .familiar__list {
     grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 16px; /* 少し詰めるとSPで気持ちいい */
+    gap: 16px;
   }
 }
 
-/* Index layout adjustments (SP) */
+/* Index (SP) */
 @media (max-width: 767px) {
-  /* index header fixed like other pages */
   .page-index .header {
     top: 0;
     position: fixed;
@@ -1647,37 +1662,33 @@ body.is-menu-open .to-top {
     box-shadow: none;
   }
 
-  /* headings */
-  .page-index .trends__heading-en,
-  .page-index .interview__heading-en,
-  .page-index .familiar__heading-en {
+  .page-index
+    :is(.trends__heading-en, .interview__heading-en, .familiar__heading-en) {
     font-size: 46px;
   }
 
-  .page-index .trends__lead,
-  .page-index .interview__lead,
-  .page-index .familiar__lead {
+  .page-index :is(.trends__lead, .interview__lead, .familiar__lead) {
     font-size: 15px;
   }
 
-  .page-index .trends__heading-ja,
-  .page-index .interview__heading-ja,
-  .page-index .familiar__heading-ja,
-  .page-index .trends__slash,
-  .page-index .interview__slash,
-  .page-index .familiar__slash {
+  .page-index
+    :is(
+      .trends__heading-ja,
+      .interview__heading-ja,
+      .familiar__heading-ja,
+      .trends__slash,
+      .interview__slash,
+      .familiar__slash
+    ) {
     display: none !important;
   }
 
-  /* trends / interview: side-by-side -> column */
-  .page-index .trends__list.articles,
-  .page-index .interview__list.articles {
+  .page-index :is(.trends__list.articles, .interview__list.articles) {
     flex-direction: column;
     gap: 24px;
   }
 
-  .page-index .articles__main,
-  .page-index .articles__sub {
+  .page-index :is(.articles__main, .articles__sub) {
     width: 100%;
   }
 
@@ -1686,66 +1697,65 @@ body.is-menu-open .to-top {
     gap: 16px;
   }
 
-  .page-index .trends__article-body,
-  .page-index .interview__article-body {
+  .page-index :is(.trends__article-body, .interview__article-body) {
     display: block;
     margin-top: 12px;
   }
 
-  .page-index .articles__sub .trends__article-image,
-  .page-index .articles__sub .interview__article-image {
+  .page-index
+    .articles__sub
+    :is(.trends__article-image, .interview__article-image) {
     height: 110px;
     object-fit: cover;
   }
 
-  .page-index .articles__main .trends__article-meta,
-  .page-index .articles__main .interview__article-meta {
+  .page-index
+    .articles__main
+    :is(.trends__article-meta, .interview__article-meta) {
     flex: none;
     width: 100%;
   }
 
-  .page-index .articles__main .trends__article-text,
-  .page-index .articles__main .interview__article-text {
+  .page-index
+    .articles__main
+    :is(.trends__article-text, .interview__article-text) {
     width: 100%;
     margin-top: 10px;
   }
 
-  .page-index .trends__article-title,
-  .page-index .interview__article-title {
+  .page-index :is(.trends__article-title, .interview__article-title) {
     font-size: 17px;
     line-height: 1.55;
   }
 
-  .page-index .trends__article-date,
-  .page-index .interview__article-date,
-  .page-index .familiar__article-date {
+  .page-index
+    :is(
+      .trends__article-date,
+      .interview__article-date,
+      .familiar__article-date
+    ) {
     font-size: 12px;
   }
 
-  .page-index .trends__article-desc,
-  .page-index .interview__article-desc {
+  .page-index :is(.trends__article-desc, .interview__article-desc) {
     font-size: 13px;
     line-height: 1.75;
   }
 
-  .page-index .trends__article-title--sm,
-  .page-index .interview__article-title--sm,
-  .page-index .familiar__article-title {
+  .page-index
+    :is(
+      .trends__article-title--sm,
+      .interview__article-title--sm,
+      .familiar__article-title
+    ) {
     font-size: 14px;
     line-height: 1.55;
   }
-
-  /* Familiar list on small screens (optional tweak if needed)
-     If your current HTML looks cramped, uncomment:
-  .page-index .familiar__list {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-  }
-  */
 }
 
-/* -------------------------------------------------------------------
-   Page: Interview
-------------------------------------------------------------------- */
+/* ------------------------------------------ */
+/* Page: Interview                            */
+/* ------------------------------------------ */
 
 .page-interview .header,
 .page-trends-article .header {
@@ -1831,7 +1841,7 @@ body.is-menu-open .to-top {
   opacity: 0.7;
 }
 
-/* single definition (no duplicates) */
+/* single definition */
 .page-interview .interview__article-item a {
   display: flex;
   flex-direction: column;
@@ -1865,9 +1875,9 @@ body.is-menu-open .to-top {
   background-color: #f3f5f6;
 }
 
-/* -------------------------------------------------------------------
-   Page: Trends Article
-------------------------------------------------------------------- */
+/* ------------------------------------------ */
+/* Page: Trends Article                        */
+/* ------------------------------------------ */
 
 .page-trends-article {
   background: #fff;
@@ -2296,8 +2306,7 @@ body.is-menu-open .to-top {
     font-size: 18px;
   }
 
-  .page-trends-article .article__text,
-  .page-trends-article .article__lead {
+  .page-trends-article :is(.article__text, .article__lead) {
     font-size: 14px;
   }
 
