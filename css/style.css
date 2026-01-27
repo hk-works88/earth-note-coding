@@ -339,13 +339,25 @@ body.is-menu-open .header__hamburger {
     padding: 20px 18px 28px;
   }
 
+  /* リスト（ul）のデフォルト余白をゼロにして安定させる */
   .sp-menu__primary,
   .sp-menu__secondary {
     list-style: none;
-    padding: 0;
     margin: 0;
+    padding: 0;
   }
 
+  /* 上下の間隔（目的が“外側の間”なので margin） */
+  .sp-menu__primary {
+    margin-top: 10px;
+  }
+
+  .sp-menu__secondary {
+    margin-top: 35px; /* primary と secondary の間 */
+    margin-bottom: 20px;
+  }
+
+  /* li：リンクの中身（アイコン＋テキストなど）を横並びに */
   .sp-menu__item,
   .sp-menu__subitem {
     display: flex;
@@ -353,24 +365,44 @@ body.is-menu-open .header__hamburger {
     gap: 10px;
   }
 
+  /* a：リンク本体（クリック領域を広くして押しやすく） */
   .sp-menu__link,
   .sp-menu__sublink {
     display: flex;
     align-items: center;
     gap: 10px;
 
-    padding: 14px 2px;
-    font-size: 15px;
-    font-weight: 500;
-    line-height: 1.4;
     color: #111;
     text-decoration: none;
   }
 
-  .sp-menu__sublink {
-    font-weight: 400;
+  /* menuリンク */
+  .sp-menu__link {
+    padding: 18px 2px;
+    font-size: 15px;
+    font-weight: 500;
+    line-height: 1.4;
   }
 
+  /* companyリンク */
+  .sp-menu__sublink {
+    padding: 10px 2px;
+    font-size: 12px;
+    font-weight: 500;
+    line-height: 1.4;
+  }
+
+  /* ホバー・フォーカス（任意：PCでも見やすく） */
+  .sp-menu__link:hover,
+  .sp-menu__sublink:hover {
+    opacity: 0.85;
+  }
+
+  .sp-menu__link:focus-visible,
+  .sp-menu__sublink:focus-visible {
+    outline: 2px solid currentColor;
+    outline-offset: 2px;
+  }
   .sp-menu__link:active,
   .sp-menu__sublink:active {
     opacity: 0.7;
@@ -633,7 +665,36 @@ body.is-menu-open .header__hamburger {
 .goals__arrow:hover {
   opacity: 1;
 }
+@media (max-width: 767px) {
+  .goals__inner {
+    flex-direction: column;
+    gap: 24px;
+    align-items: flex-start;
+  }
 
+  .goals__info {
+    flex: none;
+    width: 100%;
+  }
+
+  .goals__title {
+    width: 140px; /* ← 17Goalsを小さく */
+  }
+
+  .goals__sub {
+    font-size: 13px;
+    margin-top: 6px;
+  }
+
+  .goals__panel {
+    padding-left: 0;
+    padding-right: 0;
+  }
+
+  .goals__panel::before {
+    display: none; /* 左グラデ消す */
+  }
+}
 /* ===================================================================
    Common Button
 =================================================================== */
@@ -726,6 +787,25 @@ body.is-menu-open .header__hamburger {
 .bg-group--b::before {
   background-image: url("../images/bg-diagonal-b.png");
   left: -100%;
+}
+@media (max-width: 767px) {
+  .bg-group {
+    overflow: hidden; /* 念のため維持 */
+  }
+
+  .bg-group::before {
+    /* PCと同じ伸ばし方だとズレやすいので、SPは“幅基準”に寄せる */
+    background-size: 140% auto;
+    background-position: 50% 0;
+
+    /* これが超重要：leftでずらす方式をSPではやめる */
+    left: 0;
+  }
+
+  .bg-group--a::before,
+  .bg-group--b::before {
+    left: 0; /* PCの -50% / -100% を無効化 */
+  }
 }
 
 /* ===================================================================
@@ -830,7 +910,23 @@ body.is-menu-open .header__hamburger {
 .coming__item--circulation::before {
   background-image: url("../images/forest-road.jpg");
 }
+@media (max-width: 767px) {
+  .coming {
+    grid-template-columns: 1fr;
+  }
 
+  .coming__item {
+    height: 360px; /* 縦長すぎ防止 */
+  }
+
+  .coming__text h3 {
+    font-size: 34px;
+  }
+
+  .coming__soon {
+    font-size: 24px;
+  }
+}
 /* ===================================================================
    About
 =================================================================== */
@@ -1526,6 +1622,12 @@ body.is-menu-open .to-top {
   width: 100%;
   height: auto;
   display: block;
+}
+@media (max-width: 767px) {
+  .page-index .familiar__list {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 16px; /* 少し詰めるとSPで気持ちいい */
+  }
 }
 
 /* Index layout adjustments (SP) */
