@@ -17,13 +17,13 @@
     <meta name="format-detection" content="telephone=no,email=no,address=no" />
 
     <!-- リセットCSSリンク -->
-    <link rel="stylesheet" href="./css/reset.css" />
+    <link rel="stylesheet" href="css/reset.css" />
     <!-- CSSリンク -->
-    <link rel="stylesheet" href="./css/style.css" />
+    <link rel="stylesheet" href="css/style.css" />
 
     <!-- ファビコン -->
     <link rel="icon" href="images/favicon.png" type="image/png" />
-    <!-- <link rel="apple-touch-icon" href="/icons/favicon.png.png">　アプリアイコン -->
+    <!-- <link rel="apple-touch-icon" href="icons/favicon.png.png">　アプリアイコン -->
 
     <!-- OGP -->
     <meta property="og:title" content="SDGs情報メディア｜EARTH NOTE" />
@@ -196,6 +196,10 @@
                 企業や学校、家庭、そして私たち一人ひとりが今日から実践できることを詳しくお伝えします。
               </p>
             </header>
+            <nav class="article-toc">
+              <h2 class="article-toc__title">目次</h2>
+              <ol class="article-toc__list" id="js-toc"></ol>
+            </nav>
 
             <!-- 1 -->
             <section class="article__section">
@@ -212,7 +216,7 @@
               </p>
               <img
                 class="article__image"
-                src="images/17Goals.jpg"
+                src="images/17goals_img.jpg"
                 alt="Sustainable-Development-Goals"
               />
             </section>
@@ -752,6 +756,7 @@
       <button class="to-top" id="toTop" aria-label="ページ上部へ">TOP</button>
       <!-- wrapper -->
     </div>
-    <script src="./js/common.js" defer></script>
+    <script src="js/article.js" defer></script>
+    <script src="js/common.js" defer></script>
   </body>
 </html>

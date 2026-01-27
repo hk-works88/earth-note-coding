@@ -1973,6 +1973,127 @@ body.is-menu-open .to-top {
   margin-bottom: 40px;
 }
 
+* ========================================================================== */
+/* Article TOC (SP only)                                                      */
+/* ========================================================================== */
+
+/* PCでは非表示、SPだけ表示（既にあるならどっちかに統一でOK） */
+.article-toc {
+  display: none;
+}
+
+@media (max-width: 767px) {
+  .article-toc {
+    display: block;
+    margin: 34px 0 46px;
+  }
+
+  .article-toc__title {
+    margin: 0;
+    font-size: 20px;
+    font-weight: 800;
+    line-height: 1.25;
+  }
+
+  /* タイトル下のグリーンライン（理想スクショ寄せ） */
+  .article-toc__title::after {
+    content: "";
+    display: block;
+    height: 3px;
+    background: #0b8f6a;
+    margin-top: 14px;
+  }
+
+  .article-toc__list {
+    margin: 16px 0 0;
+    padding-left: 22px; /* 1. の位置を揃える */
+  }
+
+  .article-toc__list li {
+    margin: 10px 0;
+    line-height: 1.5;
+  }
+
+  /* 番号（1. / 1.1）の色・太さ */
+  .article-toc__list li::marker {
+    color: #111;
+    font-weight: 800;
+  }
+
+  /* リンク（青＋下線） */
+  .article-toc__list a {
+    color: #2f80d6;
+    text-decoration: underline;
+    text-underline-offset: 2px;
+    font-weight: 600;
+  }
+
+  .article-toc__list a:visited {
+    color: #2f80d6;
+  }
+
+  /* 下層（1.1 / 1.2 ...） */
+  .article-toc__list ol {
+    margin: 10px 0 0;
+    padding-left: 22px;
+  }
+
+  .article-toc__list ol li {
+    margin: 8px 0;
+  }
+
+  .article-toc__list ol li::marker {
+    color: #666;
+    font-weight: 700;
+  }
+
+  .article-toc__list ol ol {
+    opacity: 0.55;
+  }
+
+  .article-toc__list a:focus-visible {
+    outline: 2px solid #0b8f6a;
+    outline-offset: 3px;
+    border-radius: 4px;
+  }
+
+  .article-toc__more {
+    margin: 18px auto 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+
+    background: transparent;
+    border: none;
+    color: #111;
+    font-weight: 700;
+    cursor: pointer;
+  }
+
+  .article-toc__more-icon {
+    width: 26px;
+    height: 26px;
+    border-radius: 50%;
+    background: #0b8f6a;
+    position: relative;
+    flex: 0 0 26px;
+  }
+
+  .article-toc__more-icon::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    margin: auto;
+    width: 8px;
+    height: 8px;
+    border-right: 2px solid #fff;
+    border-bottom: 2px solid #fff;
+    transform: rotate(45deg);
+    top: 7px;
+  }
+}
+
 .page-trends-article .article__heading {
   padding: var(--space-md) var(--space-lg);
   margin-bottom: var(--space-lg);
