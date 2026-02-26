@@ -23,7 +23,7 @@
 
     <!-- ファビコン -->
     <link rel="icon" href="images/favicon.png" type="image/png" />
-    <!-- <link rel="apple-touch-icon" href="icons/favicon.png.png">　アプリアイコン -->
+    <!-- <link rel="apple-touch-icon" href="icons/favicon.png">　アプリアイコン -->
 
     <!-- OGP -->
     <meta property="og:title" content="SDGs情報メディア｜EARTH NOTE" />
@@ -67,9 +67,9 @@
           <!-- nav -->
           <nav class="header__nav font-noto">
             <ul>
-              <li><a href="#">SDGsトレンド</a></li>
-              <li><a href="#">インタビュー</a></li>
-              <li><a href="#">今すぐできるSDGs</a></li>
+              <li><a href="sdgs-trends.html">SDGsトレンド</a></li>
+              <li><a href="interview.html">インタビュー</a></li>
+              <li><a href="familiar-sdgs.html">今すぐできるSDGs</a></li>
             </ul>
           </nav>
         </div>
@@ -93,13 +93,13 @@
               >
             </li>
             <li class="sp-menu__item">
-              <a class="sp-menu__link" href="trends.html">
+              <a class="sp-menu__link" href="sdgs-trends.html">
                 <span class="sp-menu__icon"></span>
                 SDGsトレンド</a
               >
             </li>
             <li class="sp-menu__item">
-              <a class="sp-menu__link" href="familiar.html">
+              <a class="sp-menu__link" href="familiar-sdgs.html">
                 <span class="sp-menu__icon"></span>
                 今すぐできるSDGs</a
               >
@@ -144,11 +144,11 @@
               <img
                 src="images/mv-lead.png"
                 alt="For the future Of the earth"
-                class="mv__lead"
+                class="mv__lead fade-in fade-in--first"
               />
 
               <!-- サブコピー -->
-              <p class="mv__sub font-noto">
+              <p class="mv__sub font-noto fade-in fade-in--second">
                 地球のミライのために、今できること。
               </p>
 
@@ -284,7 +284,7 @@
               <!--trends__list -->
 
               <!--SDGsトレンド一覧 ボタン-->
-              <a href="#" class="trends__btn"><span>SDGsトレンド一覧</span></a>
+              <a href="sdgs-trends.html" class="trends__btn"><span>SDGsトレンド一覧</span></a>
             </div>
             <!--trends__inner -->
           </div>
@@ -597,7 +597,7 @@
               <!--interview__list -->
 
               <!--インタビュー一覧 ボタン-->
-              <a href="#" class="interview__btn"><span>インタビュー一覧</span></a>
+              <a href="interview.html" class="interview__btn"><span>インタビュー一覧</span></a>
             </div>
             <!--interview__inner -->
           </div>
@@ -691,7 +691,7 @@
                       </article>
               </div><!-- Familiar list -->
                       <!--今すぐできるSDGs一覧 ボタン-->
-                      <a href="#" class="familiar__btn"><span>今すぐできるSDGs一覧</span></a>
+                      <a href="familiar-sdgs.html" class="familiar__btn"><span>今すぐできるSDGs一覧</span></a>
             </div><!-- Familiar inner -->
         </section>
 
@@ -755,7 +755,9 @@
 
         <!-- 横フルのムービー -->
         <section class="movie">
-          
+          <video class="movie__video" autoplay loop muted playsinline>
+            <source src="images/forest.mp4" type="video/mp4">
+          </video>
         </section>
 
       </main>
@@ -764,8 +766,10 @@
         <div class="footer__inner">
           <!-- 左：ロゴ -->
           <div class="footer__brand">
-            <p class="footer__label">SDGs情報メディア</p>
-            <img src="images/logo.png" alt="EARTH NOTE" />
+            <a href="index.html" aria-label="EARTH NOTE トップへ">
+              <p class="footer__label">SDGs情報メディア</p>
+              <img src="images/logo.png" alt="EARTH NOTE" />
+            </a>
           </div>
 
           <!-- 中央起点 -->
@@ -773,9 +777,9 @@
           <!-- 右：リンク -->
           <nav class="footer__nav" aria-label="フッターナビ">
             <ul class="footer__nav-main">
-              <li><a href="#">SDGsトレンド</a></li>
-              <li><a href="#">インタビュー</a></li>
-              <li><a href="#">今すぐできるSDGs</a></li>
+              <li><a href="sdgs-trends.html">SDGsトレンド</a></li>
+              <li><a href="interview.html">インタビュー</a></li>
+              <li><a href="familiar-sdgs.html">今すぐできるSDGs</a></li>
             </ul>
 
             <ul class="footer__nav-sub">

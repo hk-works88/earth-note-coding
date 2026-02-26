@@ -1,0 +1,754 @@
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8" />
+    <title>SDGs情報メディア｜EARTH NOTE</title>
+
+    <!-- タイトルの下に表示される文章。サイト内容（概要）、80~120字、キーワード入れる。-->
+    <meta
+      name="description"
+      content="SDGs達成に取り組む企業インタビューや基礎知識をお伝えし、私たちにできることを紹介するWebメディアです。"
+    />
+    <!-- サイトの内容の目安に使われていたキーワード指定用。自分で管理、他の検索エンジン対策。Googleでは重要度は低い。 -->
+    <meta name="keywords" content="SDGs,SDGsトレンド,リサイクル,サステナブル" />
+    <!-- スマホ用のレスポンシブ設定。画面幅を端末の幅、最初の拡大率を100% -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- スマホで勝手にリンクになるの防ぐタグ -->
+    <meta name="format-detection" content="telephone=no,email=no,address=no" />
+
+    <!-- リセットCSSリンク -->
+    <link rel="stylesheet" href="css/reset.css" />
+    <!-- CSSリンク -->
+    <link rel="stylesheet" href="css/style.css" />
+
+    <!-- ファビコン -->
+    <link rel="icon" href="images/favicon.png" type="image/png" />
+    <!-- <link rel="apple-touch-icon" href="icons/favicon.png">　アプリアイコン -->
+
+    <!-- OGP -->
+    <meta property="og:title" content="SDGs情報メディア｜EARTH NOTE" />
+    <meta
+      property="og:description"
+      content="SDGsの企業インタビューや基礎知識を紹介"
+    />
+    <meta property="og:image" content="images/ogp.jpg" />
+    <meta property="og:url" content="https://example.com" />
+    <meta property="og:site_name" content="EARTH NOTE" />
+    <meta property="og:type" content="website" />
+
+    <!-- Google Fonts preconnect -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+
+    <!-- Fonts -->
+    <link
+      href="https://fonts.googleapis.com/css2?family=Marcellus&family=Montserrat:wght@400;500;700&family=Noto+Sans+JP:wght@400;500;700&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+
+  <body class="page-sdgs-trends">
+    <!-- ALLWrapper -->
+    <div class="wrapper">
+      <!-- header -->
+      <header class="header">
+        <div class="header__inner">
+          <!-- ロゴ -->
+          <div class="header__logo">
+            <a href="index.html" aria-label="EARTH NOTE トップへ">
+              <!-- alt画像説明、aria-label要素全体・操作の意味を説明 -->
+              <span class="header__logo-lead font-noto" aria-hidden="true"
+                >SDGs情報メディア</span
+              >
+              <img
+                src="images/logo.png"
+                alt="EARTH NOTE"
+                class="header__logo-img"
+              />
+            </a>
+          </div>
+          <!-- nav -->
+          <nav class="header__nav font-noto">
+            <ul>
+              <li><a href="#">SDGsトレンド</a></li>
+              <li><a href="#">インタビュー</a></li>
+              <li><a href="#">今すぐできるSDGs</a></li>
+            </ul>
+          </nav>
+          <button
+            class="header__hamburger"
+            type="button"
+            aria-label="メニュー"
+            aria-controls="spMenu"
+            aria-expanded="false"
+          >
+            <span class="header__hamburger-line" aria-hidden="true"></span>
+          </button>
+        </div>
+      </header>
+      <nav class="breadcrumb font-noto pc-only" aria-label="Breadcrumb">
+        <div class="container">
+          <ol class="breadcrumb__list">
+            <li class="breadcrumb__item">
+              <a href="index.html">ホーム</a>
+            </li>
+            <li class="breadcrumb__item" aria-current="page">
+              SDGsトレンド一覧<!-- 現在地にはリンクつけない -->
+            </li>
+          </ol>
+        </div>
+      </nav>
+      <nav class="sp-menu" id="spMenu" aria-hidden="true">
+        <div class="sp-menu__inner">
+          <ul class="sp-menu__primary">
+            <li class="sp-menu__item">
+              <a class="sp-menu__link" href="interview.html">
+                <span class="sp-menu__icon"></span>
+                インタビュー</a
+              >
+            </li>
+            <li class="sp-menu__item">
+              <a class="sp-menu__link" href="sdgs-trends.html">
+                <span class="sp-menu__icon"></span>
+                SDGsトレンド</a
+              >
+            </li>
+            <li class="sp-menu__item">
+              <a class="sp-menu__link" href="familiar-sdgs.html">
+                <span class="sp-menu__icon"></span>
+                今すぐできるSDGs</a
+              >
+            </li>
+          </ul>
+
+          <hr class="sp-menu__divider" />
+
+          <ul class="sp-menu__secondary">
+            <li class="sp-menu__subitem">
+              <a class="sp-menu__sublink" href="company.html"
+                >運営会社 <span class="sp-menu__companyicon"></span
+              ></a>
+            </li>
+            <li class="sp-menu__subitem">
+              <a class="sp-menu__sublink" href="contact.html"
+                >お問い合わせ <span class="sp-menu__companyicon"></span
+              ></a>
+            </li>
+            <li class="sp-menu__subitem">
+              <a class="sp-menu__sublink" href="policy.html"
+                >サイトポリシー <span class="sp-menu__companyicon"></span
+              ></a>
+            </li>
+          </ul>
+        </div>
+      </nav>
+
+      <!-- =========================
+            SDG Trends Archive
+            ========================= -->
+      <main class="page-sdgs-trends page-archive">
+        <div class="container">
+          <!-- ページ見出し -->
+          <header class="sdgs-trends__head">
+            <div class="sdgs-trends__title">
+              <span class="section-heading__icon"></span>
+              <h1 class="sdgs-trends__heading-ja font-noto">
+                SDGsトレンド一覧
+              </h1>
+            </div>
+            <p class="sdgs-trends__lead font-noto">
+              SDGsの基礎知識を詳しく解説し、最新情報や私たちにできることをわかりやすくご紹介します。
+            </p>
+          </header>
+
+          <!-- 一覧 -->
+          <section class="sdgs-trends">
+            <div class="sdgs-trends__list sdgs-trends__list--equal">
+              <!-- article 1 -->
+              <article class="sdgs-trends__article-item">
+                <a href="article.html">
+                  <img
+                    class="sdgs-trends__article-image"
+                    src="images/thumbnail-earthnote-default.jpg"
+                    alt="フードバンク"
+                  />
+                  <h3 class="sdgs-trends__article-title font-noto">
+                    全国各地のフードバンクを一挙紹介！利用方法も簡単に解説
+                  </h3>
+                  <time
+                    class="sdgs-trends__article-date font-montserrat"
+                    datetime="2023-08-27"
+                  >
+                    2023.08.27
+                  </time>
+                </a>
+              </article>
+
+              <!-- article 2 -->
+              <article class="sdgs-trends__article-item">
+                <a href="article.html">
+                  <img
+                    class="sdgs-trends__article-image"
+                    src="images/thumbnail-earthnote-default.jpg"
+                    alt="外来種"
+                  />
+                  <h3 class="sdgs-trends__article-title font-noto">
+                    生態系を脅かす外来種問題
+                  </h3>
+                  <time
+                    class="sdgs-trends__article-date font-montserrat"
+                    datetime="2023-08-27"
+                  >
+                    2023.08.27
+                  </time>
+                </a>
+              </article>
+
+              <!-- article 3 -->
+              <article class="sdgs-trends__article-item">
+                <a href="article.html">
+                  <img
+                    class="sdgs-trends__article-image"
+                    src="images/sustainable-bakery.jpg"
+                    alt="世界中の妊産婦の現状"
+                  />
+                  <h3 class="sdgs-trends__article-title font-noto">
+                    妊産婦の死亡率や医療格差などの現状について
+                  </h3>
+                  <time
+                    class="sdgs-trends__article-date font-montserrat"
+                    datetime="2023-08-27"
+                  >
+                    2023.08.27
+                  </time>
+                </a>
+              </article>
+
+              <!-- article 4 -->
+              <article class="sdgs-trends__article-item">
+                <a href="article.html">
+                  <img
+                    class="sdgs-trends__article-image"
+                    src="images/thumbnail-earthnote-default.jpg"
+                    alt="伝染病"
+                  />
+                  <h3 class="sdgs-trends__article-title font-noto">
+                    伝染病とは？感染症との違いや原因・歴史についても解説
+                  </h3>
+                  <time
+                    class="sdgs-trends__article-date font-montserrat"
+                    datetime="2023-08-27"
+                  >
+                    2023.08.27
+                  </time>
+                </a>
+              </article>
+
+              <!-- article 5 -->
+              <article class="sdgs-trends__article-item">
+                <a href="article.html">
+                  <img
+                    class="sdgs-trends__article-image"
+                    src="images/thumbnail-earthnote-default.jpg"
+                    alt="インフラ"
+                  />
+                  <h3 class="sdgs-trends__article-title font-noto">
+                    SDGsに関わりの深いインフラとは？意味や重要性をわかりやすく紹介
+                  </h3>
+                  <time
+                    class="sdgs-trends__article-date font-montserrat"
+                    datetime="2023-08-27"
+                  >
+                    2023.08.27
+                  </time>
+                </a>
+              </article>
+
+              <!-- article 6 -->
+              <article class="sdgs-trends__article-item">
+                <a href="article.html">
+                  <img
+                    class="sdgs-trends__article-image"
+                    src="images/thumbnail-earthnote-default.jpg"
+                    alt="いじめ問題"
+                  />
+                  <h3 class="sdgs-trends__article-title font-noto">
+                    いじめ問題とは。その原因や対策を知り、いじめのない学校や社会を目指そう
+                  </h3>
+                  <time
+                    class="sdgs-trends__article-date font-montserrat"
+                    datetime="2023-08-27"
+                  >
+                    2023.08.27
+                  </time>
+                </a>
+              </article>
+
+              <!-- article 7 -->
+              <article class="sdgs-trends__article-item">
+                <a href="article.html">
+                  <img
+                    class="sdgs-trends__article-image"
+                    src="images/clean-air.jpg"
+                    alt="温室効果ガス"
+                  />
+                  <h3 class="sdgs-trends__article-title font-noto">
+                    温室効果ガスによる問題と解決へ向けた世界での取り組み
+                  </h3>
+                  <time
+                    class="sdgs-trends__article-date font-montserrat"
+                    datetime="2023-08-27"
+                  >
+                    2023.08.27
+                  </time>
+                </a>
+              </article>
+
+              <!-- article 8 -->
+              <article class="sdgs-trends__article-item">
+                <a href="article.html">
+                  <img
+                    class="sdgs-trends__article-image"
+                    src="images/inclusive-workplace.jpg"
+                    alt="スラム"
+                  />
+                  <h3 class="sdgs-trends__article-title font-noto">
+                    スラムとは？世界の現状と解決策、SDGs目標11との関係も解説
+                  </h3>
+                  <time
+                    class="sdgs-trends__article-date font-montserrat"
+                    datetime="2023-08-27"
+                  >
+                    2023.08.27
+                  </time>
+                </a>
+              </article>
+
+              <!-- article 9 -->
+              <article class="sdgs-trends__article-item">
+                <a href="article.html">
+                  <img
+                    class="sdgs-trends__article-image"
+                    src="images/thumbnail-earthnote-default.jpg"
+                    alt="密漁問題"
+                  />
+                  <h3 class="sdgs-trends__article-title font-noto">
+                    密漁の問題とは？密漁の現状と防止対策について
+                  </h3>
+                  <time
+                    class="sdgs-trends__article-date font-montserrat"
+                    datetime="2023-08-27"
+                  >
+                    2023.08.27
+                  </time>
+                </a>
+              </article>
+
+              <!-- article 10 -->
+              <article class="sdgs-trends__article-item">
+                <a href="article.html">
+                  <img
+                    class="sdgs-trends__article-image"
+                    src="images/green-energy.jpg"
+                    alt="LGBTQ"
+                  />
+                  <h3 class="sdgs-trends__article-title font-noto">
+                    LGBTQとは？Ｑの意味や性的マイノリティの状況まで徹底解説
+                  </h3>
+                  <time
+                    class="sdgs-trends__article-date font-montserrat"
+                    datetime="2023-08-27"
+                  >
+                    2023.08.27
+                  </time>
+                </a>
+              </article>
+
+              <!-- article 11 -->
+              <article class="sdgs-trends__article-item">
+                <a href="article.html">
+                  <img
+                    class="sdgs-trends__article-image"
+                    src="images/eco-production.jpg"
+                    alt="太陽光発電"
+                  />
+                  <h3 class="sdgs-trends__article-title font-noto">
+                    太陽光発電の仕組みや課題、世界の現状について解説
+                  </h3>
+                  <time
+                    class="sdgs-trends__article-date font-montserrat"
+                    datetime="2023-08-27"
+                  >
+                    2023.08.27
+                  </time>
+                </a>
+              </article>
+
+              <!-- article 12 -->
+              <article class="sdgs-trends__article-item">
+                <a href="article.html">
+                  <img
+                    class="sdgs-trends__article-image"
+                    src="images/sustainability-expert.jpg"
+                    alt="ウェルビーイング"
+                  />
+                  <h3 class="sdgs-trends__article-title font-noto">
+                    ウェルビーイングとは？SDGsとの関係や企業の取り組み事例も解説
+                  </h3>
+                  <time
+                    class="sdgs-trends__article-date font-montserrat"
+                    datetime="2023-08-27"
+                  >
+                    2023.08.27
+                  </time>
+                </a>
+              </article>
+
+              <!-- article 13 -->
+              <article class="sdgs-trends__article-item">
+                <a href="article.html">
+                  <img
+                    class="sdgs-trends__article-image"
+                    src="images/thumbnail-earthnote-default.jpg"
+                    alt="アップサイクル"
+                  />
+                  <h3 class="sdgs-trends__article-title font-noto">
+                    アップサイクルとは？リサイクルやリメイクとの違いやアイデアを紹介
+                  </h3>
+                  <time
+                    class="sdgs-trends__article-date font-montserrat"
+                    datetime="2023-08-27"
+                  >
+                    2023.08.27
+                  </time>
+                </a>
+              </article>
+
+              <!-- article 14 -->
+              <article class="sdgs-trends__article-item">
+                <a href="article.html">
+                  <img
+                    class="sdgs-trends__article-image"
+                    src="images/thumbnail-earthnote-default.jpg"
+                    alt="リカレント教育"
+                  />
+                  <h3 class="sdgs-trends__article-title font-noto">
+                    リカレント教育の意味やメリットを分かりやすく解説。リスキング・生涯学習との違いや日本の現状・具体例とは
+                  </h3>
+                  <time
+                    class="sdgs-trends__article-date font-montserrat"
+                    datetime="2023-08-27"
+                  >
+                    2023.08.27
+                  </time>
+                </a>
+              </article>
+
+              <!-- article 15 -->
+              <article class="sdgs-trends__article-item">
+                <a href="article.html">
+                  <img
+                    class="sdgs-trends__article-image"
+                    src="images/thumbnail-earthnote-default.jpg"
+                    alt="風力発電"
+                  />
+                  <h3 class="sdgs-trends__article-title font-noto">
+                    風力発電の仕組みや現状、メリット・デメリットについて解説します
+                  </h3>
+                  <time
+                    class="sdgs-trends__article-date font-montserrat"
+                    datetime="2023-08-27"
+                  >
+                    2023.08.27
+                  </time>
+                </a>
+              </article>
+
+              <!-- article 16 -->
+              <article class="sdgs-trends__article-item">
+                <a href="article.html">
+                  <img
+                    class="sdgs-trends__article-image"
+                    src="images/thumbnail-earthnote-default.jpg"
+                    alt="フードマイレージ"
+                  />
+                  <h3 class="sdgs-trends__article-title font-noto">
+                    フードマイレージとは？日本の現状と減らすための取り組みをわかりやすく解説！
+                  </h3>
+                  <time
+                    class="sdgs-trends__article-date font-montserrat"
+                    datetime="2023-08-27"
+                  >
+                    2023.08.27
+                  </time>
+                </a>
+              </article>
+
+              <!-- article 17 -->
+              <article class="sdgs-trends__article-item">
+                <a href="article.html">
+                  <img
+                    class="sdgs-trends__article-image"
+                    src="images/thumbnail-earthnote-default.jpg"
+                    alt="移民問題"
+                  />
+                  <h3 class="sdgs-trends__article-title font-noto">
+                    移民問題とは？増える移民の現状と各国の政策
+                  </h3>
+                  <time
+                    class="sdgs-trends__article-date font-montserrat"
+                    datetime="2023-08-27"
+                  >
+                    2023.08.27
+                  </time>
+                </a>
+              </article>
+
+              <!-- article 18 -->
+              <article class="sdgs-trends__article-item">
+                <a href="article.html">
+                  <img
+                    class="sdgs-trends__article-image"
+                    src="images/thumbnail-earthnote-default.jpg"
+                    alt="スマートシティ"
+                  />
+                  <h3 class="sdgs-trends__article-title font-noto">
+                    スマートシティとは？日本の自治体の取り組みや海外の事例も紹介
+                  </h3>
+                  <time
+                    class="sdgs-trends__article-date font-montserrat"
+                    datetime="2023-08-27"
+                  >
+                    2023.08.27
+                  </time>
+                </a>
+              </article>
+
+              <!-- article 19 -->
+              <article class="sdgs-trends__article-item">
+                <a href="article.html">
+                  <img
+                    class="sdgs-trends__article-image"
+                    src="images/thumbnail-earthnote-default.jpg"
+                    alt="災害対策"
+                  />
+                  <h3 class="sdgs-trends__article-title font-noto">
+                    災害とは？災害に強いまちづくりと私たちにもできること
+                  </h3>
+                  <time
+                    class="sdgs-trends__article-date font-montserrat"
+                    datetime="2023-08-27"
+                  >
+                    2023.08.27
+                  </time>
+                </a>
+              </article>
+
+              <!-- article 20 -->
+              <article class="sdgs-trends__article-item">
+                <a href="article.html">
+                  <img
+                    class="sdgs-trends__article-image"
+                    src="images/thumbnail-earthnote-default.jpg"
+                    alt="地熱発電"
+                  />
+                  <h3 class="sdgs-trends__article-title font-noto">
+                    地熱発電の仕組みと課題、日本と世界の現状について
+                  </h3>
+                  <time
+                    class="sdgs-trends__article-date font-montserrat"
+                    datetime="2023-08-27"
+                  >
+                    2023.08.27
+                  </time>
+                </a>
+              </article>
+
+              <!-- article 21 -->
+              <article class="sdgs-trends__article-item">
+                <a href="article.html">
+                  <img
+                    class="sdgs-trends__article-image"
+                    src="images/thumbnail-earthnote-default.jpg"
+                    alt="ヘイトクライム"
+                  />
+                  <h3 class="sdgs-trends__article-title font-noto">
+                    ヘイトクライムとは？SDGs目標10との関係、差別をなくすための取り組みを解説
+                  </h3>
+                  <time
+                    class="sdgs-trends__article-date font-montserrat"
+                    datetime="2023-08-27"
+                  >
+                    2023.08.27
+                  </time>
+                </a>
+              </article>
+
+              <!-- article 22 -->
+              <article class="sdgs-trends__article-item">
+                <a href="article.html">
+                  <img
+                    class="sdgs-trends__article-image"
+                    src="images/thumbnail-earthnote-default.jpg"
+                    alt="環境ラベル"
+                  />
+                  <h3 class="sdgs-trends__article-title font-noto">
+                    環境ラベルとは？表示の意味と種類について解説します
+                  </h3>
+                  <time
+                    class="sdgs-trends__article-date font-montserrat"
+                    datetime="2023-08-27"
+                  >
+                    2023.08.27
+                  </time>
+                </a>
+              </article>
+
+              <!-- article 22 -->
+              <article class="sdgs-trends__article-item">
+                <a href="article.html">
+                  <img
+                    class="sdgs-trends__article-image"
+                    src="images/thumbnail-earthnote-default.jpg"
+                    alt="障がい者とSDGs"
+                  />
+                  <h3 class="sdgs-trends__article-title font-noto">
+                    障がい者とSDGsの関係とは？何番の目標が当てはまる？課題と取り組みを紹介
+                  </h3>
+                  <time
+                    class="sdgs-trends__article-date font-montserrat"
+                    datetime="2023-08-27"
+                  >
+                    2023.08.27
+                  </time>
+                </a>
+              </article>
+
+              <!-- article 23 -->
+              <article class="sdgs-trends__article-item">
+                <a href="article.html">
+                  <img
+                    class="sdgs-trends__article-image"
+                    src="images/thumbnail-earthnote-default.jpg"
+                    alt="失業率"
+                  />
+                  <h3 class="sdgs-trends__article-title font-noto">
+                    失業率の問題とは？現状と問題解決に向けた取り組み、SDGs目標8との関係も解説
+                  </h3>
+                  <time
+                    class="sdgs-trends__article-date font-montserrat"
+                    datetime="2023-08-27"
+                  >
+                    2023.08.27
+                  </time>
+                </a>
+              </article>
+
+              <!-- article 24 -->
+              <article class="sdgs-trends__article-item">
+                <a href="article.html">
+                  <img
+                    class="sdgs-trends__article-image"
+                    src="images/thumbnail-earthnote-default.jpg"
+                    alt="MDGs"
+                  />
+                  <h3 class="sdgs-trends__article-title font-noto">
+                    MDGsとは？SDGsとの違いは何？わかりやすく簡単に解説！
+                  </h3>
+                  <time
+                    class="sdgs-trends__article-date font-montserrat"
+                    datetime="2023-08-27"
+                  >
+                    2023.08.27
+                  </time>
+                </a>
+              </article>
+
+              <!-- article 25 -->
+              <article class="sdgs-trends__article-item">
+                <a href="article.html">
+                  <img
+                    class="sdgs-trends__article-image"
+                    src="images/thumbnail-earthnote-default.jpg"
+                    alt="食品ロス"
+                  />
+                  <h3 class="sdgs-trends__article-title font-noto">
+                    食品ロスの現状から原因・対策、私たちにできることまで徹底解説
+                  </h3>
+                  <time
+                    class="sdgs-trends__article-date font-montserrat"
+                    datetime="2023-08-27"
+                  >
+                    2023.08.27
+                  </time>
+                </a>
+              </article>
+            </div>
+          </section>
+          <nav class="pagination">
+            <ul class="pagination__list">
+              <li class="pagination__item pagination__info">1/5</li>
+
+              <li class="pagination__item is-current">
+                <!--表示中のページ-->
+                <a href="#">1</a>
+              </li>
+              <li class="pagination__item">
+                <a href="#">2</a>
+              </li>
+              <li class="pagination__item">
+                <a href="#">3</a>
+              </li>
+              <li class="pagination__item">
+                <a href="#">4</a>
+              </li>
+              <li class="pagination__item">
+                <a href="#">5</a>
+              </li>
+
+              <li class="pagination__item pagination__next">
+                <a href="#">&gt;</a
+                ><!-- &gt; は > を表示するHTMLエスケープ -->
+              </li>
+            </ul>
+          </nav>
+        </div>
+      </main>
+      <footer class="footer">
+        <div class="footer__inner">
+          <!-- 左：ロゴ -->
+          <div class="footer__brand">
+            <p class="footer__label">SDGs情報メディア</p>
+            <img src="images/logo.png" alt="EARTH NOTE" />
+          </div>
+
+          <!-- 中央起点 -->
+          <div class="footer__nav-wrap">
+            <!-- 右：リンク -->
+            <nav class="footer__nav" aria-label="フッターナビ">
+              <ul class="footer__nav-main">
+                <li><a href="#">SDGsトレンド</a></li>
+                <li><a href="#">インタビュー</a></li>
+                <li><a href="#">今すぐできるSDGs</a></li>
+              </ul>
+
+              <ul class="footer__nav-sub">
+                <li><a href="#" class="is-external">運営会社</a></li>
+                <li><a href="#" class="is-external">お問い合わせ</a></li>
+                <li><a href="#" class="is-external">サイトポリシー</a></li>
+              </ul>
+            </nav>
+          </div>
+          <!-- /footer__nav-wrap -->
+        </div>
+        <!-- /footer__inner -->
+        <p class="footer__copy">© 2023-2026 EARTH NOTE</p>
+      </footer>
+
+      <!-- 右下固定TOPボタン -->
+      <button class="to-top" id="toTop" aria-label="ページ上部へ">TOP</button>
+    </div>
+
+    <script src="js/common.js" defer></script>
+  </body>
+</html>
