@@ -2497,3 +2497,32 @@ body.is-menu-open .to-top {
     position: static;
   }
 }
+
+/* article: 原文 / 日本語訳リンクのアイコンを横並び */
+.page-trends-article .article__captionlink {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 6px;
+}
+
+.page-trends-article .article__captionlink a {
+  display: inline-flex !important;
+  align-items: center;
+  gap: 6px;
+  width: fit-content;
+  white-space: nowrap;
+}
+
+.page-trends-article .article__captionlink a br {
+  display: none;
+}
+
+.page-trends-article .article__captionlink .callout__linkicon,
+.page-trends-article .article__captionlink img {
+  display: inline-block !important;
+  width: 20px;
+  height: 20px;
+  flex: 0 0 auto;
+  vertical-align: middle;
+}
