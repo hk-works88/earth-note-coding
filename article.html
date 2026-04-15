@@ -31,34 +31,6 @@
 <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
 <!-- Fonts -->
 <link href="https://fonts.googleapis.com/css2?family=Marcellus&amp;family=Montserrat:wght@400;500;700&amp;family=Noto+Sans+JP:wght@400;500;700&amp;display=swap" rel="stylesheet"/>
-<style>
-.page-trends-article .article__captionlink {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  row-gap: 6px;
-}
-
-.page-trends-article .article__captionlink a {
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  width: fit-content;
-  color: #3399cc;
-  text-decoration: none;
-}
-
-.page-trends-article .article__captionlink a:visited {
-  color: #3399cc;
-}
-
-.page-trends-article .article__captionlink .callout__linkicon {
-  width: 20px;
-  height: 20px;
-  flex: 0 0 auto;
-}
-</style>
-
 </head>
 <body class="page-trends-article page-article">
 <!-- ALLWrapper -->
@@ -432,13 +404,13 @@
 <nav aria-label="シェア" class="share">
 <ul class="share__list">
 <li class="share__item">
-<a href="#"><img alt="X（旧Twitter）でシェア" src="images/twitter.png"/></a>
+<a class="share__link share__link--x" href="#" rel="noopener noreferrer" target="_blank"><img alt="X（旧Twitter）でシェア" src="images/twitter.png"/></a>
 </li>
 <li class="share__item">
-<a href="#"><img alt="B!ブックマークで保存" src="images/b-hatena.png"/></a>
+<a class="share__link share__link--hatena" href="#" rel="noopener noreferrer" target="_blank"><img alt="B!ブックマークで保存" src="images/b-hatena.png"/></a>
 </li>
 <li class="share__item">
-<a href="#"><img alt="Facebookでシェア" src="images/facebook.png"/></a>
+<a class="share__link share__link--facebook" href="#" rel="noopener noreferrer" target="_blank"><img alt="Facebookでシェア" src="images/facebook.png"/></a>
 </li>
 </ul>
 <button aria-label="URLをコピー" class="article__copy-button" type="button">
