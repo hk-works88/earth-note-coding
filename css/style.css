@@ -772,7 +772,7 @@ body.is-menu-open .header__hamburger {
 
 :is(.trends__btn, .interview__btn, .familiar__btn) {
   margin-top: 60px;
-  margin-bottom: 110px;
+  margin-bottom: 60px;
   text-align: right;
 
   position: relative;
@@ -1890,7 +1890,6 @@ body.is-menu-open .to-top {
     font-size: 14px;
   }
 }
-
 
 .page-archive .interview__list a {
   display: block;
